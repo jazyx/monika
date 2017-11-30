@@ -21,6 +21,12 @@
       overflow: hidden;
     }
 
+    p {
+      position: fixed;
+      right: 0;
+      margin: 0;
+    }
+
     @media screen and (orientation:portrait) {
       div {
         background-color: green;
@@ -30,6 +36,7 @@
 </head>
 <body>
 <div>
+  <p></p>
   <pre>
     1
     2
@@ -59,10 +66,15 @@
   var ratio = window.devicePixelRatio || 1;
   var w = screen.width * ratio;
   var h = screen.height * ratio;
+  var p = document.querySelector("p")
 
   document.body.style.height = (h + 400) + "px"
 
   window.scrollTo(0,1);
+
+  window.onscroll = function (event) {
+    p.innerHTML = Math.round(window.scrollY)
+  }
 })()
 </script>
 </body>
