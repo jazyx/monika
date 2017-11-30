@@ -23,6 +23,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #630;
 }
 
 /* Optimal 6 x 4 mode */
@@ -187,7 +188,7 @@ opacity: 0.2;
 
 @media screen and (orientation:portrait) {
 
-  main.square {
+  main {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -196,7 +197,7 @@ opacity: 0.2;
   min-width:100%;
   }
 
-  .square article {
+  article {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -204,26 +205,26 @@ opacity: 0.2;
   width: 100vmin;
   }
 
-  .square ul.counters li {
+  ul.counters li {
   width: 25%;
   }
 
-  .square ul.words li,
-  .square ul.numbers li {
+  ul.words li,
+  ul.numbers li {
   width: 50%;
   }
 
   /* Hide all decoys... */
-  .square ul.counters li.decoy,
-  .square ul.counters li.decoy,
-  .square ul.words li.decoy,
-  .square ul.numbers li.decoy {
+  ul.counters li.decoy,
+  ul.counters li.decoy,
+  ul.words li.decoy,
+  ul.numbers li.decoy {
   display:none;
   }
 
-  .square ul.counters li.decoy ~ li.decoy ~ li.decoy,
-  .square ul.words li.decoy ~ li.decoy,
-  .square ul.numbers li.decoy ~ li.decoy {
+  ul.counters li.decoy ~ li.decoy ~ li.decoy,
+  ul.words li.decoy ~ li.decoy,
+  ul.numbers li.decoy ~ li.decoy {
   display:inline-flex;
   }
 
