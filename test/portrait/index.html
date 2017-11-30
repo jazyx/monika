@@ -73,8 +73,24 @@
   window.scrollTo(0,1);
 
   window.onscroll = function (event) {
-    p.innerHTML = Math.round(window.scrollY)
+    showScroll()
+    p.innerHTML = Math.round(window.scrollY * 100)
   }
+
+  function showScroll() {
+    p.innerHTML = Math.round(window.scrollY * 100)
+  }
+
+  function scrollIt () {
+    window.scroll(0, 1)
+    showScroll()
+    if (!window.scrollY) {
+      setTimeout(scrollIt, 10)
+      console.log("trying to scroll...", window.scrollY)
+    }
+  }
+
+  setTimeout(scrollIt, 10)
 })()
 </script>
 </body>
