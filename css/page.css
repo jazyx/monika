@@ -46,6 +46,7 @@ width: 33.3333%;
 
 
 /* Fallback 4 x 4 square mode */
+/* Copy at @media screen and orientation portrait below */
 
 main.square {
 display: flex;
@@ -86,7 +87,6 @@ display:none;
 .square ul.numbers li.decoy ~ li.decoy {
 display:inline-flex;
 }
-
 
 
 /* Both modes */
@@ -172,4 +172,50 @@ color: #bbb;
 
 article li.disabled img {
 opacity: 0.2;
+}
+
+
+
+@media screen and (orientation:portrait) {
+
+  main.square {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100vmin;
+  width: 100%;
+  min-width:100%;
+  }
+
+  .square article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100vmin;
+  }
+
+  .square ul.counters li {
+  width: 25%;
+  }
+
+  .square ul.words li,
+  .square ul.numbers li {
+  width: 50%;
+  }
+
+  /* Hide all decoys... */
+  .square ul.counters li.decoy,
+  .square ul.counters li.decoy,
+  .square ul.words li.decoy,
+  .square ul.numbers li.decoy {
+  display:none;
+  }
+
+  .square ul.counters li.decoy ~ li.decoy ~ li.decoy,
+  .square ul.words li.decoy ~ li.decoy,
+  .square ul.numbers li.decoy ~ li.decoy {
+  display:inline-flex;
+  }
+
 }
