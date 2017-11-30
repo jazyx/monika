@@ -1,6 +1,83 @@
 nav {
-  position: absolute;
-  height: 100%;
-  width: 10vw;
-  background-color: rgba(255,255,255,0.8);
+position: absolute;
+height: 100%;
+width: 0;
+background-color: rgba(255,255,255,0.8);
+/*overflow-x:;*/
+}
+
+nav input[type=checkbox] {
+opacity: 0;
+}
+
+nav label {
+position: absolute;
+top: 0;
+left: 0;
+width: 12vmin;
+height: 12vmin;
+
+display: flex;
+align-items: center;
+z-index: 1;
+
+text-align: left;
+}
+
+nav label svg {
+height: 90%;
+width: 12vmin;
+fill:#666;
+}
+
+nav label:hover svg{
+fill: #fff;
+}
+
+nav label:hover svg{
+fill: #fff;
+}
+
+nav input[type=checkbox]:checked ~ label {
+width:35vmin;
+background-color: #fff;
+border-bottom: 1px solid #999;
+}
+
+nav input[type=checkbox]:checked ~ label svg {
+fill: #ccc;
+}
+
+nav input[type=checkbox]:checked ~ label:hover svg {
+fill: #000;
+}
+
+nav input[type=checkbox]:checked ~ section {
+left: 0;
+}
+
+nav section {
+position: absolute;
+top: 0;
+width: 35vmin;
+height: 100%;
+background-color: #fff;
+overflow-y: auto;
+left: -35vmin;
+}
+
+nav ul {
+position: relative;
+top: 14vmin;
+}
+
+nav li {
+height:33vmin ;
+}
+
+nav li button {
+width: 30vmin;
+height:30vmin;
+margin: 0;
+font-size: 20vmin;
 }
