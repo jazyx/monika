@@ -39,9 +39,10 @@ fill: #fff;
 }
 
 nav input[type=checkbox]:checked ~ label {
-width:35vmin;
+width:36vmin;
 background-color: #fff;
 border-bottom: 1px solid #999;
+transition: width 0.2s 0.1s linear;
 }
 
 nav input[type=checkbox]:checked ~ label svg {
@@ -59,11 +60,14 @@ left: 0;
 nav section {
 position: absolute;
 top: 0;
-width: 35vmin;
+width: 36vmin;
 height: 100%;
 background-color: #fff;
 overflow-y: auto;
-left: -35vmin;
+left: -36vmin;
+
+-webkit-transition: left 0.3s linear;
+transition: left 0.3s linear;
 }
 
 nav ul {
