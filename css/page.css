@@ -16,13 +16,7 @@ text-align: center;
 user-select: none;  
 }
 
-/*main {
-display: flex;
-flex-direction: row;
-justify-content: center;
-height: 100vmin;
-width: 100%;
-}*/
+/* Optimal 6 x 4 mode */
 
 main {
 display: flex;
@@ -33,14 +27,6 @@ min-width: 150vmin;
 width: 100%;
 }
 
-/*article {
-display: flex;
-flex-direction: column;
-justify-content: center;
-height: 100%;
-width: 100vmin;
-}*/
-
 article {
 display: flex;
 flex-direction: column;
@@ -49,28 +35,83 @@ height: 100%;
 width: 150vmin;
 }
 
+ul.counters li {
+width: 16.6666%;
+}
+
+ul.words li,
+ul.numbers li {
+width: 33.3333%;
+}
+
+
+/* Fallback 4 x 4 square mode */
+
+main.square {
+display: flex;
+flex-direction: row;
+justify-content: center;
+height: 100vmin;
+width: 100%;
+min-width:100%;
+}
+
+.square article {
+display: flex;
+flex-direction: column;
+justify-content: center;
+height: 100%;
+width: 100vmin;
+}
+
+.square ul.counters li {
+width: 25%;
+}
+
+.square ul.words li,
+.square ul.numbers li {
+width: 50%;
+}
+
+/* Hide all decoys... */
+.square ul.counters li.decoy,
+.square ul.counters li.decoy,
+.square ul.words li.decoy,
+.square ul.numbers li.decoy {
+display:none;
+}
+
+.square ul.counters li.decoy ~ li.decoy ~ li.decoy,
+.square ul.words li.decoy ~ li.decoy,
+.square ul.numbers li.decoy ~ li.decoy {
+display:inline-flex;
+}
+
+
+
+/* Both modes */
+
 ul {
 list-style: none;
 margin: 0;
 padding: 0;
 }
 
-article div {
+article ul {
 width: 100%;
 }
 
-div.counters, 
-div.words {
+ul.counters, 
+ul.words {
 height: 25%;
 }
 
-div.numbers {
+ul.numbers {
 height: 50%;
 font-size: 40vmin;
 }
 
 article li {
-display:inline-block;
 height: 100%;
 
 display: inline-flex;
@@ -115,25 +156,6 @@ margin:0;
 font-size: 12.5vmin;
 }
 
-
-/*div.counters li {
-width: 25%;
-}
-
-div.words li,
-div.numbers li {
-width: 50%;
-}*/
-
-div.counters li {
-width: 16.6666%;
-}
-
-div.words li,
-div.numbers li {
-width: 33.3333%;
-}
-
 span.key {
 color: #f90;
 }
@@ -151,14 +173,3 @@ color: #bbb;
 article li.disabled img {
 opacity: 0.2;
 }
-
-/*div.counters li:nth-child(even) {background: #336}
-div.counters li:nth-child(odd) {background: #663}
-
-div.words li:nth-child(even) {background: #636}
-div.words li:nth-child(odd) {background: #363}
-
-div.numbers li:nth-child(even) {background: #633}
-div.numbers li:nth-child(odd) {background: #366}
-
-*/
