@@ -1,6 +1,7 @@
 nav {
-position: absolute;
-height: 100%;
+position: fixed;
+top: 12vmin;
+bottom: 0;
 width: 0;
 background-color: rgba(255,255,255,0.8);
 /*overflow-x:;*/
@@ -11,7 +12,7 @@ opacity: 0;
 }
 
 nav label {
-position: absolute;
+position: fixed;
 top: 0;
 left: 0;
 width: 12vmin;
@@ -22,6 +23,8 @@ align-items: center;
 z-index: 1;
 
 text-align: left;
+background-color: none;
+transition: background 0s 0.2s, width 0.2s 0s linear;
 }
 
 nav label svg {
@@ -42,7 +45,8 @@ nav input[type=checkbox]:checked ~ label {
 width:36vmin;
 background-color: #fff;
 border-bottom: 1px solid #999;
-transition: width 0.2s 0.1s linear;
+/*transition: width 2s 1s linear;*/
+transition: background 0s 0s, width 0.2s 0.1s linear;
 }
 
 nav input[type=checkbox]:checked ~ label svg {
@@ -72,7 +76,7 @@ transition: left 0.3s linear;
 
 nav ul {
 position: relative;
-top: 14vmin;
+top: 2vmin;
 }
 
 nav li {

@@ -13,7 +13,9 @@
     div {
       background-color: blue;
       width: 100%;
-      height: calc(100% - 1px);
+      height: 100%;
+      box-sizing: border-box;
+      border: 1px solid red;
     }
 
     pre {
@@ -62,36 +64,45 @@
 </div>
 
 <script>
-;(function () {
-  var ratio = window.devicePixelRatio || 1;
-  var w = screen.width * ratio;
-  var h = screen.height * ratio;
-  var p = document.querySelector("p")
+// ;(function () {
+//   var ratio = window.devicePixelRatio || 1;
+//   var w = screen.width * ratio;
+//   var h = screen.height * ratio;
+//   var p = document.querySelector("p")
 
-  document.body.style.height = (h + 267) + "px"
+//   document.body.style.height = (h + 267) + "px"
 
-  window.scrollTo(0,1);
+//   window.scrollTo(0,1);
 
-  window.onscroll = function (event) {
-    showScroll()
-    p.innerHTML = Math.round(window.scrollY * 100)
-  }
+//   window.onscroll = function (event) {
+//     showScroll()
+//     p.innerHTML = Math.round(window.scrollY * 100)
+//   }
 
-  function showScroll() {
-    p.innerHTML = Math.round(window.scrollY * 100)
-  }
+//   function showScroll() {
+//     p.innerHTML = Math.round(window.scrollY * 100)
+//   }
 
-  function scrollIt () {
-    window.scroll(0, 1)
-    showScroll()
-    if (!window.scrollY) {
-      setTimeout(scrollIt, 10)
-      console.log("trying to scroll...", window.scrollY)
-    }
-  }
+//   function scrollIt () {
+//     window.scroll(0, 1)
+//     showScroll()
+//     if (!window.scrollY) {
+//       setTimeout(scrollIt, 10)
+//       console.log("trying to scroll...", window.scrollY)
+//     }
+//   }
 
-  setTimeout(scrollIt, 10)
-})()
+//   setTimeout(scrollIt, 10)
+// })()
+
+function fitToWindow() {
+  var vH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  document.body.style.height = vH + "px"
+}
+
+fitToWindow();
+window.addEventListener('onorientationchange', fitToWindow, true);
+window.addEventListener('resize', fitToWindow, true);
 </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 html, body {
 margin: 0;
-height: 100%;
+height: calc(100vh + 3em);
 background-color: #002;
 
 display: flex;
@@ -13,7 +13,16 @@ text-align: center;
 -webkit-user-select: none;  /* Chrome all / Safari all */
 -moz-user-select: none;     /* Firefox all */
 -ms-user-select: none;      /* IE 10+ */
-user-select: none;  
+user-select: none; 
+
+font-size: 4vw; 
+}
+
+header {
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Optimal 6 x 4 mode */
