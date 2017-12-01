@@ -16,6 +16,7 @@
   , js: "js/"
   }
   const menu = document.querySelector("nav ul")
+  const check = document.querySelector("input[type=checkbox]")
 
   var level_css = document.querySelector("link.level")
   var level_js = document.querySelector("script.level")
@@ -74,6 +75,12 @@
 
     // GET AJAX AND CALL prepareLevel() ON SUCCESS
     var remaining = 3
+
+    check.checked = false 
+
+    if (name === levelName) {
+      return
+    }
 
     levelName = level.name = name
 
