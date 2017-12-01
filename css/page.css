@@ -195,6 +195,7 @@ opacity: 0.2;
   height: 100vmin;
   width: 100%;
   min-width:100%;
+  background-color: rgba(255,0,0,0.5)
   }
 
   article {
@@ -203,6 +204,7 @@ opacity: 0.2;
   justify-content: center;
   height: 100%;
   width: 100vmin;
+  background-color: rgba(0,255,0,0.5)
   }
 
   ul.counters li {
@@ -220,12 +222,15 @@ opacity: 0.2;
   ul.words li.decoy,
   ul.numbers li.decoy {
   display:none;
+  background-color: #c66;
   }
 
+  /* ... then reveal all but the first one or two */
   ul.counters li.decoy ~ li.decoy ~ li.decoy,
   ul.words li.decoy ~ li.decoy,
   ul.numbers li.decoy ~ li.decoy {
   display:inline-flex;
+  background-color: #6c6;
   }
 
 }
