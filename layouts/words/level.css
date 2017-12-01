@@ -1,0 +1,33 @@
+main section li {
+background-color: #339;
+border-color: #006;
+border-top-color: #669;
+border-left-color: #669;
+}
+
+main section li:hover {
+background-color: #44a;
+border-color:#003;
+border-top-color: #99c;
+border-left-color: #99c;
+}
+
+main section li:focus {
+background-color: #282;
+border-color:#99c;
+border-top-color: #003;
+border-left-color: #003;
+}
+
+ul.images li,
+ul.words li {
+width: 33.3333%;
+}
+
+ul.images {
+height: 50%;
+}
+
+ul.numbers li {
+width: 16.6666%;
+}

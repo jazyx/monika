@@ -2,7 +2,7 @@
   // monika = { map: { <name>: <object>, ... }, name: <string> }
   
   function Level() {
-    this.name = "Intro"
+    this.name = "Words"
 
     console.log(this.name + " is instantiated")
   }

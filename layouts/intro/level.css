@@ -1,6 +1,37 @@
 main section li {
 background-color: #393;
 border-color: #060;
-border-top-color: #6c6;
-border-left-color: #6c6;
+border-top-color: #696;
+border-left-color: #696;
+}
+
+main section li:hover {
+background-color: #4a4;
+border-color:#030;
+border-top-color: #9c9;
+border-left-color: #9c9;
+}
+
+main section li:focus {
+background-color: #282;
+border-color:#9c9;
+border-top-color: #030;
+border-left-color: #030;
+}
+
+ul.numbers {
+height: 50%;
+font-size: 40vmin;
+}
+
+ul.numbers li {
+width: 33.3333%;
+}
+
+@media screen and (orientation:portrait) {
+
+  ul.numbers li {
+  width: 50%;
+  }
+
 }

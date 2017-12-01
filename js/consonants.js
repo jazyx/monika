@@ -1,5 +1,5 @@
-;(function levelLoaded(level){
-  // level = { map: { <name>: <object>, ... }, name: <string> }
+;(function levelLoaded(monika){
+  // monika = { map: { <name>: <object>, ... }, name: <string> }
   
   function Level() {
     this.name = "Consonants"
@@ -14,7 +14,7 @@
 
 
     function levelComplete(event) {
-      level.completed(level.name)
+      monika.completed(monika.level)
     }
   }
 
@@ -22,9 +22,9 @@
     // Clean up when level is about to be replaced
   }
 
-  if (typeof level.name === "string") {
-    if (typeof level.map === "object") {
-      var object = level.map[level.name] = new Level()
+  if (typeof monika.level === "string") {
+    if (typeof monika.map === "object") {
+      var object = monika.map[monika.level] = new Level()
     }
   }
-})(window.level) // <HARD-CODED global object>
+})(window.monika) // <HARD-CODED global object>

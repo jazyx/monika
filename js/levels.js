@@ -8,7 +8,7 @@
 // 
 // This script contains a map of 
 
-;(function levels(window, document) {
+;(function manageMonika(window, document) {
   const $article = $("body > article")
   const levelOptions = {} // populated below
   const paths = {
@@ -26,10 +26,10 @@
 
   // Create a global object that each new level script will have
   // access to
-  window.level = {
+  window.monika = {
     map: {}  // level objects will be added here
   // .name and .options will change depending on the level
-  , name: ""
+  , level: ""
   , options: {}
   // .paths and .completed will not change
   , paths: {
@@ -68,8 +68,8 @@
     document.body.removeEventListener("touchend", selectLevel,false)
   }
 
-  function loadLevel(name) {
-    var levelData = level.options = levelOptions[name]
+  function loadLevel(level) {
+    var levelData = monika.options = levelOptions[level]
     var layoutPath = paths.layout + levelData.layout + "/level."
     var scriptPath = paths.js + levelData.script
 
@@ -78,11 +78,11 @@
 
     check.checked = false 
 
-    if (name === levelName) {
+    if (level === levelName) {
       return
     }
 
-    levelName = level.name = name
+    levelName = monika.level = level
 
     $article.load(layoutPath+"html", loaded)
     level_css = swapFile(level_css, "link", "href", layoutPath + "css")
@@ -110,7 +110,7 @@
         // HTML and CSS are ready, and the IIFE in the JS file will
         // have triggered.
         
-        levelObject = level.map[levelName]
+        levelObject = monika.map[levelName]
 
         if (levelObject && levelObject.initialize) {
           levelObject.initialize()
