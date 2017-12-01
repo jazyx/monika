@@ -89,6 +89,7 @@ width: 30vmin;
 height:30vmin;
 margin: 0;
 font-size: 20vmin;
+border-radius: 4vmin;
 }
 
 nav button[disabled]::after {

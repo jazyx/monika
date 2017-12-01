@@ -10,10 +10,10 @@ color: #fff;
 
 text-align: center;
 
-/*-webkit-user-select: none;
+-webkit-user-select: none;
 -moz-user-select: none;
 -ms-user-select: none;
-user-select: none*/; 
+user-select: none; 
 
 font-size: 4vw; 
 }
@@ -36,7 +36,7 @@ min-width: 150vmin;
 width: 100%;
 }
 
-article {
+main section {
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -53,62 +53,13 @@ ul.numbers li {
 width: 33.3333%;
 }
 
-
-/* Fallback 4 x 4 square mode */
-/* Copy at @media screen and orientation portrait below */
-
-main.square {
-display: flex;
-flex-direction: row;
-justify-content: center;
-height: 100vmin;
-width: 100%;
-min-width:100%;
-}
-
-.square article {
-display: flex;
-flex-direction: column;
-justify-content: center;
-height: 100%;
-width: 100vmin;
-}
-
-.square ul.counters li {
-width: 25%;
-}
-
-.square ul.words li,
-.square ul.numbers li {
-width: 50%;
-}
-
-/* Hide all decoys... */
-.square ul.counters li.decoy,
-.square ul.counters li.decoy,
-.square ul.words li.decoy,
-.square ul.numbers li.decoy {
-display:none;
-background-color: #c66;
-}
-
-.square ul.counters li.decoy ~ li.decoy ~ li.decoy,
-.square ul.words li.decoy ~ li.decoy,
-.square ul.numbers li.decoy ~ li.decoy {
-display:inline-flex;
-background-color: #6c6;
-}
-
-
-/* Both modes */
-
 ul {
 list-style: none;
 margin: 0;
 padding: 0;
 }
 
-article ul {
+main section ul {
 width: 100%;
 }
 
@@ -122,7 +73,7 @@ height: 50%;
 font-size: 40vmin;
 }
 
-article li {
+main section li {
 height: 100%;
 
 display: inline-flex;
@@ -138,31 +89,31 @@ border-top-color: #999;
 border-left-color: #999;
 }
 
-article li:hover {
+main section li:hover {
 border-color:#333;
 border-top-color: #ccc;
 border-left-color: #ccc;
 background-color: #999;
 }
 
-article li:focus {
+main section li:focus {
 border-color:#ccc;
 border-top-color: #333;
 border-left-color: #333;
 background-color: #777;
 }
 
-article li img {
+main section li img {
 height: 100%;
 }
 
-article li div {
+main section li div {
 display: flex;
 flex-direction: column;
 justify-content: center;
 }
 
-article li p {
+main section li p {
 margin:0;
 font-size: 12.5vmin;
 }
@@ -171,17 +122,17 @@ span.key {
 color: #f90;
 }
 
-article li.disabled {
+main section li.disabled {
 border-color:#999;
 background-color: #aaa;
 color: #bbb;
 }
 
-article li.disabled span {
+main section li.disabled span {
 color: #bbb;
 }
 
-article li.disabled img {
+main section li.disabled img {
 opacity: 0.2;
 }
 
@@ -198,7 +149,7 @@ opacity: 0.2;
   min-width:100%;
   }
 
-  article {
+  main section {
   display: flex;
   flex-direction: column;
   justify-content: center;

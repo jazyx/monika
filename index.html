@@ -1,14 +1,25 @@
+<!DOCTYPE html>
+<html lang=ru _manifest="manifest.appcache">
 <head>
-  <html lang=ru _manifest="manifest.appcache">
+  <meta charset="utf-8">
 
   <title>Русский Fun</title>
   <meta charset="utf-8">
+
+  <!-- General styling of the interface -->
   <link rel="stylesheet" type="text/css" href="css/layout.css">
   <link rel="stylesheet" type="text/css" href="css/sidebar.css">
-  <link rel="stylesheet" type="text/css" href="css/level1.css">
+
+  <!-- Specific styling of the current level -->
+  <link
+    class="level"
+    rel="stylesheet"
+    type="text/css"
+    href="layouts/splash.css"
+  >
 </head>
 
-<body oncontextmenu="return false;">
+<bodY> <!-- oncontextmenu="return false;"> -->
   <nav>
     <input type="checkbox" name="menu" id="menu" value="">
     <label for="menu">
@@ -54,82 +65,86 @@
     <section>
       <ul>
         <li><button>1</button></li>
-        <li><button disabled>2</button></li>
+        <li><button>2</button></li>
         <li><button disabled>3</button></li>
         <li><button disabled>4</button></li>
         <li><button disabled>5</button></li>
         <li><button disabled>6</button></li>
-        <li><button disabled>7</button></li>
-        <li><button disabled>8</button></li>
-        <li><button disabled>9</button></li>
+        <!-- <li><button>7</button></li>
+        <li><button>8</button></li>
+        <li><button>9</button></li>
         <li><button disabled>10</button></li>
-        <li><button disabled>11</button></li>
+        <li><button>11</button></li>
         <li><button disabled>12</button></li>
-        <li><button disabled>13</button></li>
-        <li><button disabled>14</button></li>
+        <li><button>13</button></li>
+        <li><button>14</button></li>
         <li><button disabled>15</button></li>
         <li><button disabled>16</button></li>
         <li><button disabled>17</button></li>
         <li><button disabled>18</button></li>
-        <li><button disabled>19</button></li>
+        <li><button>19</button></li>
         <li><button disabled>20</button></li>
         <li><button disabled>21</button></li>
         <li><button disabled>22</button></li>
         <li><button disabled>23</button></li>
-        <li><button disabled>24</button></li>
+        <li><button>24</button></li>
         <li><button disabled>25</button></li>
         <li><button disabled>26</button></li>
         <li><button disabled>27</button></li>
         <li><button disabled>28</button></li>
-        <li><button disabled>29</button></li>
+        <li><button>29</button></li>
         <li><button disabled>30</button></li>
         <li><button disabled>31</button></li>
         <li><button disabled>32</button></li>
         <li><button disabled>33</button></li>
-        <li><button disabled>34</button></li>
+        <li><button>34</button></li>
         <li><button disabled>35</button></li>
         <li><button disabled>36</button></li>
         <li><button disabled>37</button></li>
         <li><button disabled>38</button></li>
-        <li><button disabled>39</button></li>
-        <li><button disabled>40</button></li>
+        <li><button>39</button></li>
+        <li><button>40</button></li> -->
       </ul>
     </section>
   </nav>
 
-  <header>
-    Русские цифры, согласные, мнемоники!
-  </header>
-  <main class="squ are">
-    <article>
-      <ul class="counters">
-        <li><img src="img/1.png"/></li><!--
-     --><li class="decoy"><img src="img/2.png"/></li><!--
-     --><li class="decoy disabled"><img src="img/3.png"/></li><!--
-     --><li class="decoy"><img src="img/4.png"/></li><!--
-     --><li class="decoy"><img src="img/5.png"/></li><!--
-     --><li class="decoy"><img src="img/6.png"/></li> 
-      </ul>
-      <ul class="words">
-        <li><p>оди<span class="key">н</span></p></li><!--
-     --><li class="decoy"><p><span class="key">в</span>осемь</p></li><!--
-     --><li class="decoy disabled">
-          <p><span class="key">ч</span>етыре</p>
-        </li>
-      </ul>
-      <ul class="numbers">
-      <li class="decoy">9</li><!--
-     --><li class="decoy disabled">44</li><!--
-     --><li>1</li>
-      </ul>
-    </article>
-  </main>
+  <article> <!-- this element is replaced when the layout changes -->
+    <header>
+      Русские цифры, согласные, мнемоники!
+    </header>
+    <main>
+      <section>
+        <ul class="counters">
+          <li><img src="img/1.png"/></li><!--
+       --><li class="decoy"><img src="img/2.png"/></li><!--
+       --><li class="decoy disabled"><img src="img/3.png"/></li><!--
+       --><li class="decoy"><img src="img/4.png"/></li><!--
+       --><li class="decoy"><img src="img/5.png"/></li><!--
+       --><li class="decoy"><img src="img/6.png"/></li> 
+        </ul>
+        <ul class="words">
+          <li><p>оди<span class="key">н</span></p></li><!--
+       --><li class="decoy"><p><span class="key">в</span>осемь</p></li><!--
+       --><li class="decoy disabled">
+            <p><span class="key">ч</span>етыре</p>
+          </li>
+        </ul>
+        <ul class="numbers">
+        <li class="decoy">9</li><!--
+       --><li class="decoy disabled">44</li><!--
+       --><li>1</li>
+        </ul>
+      <section>
+    </main>
+  </article>
+
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous">
+  </script>
+
+  <script class="level" src="js/splash.js"></script>
+  <script src="js/levels.js"></script>
 </body>
-
-<template name="sidebar">
-  
-</template>
-
-<template name="game">
-  
-</template>
+</html>
