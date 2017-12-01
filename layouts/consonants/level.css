@@ -34,4 +34,10 @@ width: 33.3333%;
   width: 50%;
   }
 
+  /* Hide only one number when they're big */
+  ul.numbers li.decoy ~ li.decoy {
+  display:inline-flex;
+  }
+
+
 }

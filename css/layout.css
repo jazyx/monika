@@ -45,7 +45,7 @@ width: 150vmin;
 }
 
 section>p {
-font-size: 6vmin;
+font-size: 5vmin;
 }
 
 ul {
@@ -56,6 +56,11 @@ padding: 0;
 
 main section ul {
 width: 100%;
+}
+
+
+ul.images {
+height: 50%;
 }
 
 ul.consonants, 
@@ -182,6 +187,7 @@ opacity: 0.2;
   /* Hide all decoys... */
   ul.consonants li.decoy,
   ul.consonants li.decoy,
+  ul.images li.decoy,
   ul.words li.decoy,
   ul.numbers li.decoy {
   display:none;
@@ -189,8 +195,9 @@ opacity: 0.2;
 
   /* ... then reveal all but the first one or two */
   ul.consonants li.decoy ~ li.decoy ~ li.decoy,
+  ul.images li.decoy ~ li.decoy,
   ul.words li.decoy ~ li.decoy,
-  ul.numbers li.decoy ~ li.decoy {
+  ul.numbers li.decoy ~ li.decoy ~ li.decoy {
   display:inline-flex;
   }
 

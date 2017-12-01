@@ -1,5 +1,5 @@
 # Мнемоника
-###(Monika to her friends)
+#### (Monika to her friends)
 
 A game for learning the Major System for training your memory, in Russian
 
