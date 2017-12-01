@@ -81,6 +81,7 @@ top: 2vmin;
 
 nav li {
 height:33vmin ;
+position: relative; /*required so that locks appear correctly*/
 }
 
 nav li button {
@@ -88,4 +89,16 @@ width: 30vmin;
 height:30vmin;
 margin: 0;
 font-size: 20vmin;
+}
+
+nav button[disabled]::after {
+content: "";
+background: url(../img/lock.png) 0 0 no-repeat;
+background-size: cover;
+position: absolute;
+bottom: 4vmin;
+right: 3vmin;
+width: 8vmin;
+height: 12vmin;
+display: inline-block;
 }
