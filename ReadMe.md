@@ -6,7 +6,14 @@ A game for learning the Major System for training your memory, in Russian
 You can follow progress [here](https://lexogram.github.io/monika/).
 
 ## The Major System
-The [Major System](https://en.wikipedia.org/wiki/Mnemonic_major_system) is a mnemonic technique for remembering numbers. It associates each digit with one or more consonants. By adding vowels wherever you like, you can create words that are easier to remember than the original number. You can then use these words as "pegs" to [create crazy unforgettable mental images](https://www.ted.com/talks/joshua_foer_feats_of_memory_anyone_can_do).
+The [Major System](https://en.wikipedia.org/wiki/Mnemonic_major_system) is a mnemonic technique for remembering numbers. It associates each digit with one or more consonants. By adding vowels wherever you like, you can create words that are easier to remember than the original number.
+
+>For example:  
+>4 - **ч**етыре (chetyre) => **ч**ай (chay = tea)  
+>24 - **д**вадцать **ч**етыре (dvadtsat' chetyre) => **д**и**ч**ь (dich' = wild fowl)   
+>54 - **п**ятьдесят **ч**етыре (pyat'desyat chetyre) => **п**е**ч**и (pech' = oven)  
+
+You can then use these words as "pegs" to [create crazy unforgettable mental images](https://www.ted.com/talks/joshua_foer_feats_of_memory_anyone_can_do).
 
 The Russian version has [two main methods](https://ru.wikipedia.org/wiki/Мнемоника#Методы) for mapping numbers to consonants. Monika uses a third method, derived from the two traditional methods. The motivation for  making these changes was to even out the number of words that can be used with each number, while maintaining a simple logic between the number and the consonants that it is associated with.
 
