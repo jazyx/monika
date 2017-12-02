@@ -30,11 +30,7 @@ transition: background 0s 0.2s, width 0.2s 0s linear;
 nav label svg {
 height: 90%;
 width: 12vmin;
-fill:#666;
-}
-
-nav label:hover svg{
-fill: #fff;
+fill: rgba(255,255,255,0.3333);
 }
 
 nav label:hover svg{
@@ -50,7 +46,7 @@ transition: background 0s 0s, width 0.2s 0.1s linear;
 }
 
 nav input[type=checkbox]:checked ~ label svg {
-fill: #ccc;
+fill: rgba(0,0,0,0.3333);
 }
 
 nav input[type=checkbox]:checked ~ label:hover svg {

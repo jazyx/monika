@@ -19,6 +19,10 @@ border-top-color: #003;
 border-left-color: #003;
 }
 
+html, body {
+height: calc(100vh + 2em);
+}
+
 header {
 font-size: 6vmin; 
 }
