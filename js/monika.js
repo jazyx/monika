@@ -11,10 +11,7 @@
 ;(function manageMonika(window, document) {
   const $article = $("body > article")
   const levelOptions = {} // populated below
-  const paths = {
-    layout: "layouts/"
-  , js: "js/"
-  }
+  const layoutPath = "layouts/"
   const menu = document.querySelector("nav ul")
   const check = document.querySelector("input[type=checkbox]")
 
@@ -75,8 +72,7 @@
 
   function loadLevel(level) {
     var levelData = monika.options = levelOptions[level]
-    var layoutPath = paths.layout + levelData.layout + "/level."
-    var scriptPath = paths.js + levelData.script
+    var levelPath = layoutPath + levelData.layout + "/layout."
 
     // GET AJAX AND CALL prepareLevel() ON SUCCESS
     var remaining = 3
@@ -84,14 +80,15 @@
     check.checked = false 
 
     if (level === levelName) {
+      // RELOAD?
       return
     }
 
     levelName = monika.level = level
 
-    $article.load(layoutPath+"html", loaded)
-    level_css = swapFile(level_css, "link", "href", layoutPath + "css")
-    level_js = swapFile(level_js, "script", "src", scriptPath)
+    $article.load(levelPath+"html", loaded)
+    level_css = swapFile(level_css, "link", "href", levelPath + "css")
+    level_js = swapFile(level_js, "script", "src", levelPath + "js")
 
     function loaded(mainElement) {
       checkIfAllIsLoaded()
