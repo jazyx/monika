@@ -5,8 +5,7 @@
 // * The game play (script)
 // * The media to use
 // * The initial order
-// 
-// This script contains a map of 
+
 
 ;(function manageMonika(window, document) {
   const $article = $("body > article")
@@ -155,11 +154,10 @@
 
 //// Digits and their names
     levelOptions[1] = {
-      layout: "intro"
+      layout: "01_digits"
     , numbers: 9
     , order: "exact"
     , media: "simple"
-    , script: "intro.js"
     }
   //// Even digits and their key consonants
     levelOptions[2] = {
@@ -168,7 +166,6 @@
     , consonants: "дцшвн"
     , order: "exact"
     , media: "simple"
-    , script: "consonants.js"
     }
     // Odd digits and their key consonants
     levelOptions[3] = {
@@ -177,7 +174,6 @@
     , consonants: "ркпсм"
     , order: "random"
     , media: "simple"
-    , script: "consonants.js"
     }
     // All digits and their key consonants
     levelOptions[4] = {
@@ -186,7 +182,6 @@
     , consonants: "рдкчпшсвмн"
     , order: "random"
     , media: "simple"
-    , script: "consonants.js"
     , options: { colour: "ркм", show_alternatives: true }
     }
     // All digits and all their consonants
@@ -195,7 +190,6 @@
     , numbers: 9
     , order: "random"
     , media: "simple"
-    , script: "consonants.js"
     , options: { use: 3 }
     }
     // All digits and all their consonants
@@ -204,7 +198,6 @@
     , numbers: 9
     , order: "exact"
     , media: "simple"
-    , script: "consonants.js"
     , options: { use: 1, colour: "pause" }
     }
   //// Words for digits
@@ -213,7 +206,6 @@
     , numbers: 9
     , order: "random"
     , media: "simple"
-    , script: "words.js"
     }
   //// Consonant cue
     levelOptions[8] = {
@@ -221,7 +213,6 @@
     , numbers: 9
     , order: "random"
     , media: "simple"
-    , script: "consonant_cue.js"
     }
   //// Image cue
     levelOptions[9] = {
@@ -229,7 +220,6 @@
     , numbers: 9
     , order: "random"
     , media: "simple"
-    , script: "image_cue.js"
     }
   //// Image cue
     levelOptions[9] = {
@@ -237,7 +227,6 @@
     , numbers: 9
     , order: "random"
     , media: "simple"
-    , script: "image_cue.js"
     }
     // Image cue with varied images
     levelOptions[10] = {
@@ -245,7 +234,6 @@
     , numbers: 9
     , order: "random"
     , media: ["images"]
-    , script: "image_cue.js"
     }
   //// Number cue with varied images
     levelOptions[11] = {
@@ -253,7 +241,6 @@
     , numbers: 9
     , order: "random"
     , media: ["images"]
-    , script: "number_cue.js"
     , options: { colour: "pause" }
     }
     // Number cue with varied images (colour all consonants in words)
@@ -262,7 +249,6 @@
     , numbers: { start: 10, end: 19 }
     , order: "exact"
     , media: "simple"
-    , script: "number_cue.js"
     }
 
     //...
@@ -273,7 +259,6 @@
     , numbers: { start: 10, end: 19 }
     , order: "exact"
     , media: "simple"
-    , script: "number_cue.js"
     }
   //// 
     levelOptions[14] = {
@@ -281,7 +266,6 @@
     , numbers: { start: 10, end: 19 }
     , order: "exact"
     , media: "simple"
-    , script: "number_cue.js"
     }
 
     //...
@@ -292,7 +276,6 @@
     , numbers: { start: 10, end: 19 }
     , order: "exact"
     , media: "simple"
-    , script: "number_cue.js"
     }
 
     //...
@@ -303,7 +286,6 @@
     , numbers: { start: 10, end: 19 }
     , order: "exact"
     , media: "simple"
-    , script: "number_cue.js"
     }
 
     //...
@@ -314,7 +296,6 @@
     , numbers: { start: 10, end: 19 }
     , order: "exact"
     , media: "simple"
-    , script: "number_cue.js"
     }
 
     //...
@@ -325,7 +306,6 @@
     , numbers: { start: 10, end: 19 }
     , order: "exact"
     , media: "simple"
-    , script: "number_cue.js"
     }
 
     //...
@@ -336,7 +316,6 @@
     , numbers: { start: 10, end: 19 }
     , order: "exact"
     , media: "simple"
-    , script: "number_cue.js"
     }
   //// 
     levelOptions[40] = {
@@ -344,7 +323,6 @@
     , numbers: { start: 10, end: 19 }
     , order: "exact"
     , media: "simple"
-    , script: "number_cue.js"
     }
 //////
 })(window, document)
