@@ -24,18 +24,22 @@
   }
 
   Level.prototype.startGame = function startGame() {
+    this.media = monika.media
     this.newChallenge()
   }
 
   Level.prototype.newChallenge = function newChallenge() {
     var section = document.querySelector("article main section")
     var dots = section.querySelectorAll("ul.consonants li")
+    var child
 
     var total = dots.length    
     for (let ii = 0; ii < total; ii += 1) {
       let li = dots[ii]
       let svg = getDotsSVG(ii)
-      li.removeChild(li.lastChild)
+      while (child = li.lastChild) {
+        li.removeChild(child)
+      }
       li.appendChild(svg)
     }
   }
@@ -51,7 +55,7 @@
   }
 
 
-  // DOTS // DOTS // DOTS // DOTS // DOTS // DOTS // DOTS // DOTS //
+// << DOTS // DOTS // DOTS // DOTS // DOTS // DOTS // DOTS // DOTS //
 
   var radiusMap = []
   var centreMap = []
@@ -87,10 +91,11 @@
   //  ]
   
   // No dots = one dot with no fill
-  radiusMap[0] = radiusMap[1]
+  //radiusMap[0] = radiusMap[1]
 
   // One dot: centre is at 0.5, 0.5
-  centreMap[0] = centreMap[1] = [ { x: 0.5, y: 0.5 } ]
+  // centreMap[0] = 
+  centreMap[1] = [ { x: 0.5, y: 0.5 } ]
 
   // Two dots: diagonal radii touch at 0.5, 0.5
   r = radiusMap[2]
@@ -233,4 +238,6 @@
 
     return svg
   }
+// DOTS // DOTS // DOTS // DOTS // DOTS // DOTS // DOTS // DOTS >> //
+
 })(window.monika)

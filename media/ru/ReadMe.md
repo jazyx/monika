@@ -19,9 +19,9 @@ important.
 ### Numbers
 
 The numbers folder will contain one folder for each of the numbers
-0 - 99, plus ten more with the names "00" - "09". In addition to what
-is described below, the folders named "0" will contain a file named
-"counter.png", showing between 0 and 9 circles.
+0 - 99, plus ten more with the names "00" - "09".  Each folder will
+contain a file called "name.txt" which contains the name of the
+relevant number.
 
 Each of the number folders will contain the following sub-folders:
 

@@ -44,5 +44,7 @@ width: 33.3333%;
 article svg {
   width: 100%;
   height: 100%;
-  stroke: black;
+  /*stroke: black;*/
+  fill: #fff;
+  opacity: 0.9;
 }

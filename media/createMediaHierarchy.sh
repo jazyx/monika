@@ -64,6 +64,349 @@ plain='\033[0m'
 
 declare -A digit_map
 
+getNumberName() {
+  local  __output=$1
+  local  output=""
+
+  input=$2
+
+  case $input in
+    00)
+       output="ноль ноль"
+       ;;
+    01)
+       output="ноль один"
+       ;;
+    02)
+       output="ноль два"
+       ;;
+    03)
+       output="ноль три"
+       ;;
+    04)
+       output="ноль четыре"
+       ;;
+    05)
+       output="ноль пять"
+       ;;
+    06)
+       output="ноль шесть"
+       ;;
+    07)
+       output="ноль семь"
+       ;;
+    08)
+       output="ноль восемь"
+       ;;
+    09)
+       output="ноль девять"
+       ;;
+    0)
+       output="ноль|нуль"
+       ;;
+    1)
+       output="один|одна|одно|одни"
+       ;;
+    2)
+       output="два|две"
+       ;;
+    3)
+       output="три"
+       ;;
+    4)
+       output="четыре"
+       ;;
+    5)
+       output="пять"
+       ;;
+    6)
+       output="шесть"
+       ;;
+    7)
+       output="семь"
+       ;;
+    8)
+       output="восемь"
+       ;;
+    9)
+       output="девять"
+       ;;
+    10)
+       output="десять"
+       ;;
+    11)
+       output="одиннадцать"
+       ;;
+    12)
+       output="двенадцать"
+       ;;
+    13)
+       output="тринадцать"
+       ;;
+    14)
+       output="четырнадцать"
+       ;;
+    15)
+       output="пятнадцать"
+       ;;
+    16)
+       output="шестнадцать"
+       ;;
+    17)
+       output="семнадцать"
+       ;;
+    18)
+       output="восемнадцать"
+       ;;
+    19)
+       output="девятнадцать"
+       ;;
+    20)
+       output="двадцать"
+       ;;
+    21)
+       output="двадцать один|двадцать одна|двадцать одно"
+       ;;
+    22)
+       output="двадцать два|двадцать две"
+       ;;
+    23)
+       output="двадцать три"
+       ;;
+    24)
+       output="двадцать четыре"
+       ;;
+    25)
+       output="двадцать пять"
+       ;;
+    26)
+       output="двадцать шесть"
+       ;;
+    27)
+       output="двадцать семь"
+       ;;
+    28)
+       output="двадцать восемь"
+       ;;
+    29)
+       output="двадцать девять"
+       ;;
+    30)
+       output="тридцать"
+       ;;
+    31)
+       output="тридцать один|тридцать одна|тридцать одно"
+       ;;
+    32)
+       output="тридцать два|тридцать две"
+       ;;
+    33)
+       output="тридцать три"
+       ;;
+    34)
+       output="тридцать четыре"
+       ;;
+    35)
+       output="тридцать пять"
+       ;;
+    36)
+       output="тридцать шесть"
+       ;;
+    37)
+       output="тридцать семь"
+       ;;
+    38)
+       output="тридцать восемь"
+       ;;
+    39)
+       output="тридцать девять"
+       ;;
+    40)
+       output="сорок"
+       ;;
+    41)
+       output="сорок один|сорок одна|сорок одно"
+       ;;
+    42)
+       output="сорок два|сорок две"
+       ;;
+    43)
+       output="сорок три"
+       ;;
+    44)
+       output="сорок четыре"
+       ;;
+    45)
+       output="сорок пять"
+       ;;
+    46)
+       output="сорок шесть"
+       ;;
+    47)
+       output="сорок семь"
+       ;;
+    48)
+       output="сорок восемь"
+       ;;
+    49)
+       output="сорок девять"
+       ;;
+    50)
+       output="пятьдесят"
+       ;;
+    51)
+       output="пятьдесят один|пятьдесят одна|пятьдесят одно"
+       ;;
+    52)
+       output="пятьдесят два|пятьдесят две"
+       ;;
+    53)
+       output="пятьдесят три"
+       ;;
+    54)
+       output="пятьдесят четыре"
+       ;;
+    55)
+       output="пятьдесят пять"
+       ;;
+    56)
+       output="пятьдесят шесть"
+       ;;
+    57)
+       output="пятьдесят семь"
+       ;;
+    58)
+       output="пятьдесят восемь"
+       ;;
+    59)
+       output="пятьдесят девять"
+       ;;
+    60)
+       output="шестьдесят"
+       ;;
+    61)
+       output="шестьдесят один|шестьдесят одна|шестьдесят одно"
+       ;;
+    62)
+       output="шестьдесят два|шестьдесят две"
+       ;;
+    63)
+       output="шестьдесят три"
+       ;;
+    64)
+       output="шестьдесят четыре"
+       ;;
+    65)
+       output="шестьдесят пять"
+       ;;
+    66)
+       output="шестьдесят шесть"
+       ;;
+    67)
+       output="шестьдесят семь"
+       ;;
+    68)
+       output="шестьдесят восемь"
+       ;;
+    69)
+       output="шестьдесят девять"
+       ;;
+    70)
+       output="семьдесят"
+       ;;
+    71)
+       output="семьдесят один|семьдесят одна|семьдесят одно"
+       ;;
+    72)
+       output="семьдесят два|семьдесят две"
+       ;;
+    73)
+       output="семьдесят три"
+       ;;
+    74)
+       output="семьдесят четыре"
+       ;;
+    75)
+       output="семьдесят пять"
+       ;;
+    76)
+       output="семьдесят шесть"
+       ;;
+    77)
+       output="семьдесят семь"
+       ;;
+    78)
+       output="семьдесят восемь"
+       ;;
+    79)
+       output="семьдесят девять"
+       ;;
+    80)
+       output="восемьдесят"
+       ;;
+    81)
+       output="восемьдесят один|восемьдесят одна|восемьдесят одно"
+       ;;
+    82)
+       output="восемьдесят два|восемьдесят две"
+       ;;
+    83)
+       output="восемьдесят три"
+       ;;
+    84)
+       output="восемьдесят четыре"
+       ;;
+    85)
+       output="восемьдесят пять"
+       ;;
+    86)
+       output="восемьдесят шесть"
+       ;;
+    87)
+       output="восемьдесят семь"
+       ;;
+    88)
+       output="восемьдесят восемь"
+       ;;
+    89)
+       output="восемьдесят девять"
+       ;;
+    90)
+       output="девяносто"
+       ;;
+    91)
+       output="девяносто один|девяносто одна|девяносто одно"
+       ;;
+    92)
+       output="девяносто два|девяносто две"
+       ;;
+    93)
+       output="девяносто три"
+       ;;
+    94)
+       output="девяносто четыре"
+       ;;
+    95)
+       output="девяносто пять"
+       ;;
+    96)
+       output="девяносто шесть"
+       ;;
+    97)
+       output="девяносто семь"
+       ;;
+    98)
+       output="девяносто восемь"
+       ;;
+    99)
+       output="девяносто девять"
+  esac
+
+
+  eval $__output="'$output'"
+}
+
+
 
 do_or_die() {
   # $1       = result of previous call
@@ -97,6 +440,8 @@ do_or_die() {
   fi
 }
 
+
+
 create_dir() {
   # $1       = directory path
   # $2       = next action
@@ -105,11 +450,13 @@ create_dir() {
   if ! [ -d $1 ]
   then
     echo -e "${tell}Creating directory $1${plain}"
-    mkdir $1
+    mkdir -p $1
   fi
 
   do_or_die $? "create_dir $1" ${@:2}
 }
+
+
 
 createReadMe() {
   cd $langCode
@@ -135,9 +482,9 @@ important.
 ### Numbers
 
 The numbers folder will contain one folder for each of the numbers
-0 - 99, plus ten more with the names "00" - "09". In addition to what
-is described below, the folders named "0" will contain a file named
-"counter.png", showing between 0 and 9 circles.
+0 - 99, plus ten more with the names "00" - "09".  Each folder will
+contain a file called "name.txt" which contains the name of the
+relevant number.
 
 Each of the number folders will contain the following sub-folders:
 
@@ -190,10 +537,14 @@ EOF
 do_or_die $? createReadMe create_consonants_folder
 }
 
+
+
 create_consonants_folder() {
   create_dir consonants
   do_or_die $? create_consonants_folder create_consonant_folders
 }
+
+
 
 create_consonant_folders() {
   cd consonants
@@ -219,10 +570,14 @@ create_consonant_folders() {
   do_or_die $? create_consonant_folders create_numbers_folder
 }
 
+
+
 create_numbers_folder() {
   create_dir numbers
   do_or_die $? create_numbers_folder create_number_subfolders
 }
+
+
 
 create_number_subfolders() {
   cd numbers
@@ -236,11 +591,16 @@ create_number_subfolders() {
     # echo $number "${digit_map[$number]}"
 
     create_dir $number add_consonant_folders $number "${number_line:1}"
-    touch $number/counter.png
+    # rm $number/counter.png
+
+    getNumberName name $number
+    echo $name > $number/name.txt
   done
 
   do_or_die $? create_number_subfolders create_double_digit_folders
 }
+
+
 
 create_double_digit_folders() {
   for tens in `seq 0 9`;
@@ -255,6 +615,9 @@ create_double_digit_folders() {
       key+=_
 
       create_dir $number add_consonant_folders $number $key
+
+      getNumberName name $number
+      echo $name > $number/name.txt
     done
   done
 
@@ -264,6 +627,8 @@ create_double_digit_folders() {
   # tree
 }
 
+
+
 add_consonant_folders() {
   cd $1
 
@@ -271,17 +636,17 @@ add_consonant_folders() {
   touch audio/$delete_me.mp3
   touch audio/$delete_me.ogg
   
-  create_dir $2
+  create_dir words/$2
 
-  create_dir $2/audio
-  touch $2/audio/$delete_me.mp3
-  touch $2/audio/$delete_me.ogg
+  create_dir words/$2/audio
+  touch words/$2/audio/$delete_me.mp3
+  touch words/$2/audio/$delete_me.ogg
 
-  create_dir $2/images
-  touch $2/images/$delete_me.png
-  if ! [ -f $2/images/$delete_me.cdt ]
+  create_dir words/$2/images
+  touch words/$2/images/$delete_me.png
+  if ! [ -f words/$2/images/$delete_me.cdt ]
   then
-    cat << EOF > $2/images/$delete_me.cdt
+    cat << EOF > words/$2/images/$delete_me.cdt
 title      title  
 source     URL_of_page_for_original_image 
 author     author  
