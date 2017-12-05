@@ -107,18 +107,18 @@ border-top-color: #999;
 border-left-color: #999;
 }
 
-main section li:hover {
+main section li:not(.touched):hover {
 background-color: #999;
 border-color:#333;
 border-top-color: #ccc;
 border-left-color: #ccc;
 }
 
-main section li:focus {
+main section li.touched {
 background-color: #777;
-border-color:#ccc;
-border-top-color: #333;
-border-left-color: #333;
+border-color:#999;
+border-top-color: #555;
+border-left-color: #555;
 }
 
 main section li img {
@@ -135,7 +135,7 @@ main section li p {
 margin:0;
 }
 
-.key {
+span {
 color: #f90;
 }
 
@@ -149,7 +149,8 @@ main section li.disabled span {
 color: #bbb;
 }
 
-main section li.disabled img {
+main section li.disabled img,
+main section li.disabled svg {
 opacity: 0.2;
 }
 

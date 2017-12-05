@@ -25,7 +25,7 @@ image_folder=images
 ignore="delete_me*"
 
 directory=$lang_code/$number_folder
-root_folder=media
+root_folder=/media
 
 ######################################################################
 
@@ -137,6 +137,22 @@ removeDuplicates() {
   echo "${_filenames[@]}"
 }
 
+addPath() {
+  local _path=$1/
+  shift
+  local _filenames=("$@")
+  local -i ii=${#_filenames[@]}
+  local _filename
+
+  for (( ; ii-- ; ))
+  do
+    _filename=${_filenames[$ii]}
+    _filenames[$ii]=$_path$_filename
+  done
+
+  echo "${_filenames[@]}"
+}
+
 createJSArray () {
   local _input=("$@")
   # local output=$(IFS='/' eval 'echo "${_input[*]}"')
@@ -153,6 +169,7 @@ createJSArray () {
 
 get_audio_array() {
   local _dir=$1
+  local _path=$2
   local -a _file_types=( ogg mp3 )
   local -a _files=$(getMatchingFiles $_dir ${_file_types[@]})
   local _unwanted="^(delete_me|deleteme)$"
@@ -161,6 +178,7 @@ get_audio_array() {
   _files=$(trimToBasename 1 $_files)
   _files=$(removeUnwanted $_unwanted $_files)
   _files=$(removeDuplicates $_files)
+  _files=$(addPath $_path $_files)
   
   _js_array=$(createJSArray "${_files[@]}")
 
@@ -169,6 +187,7 @@ get_audio_array() {
 
 get_images_array() {
   local _dir=$1
+  local _path=$2
   local -a _file_types=( jpg png )
   local -a _files=$(getMatchingFiles $_dir ${_file_types[@]})
   local _unwanted="^(delete_me.*)$"
@@ -176,6 +195,7 @@ get_images_array() {
 
   _files=$(trimToBasename 0 $_files)
   _files=$(removeUnwanted $_unwanted $_files)
+  _files=$(addPath $_path $_files)
   
   _js_array=$(createJSArray "${_files[@]}")
 
@@ -184,7 +204,9 @@ get_images_array() {
 
 add_audio_array() {
   local _dir=$1audio
-  local _audio_array=$(get_audio_array $_dir)
+  local _path=$2audio
+
+  local _audio_array=$(get_audio_array $_dir $_path)
 
   echo "      , audio: $_audio_array" >> $media_file
 }
@@ -192,6 +214,7 @@ add_audio_array() {
 
 addWords() {
   local _dir=$1words
+  local _path=$2words
   local _index=0
   local _word_dir _word _default _file_array 
 
@@ -202,6 +225,7 @@ addWords() {
     checkIfUninhabited "$_word_dir"
     if [[ $? = 0 ]]; then
       _word=$(basename "$_word_dir")
+      _word_path=$_path/$_word
 
       # Set $default to the first word, or to the last word whose
       # folder has a file called `default` at the root.
@@ -219,9 +243,9 @@ addWords() {
         echo "        , $_word: {" >> $media_file
       fi
 
-      _file_array=$(get_audio_array $_word_dir/audio)
+      _file_array=$(get_audio_array $_word_dir/audio $_word_path/audio)
       echo "            audio: $_file_array"  >> $media_file
-      _file_array=$(get_images_array $_word_dir/images)
+      _file_array=$(get_images_array $_word_dir/images $_word_path/images)
       echo "          , images: $_file_array"  >> $media_file
 
       echo "          }" >> $media_file 
@@ -229,31 +253,9 @@ addWords() {
   done
 
   echo "        , default_word: \"$_default\"" >> $media_file 
-
-  # local _dir=$1audio
-  # local -a _file_types=( ogg mp3 )
-  # local -a _files=$(getMatchingFiles $_dir ${_file_types[@]})
-  # local _unwanted="^(delete_me|deleteme)$"
-  # local _js_array
-
-  # _files=$(trimToBasename 1 $_files)
-  # _files=$(removeUnwanted $_unwanted $_files)
-  # _files=$(removeDuplicates $_files)
-  
-  # _js_array=$(createJSArray "${_files[@]}")
-
-  # echo "      , audio: $_js_array" >> $media_file
-    echo "        }" >> $media_file
+  echo "        }" >> $media_file
 }
-    
-#     getDirectoriesArray words_array "$dir/words/"
-#     
 
-#     cat << EOF >> $media_file
-#         path: "$root_folder/$directory/$dir"
-#       , name: "$name"
-#       , words: $words_array
-# EOF
 ######################################################################
 
 cat << EOF > $media_file
@@ -304,13 +306,15 @@ do
     echo ": {" >> $media_file
 
     name=$(<$source/$directory/$dir/name.txt)
+    path="$root_folder/$directory/$dir"
+
     cat << EOF >> $media_file
-        path: "$root_folder/$directory/$dir"
-      , name: "$name"
+       name: "$name"
+  // , path: "$root_folder/$directory/$dir"
 EOF
 
-    add_audio_array $source/$directory/$dir
-    addWords $source/$directory/$dir
+    add_audio_array $source/$directory/$dir $path
+    addWords $source/$directory/$dir $path
 
     echo "      }" >> $media_file
   fi

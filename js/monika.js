@@ -80,7 +80,7 @@
 
     if (level === levelName) {
       // RELOAD?
-      return
+      // return
     }
 
     levelName = monika.level = level

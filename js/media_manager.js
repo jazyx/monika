@@ -8,7 +8,7 @@
   }
 
   monika.manager = ({
-    setCue: function setCue(number) {
+    getCue: function getCue(number) {
     // x = {
     //   path:   <path to media folder>
     // , name:  "ноль"
@@ -18,52 +18,83 @@
     // , images: [<name of image>, ..., <name of counter image>]
     // }
 
-      numberMedia = this.media[number]
+      var numberMedia = this.media.numbers[number]
       if (!numberMedia) {
         console.log("Media not found for", number)
         return 0
       }
 
-      decoys = getRandomDecoys()
+      let decoys = this.getRandomDecoys(number)
+
+      let names = this.getNames(decoys)
+      let words = this.getWords(decoys)
 
       decoys = {
         numbers:    decoys
-      , words:      []
+      , names:      names
+      , words:      words
       , images:     []
-      , consonants: []
+      , consonants: this.media.consonants
       }
 
       cue = {
-        cue: numberMedia
+        answer: numberMedia
       , decoys: decoys
       }
 
       return cue
+    }
 
-      function getRandomDecoys () {
-        var available = []
-        var chosen = []
-        var start = this.range.start
-        var stop = this.range.end + 1
-        var count = stop - start
-        var ii
-          , random
-          , decoy
+  , getRandomDecoys: function getRandomDecoys(number) {
+      var available = []
+      var chosen = []
+      var start = this.range.start
+      var stop = this.range.end + 1
+      var count = stop - start
+      var ii
+        , random
+        , decoy
 
-        for (ii = start; ii < stop; ii += 1) {
-          available.push(ii)
-        }
-
-        for ( ; count; count -=1 ) {
-          random = Math.floor(Math.random() * count)
-          decoy = available.splice(random, 1)[0]
-          if (decoy !== number) {
-            chosen.push(decoy)
-          }
-        }
-
-        return chosen
+      for (ii = start; ii < stop; ii += 1) {
+        available.push(ii)
       }
+
+      for ( ; count; count -=1 ) {
+        random = Math.floor(Math.random() * count)
+        decoy = available.splice(random, 1)[0]
+        if (decoy !== number) {
+          chosen.push(decoy)
+        }
+      }
+
+      return chosen
+    }
+
+  , getNames: function getNames(numberArray) {
+      var names = {}
+
+      for (let number in numberArray) {
+        number = numberArray[number]
+
+        // TODO: Decide how to treat numbers with multiple genders
+        let name = this.media.numbers[number].name.match(/[^|]+/)[0]
+        names[number] = name
+      }
+
+console.log(names)
+
+      return names
+    }
+
+  , getWords: function getWords(numberArray) {
+      var words = {}
+
+      for (let number in numberArray) {
+        number = numberArray[number]
+        words[number] = this.number_word_LUT[number]
+      }
+
+      return words
     }
 
   , setOptions: function setOptions(options) {
@@ -84,7 +115,7 @@
 
       this.media = media
 
-      ;(function updateLUT() {
+      const updateLUT = () => {
         let numbersData = media.numbers
 
         for(let number in numbersData) {
@@ -93,7 +124,9 @@
           let dataForNumber = numbersData[number]
           let wordList = dataForNumber.words
           let default_word = wordList.default_word
-          number_word_LUT[number] = default_word
+
+          dataForNumber.consonants = media.consonants[number]
+          this.number_word_LUT[number] = default_word
 
           for (let word in wordList) {
             if (word === "default_word") {
@@ -109,7 +142,7 @@
               images.every(checkForDefaultImage)
             }
 
-            word_image_LUT[word] = image
+            this.word_image_LUT[word] = image
           }
 
           function checkForDefaultImage(URL) {
@@ -121,10 +154,12 @@
             return true
           }
         }
-      })()
+      }
 
-      console.log("number_word_LUT", number_word_LUT)
-      console.log("word_image_LUT", word_image_LUT)
+      updateLUT()
+
+      console.log("number_word_LUT", this.number_word_LUT)
+      console.log("word_image_LUT", this.word_image_LUT)
     }
 
   , media: {}

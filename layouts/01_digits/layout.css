@@ -1,11 +1,11 @@
-main section li {
+/*main section li {
 background-color: #393;
 border-color: #060;
 border-top-color: #696;
 border-left-color: #696;
 }
 
-main section li:hover {
+main section li:not(.disabled):hover {
 background-color: #4a4;
 border-color:#030;
 border-top-color: #9c9;
@@ -17,7 +17,7 @@ background-color: #282;
 border-color:#9c9;
 border-top-color: #030;
 border-left-color: #030;
-}
+}*/
 
 ul.numbers {
 height: 50%;
@@ -47,4 +47,8 @@ article svg {
   /*stroke: black;*/
   fill: #fff;
   opacity: 0.9;
+}
+
+li.decoy {
+  background-color: #888;
 }

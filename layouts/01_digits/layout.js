@@ -24,23 +24,157 @@
   }
 
   Level.prototype.startGame = function startGame() {
-    this.media = monika.media
+    var self = this
+    var section = document.querySelector("main section")
+    var target
+
+
+    // const startTap = (event) => {
+    //   target = event.target
+
+      let treatTap = (event) => {
+        target = event.target
+
+        while (target  && target.nodeName !== "LI") {
+          target = target.parentNode
+        }
+
+        if (!target) {
+          return
+        } else if (target.classList.contains("touched")) {
+          return
+        }
+
+        target.classList.add("touched")
+
+        if (target.classList.contains("decoy")) {
+          target.classList.add("disabled")
+        } else {
+          this.remaining--
+          if (!this.remaining) {
+            setTimeout(next, 500)
+          }
+        }
+      }
+
+      let next = () => {
+        self.newChallenge()
+      }
+
+      // let checkTap = (event) => {
+      //   if (event.target === target) {
+      //     treatTap()
+      //   }
+
+      //   target = 0
+      //   document.body.onmouseup = document.body.ontouchend = null
+      // }
+
+    //   document.body.onmouseup = document.body.ontouchend = checkTap
+    // }
+
+    section.onmousedown = section.ontouchstart = treatTap // startTap
     this.newChallenge()
   }
 
   Level.prototype.newChallenge = function newChallenge() {
-    var section = document.querySelector("article main section")
-    var dots = section.querySelectorAll("ul.consonants li")
-    var child
+    var number = random(9)
+    var cue = monika.manager.getCue(number)
+    var decoys = cue.decoys
+    var answer = cue.answer
 
-    var total = dots.length    
-    for (let ii = 0; ii < total; ii += 1) {
-      let li = dots[ii]
-      let svg = getDotsSVG(ii)
-      while (child = li.lastChild) {
-        li.removeChild(child)
+    drawDots()
+    showNames()
+    showNumbers()
+
+    this.remaining = 3
+
+    function getCueArray(total) {
+      total -= 1
+      var cueArray = decoys.numbers.splice(0, total)
+      cueArray.splice(random(total), 0, number)
+      return cueArray
+    }
+
+    function random (max) {
+      return Math.floor(Math.random() * max + 1)
+    }
+
+    function drawDots() {
+      var section = document.querySelector("article main section")
+      var list = section.querySelectorAll("ul.consonants li")
+      var total = list.length    
+      var child
+
+      var cueArray = getCueArray(total)
+
+      var total = list.length    
+      for (let ii = 0; ii < total; ii += 1) {
+        let li = list[ii]
+        let cue = cueArray[ii]
+        let svg = getDotsSVG(cue)
+
+        while (child = li.lastChild) {
+          li.removeChild(child)
+        }
+        li.appendChild(svg)
+
+        li.className = ""
+
+        if (cue !== number) {
+          li.classList.add("decoy")
+        }
       }
-      li.appendChild(svg)
+    }
+
+    function showNames() {    
+      var section = document.querySelector("article main section")
+      var list = section.querySelectorAll("ul.words li")
+      var total = list.length    
+      var child
+
+      var cueArray = getCueArray(total)
+
+      for (let ii = 0; ii < total; ii += 1) {
+        let li = list[ii]
+        let cue = cueArray[ii]
+        let name = decoys.names[cue] || answer.name.match(/[^|]+/)[0]
+        let consonants = decoys.consonants[cue]
+        let regex = new RegExp ("[" + consonants + "]")
+        let match = name.match(regex)
+
+        if (match) {
+          name = name.replaceAt(match.index, "<span>" + match[0] + "</span>")
+        }
+
+        li.innerHTML = "<p>" + name + "</p>"
+        li.className = ""
+
+        if (cue !== number) {
+          li.classList.add("decoy")
+        }
+      }
+    }
+
+    function showNumbers() {    
+      var section = document.querySelector("article main section")
+      var list = section.querySelectorAll("ul.numbers li")
+      var total = list.length    
+      var child
+
+      var cueArray = getCueArray(total)
+
+      for (let ii = 0; ii < total; ii += 1) {
+        let li = list[ii]
+        let cue = cueArray[ii]
+
+        li.innerHTML = cue
+        li.className = ""
+
+        if (cue !== number) {
+          li.classList.add("decoy")
+        }
+      }
     }
   }
 
