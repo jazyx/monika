@@ -1,5 +1,8 @@
 ;(function (monika){
 
+  alert("audio.js loading")
+  document.body.style.backgroundColor="red"
+
   if (!monika) {
     monika = window.monika = {}
   }
