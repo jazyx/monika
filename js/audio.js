@@ -21,24 +21,33 @@
       ".mp3":  "audio/mpeg"
     , ".ogg":  "audio/ogg"
     , ".mp4":  "audio/mp4"
-    , ".aac":  "audio/aac"
-    , ".aacp": "audio/aacp"
-    , ".webm": "audio/webm"
-    , ".webm": "audio/webm"
-    , ".flac": "audio/flac"
-    , ".wav":  "audio/wav"
+    // , ".aac":  "audio/aac"
+    // , ".aacp": "audio/aacp"
+    // , ".webm": "audio/webm"
+    // , ".webm": "audio/webm"
+    // , ".flac": "audio/flac"
+    // , ".wav":  "audio/wav"
     }
+
+    let tried = "Tried:"
+
     if (this.audioPreloader.canPlayType) {
       for (let type in audioTypes) {
         let audioType = audioTypes[type]
         let canPlay = audio.canPlayType(audioType).replace(/no/, '')
-
+       
+        tried += " " + type
+       
         if (canPlay) {
           this.canPlay = type
+
+          tried += " (success)"
           break
         }
       }
     }
+
+    this.notFoundAlert(tried)
   }
 
   Audio.prototype.play = function play(src) {
@@ -164,11 +173,11 @@
 
     document.querySelector("header").innerHTML = message
 
-    if (this.debug) {
-       alert(message)
-    } else {
-      console.log(message)
-    }
+    // if (this.debug) {
+    //    alert(message)
+    // } else {
+    //   console.log(message)
+    // }
   }
 
   monika.audio = new Audio()
