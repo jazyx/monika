@@ -6,6 +6,7 @@
   
   function Level() {
     this.name = "Intro"
+    this.queue = []
 
     console.log(this.name + " is instantiated")
   }
@@ -28,6 +29,8 @@
     var section = document.querySelector("main section")
     var target
 
+    monika.manager.setOptions({ range: { start: 0, end: 9 } } )
+    this.queue = monika.manager.getQueue()
 
     // const startTap = (event) => {
     //   target = event.target
@@ -49,6 +52,10 @@
 
         if (target.classList.contains("decoy")) {
           target.classList.add("disabled")
+
+          // TODO: Remember this as an number to be revised
+          this.queue.recycle(this.number)
+
         } else {
           this.remaining--
           if (!this.remaining) {
@@ -78,7 +85,37 @@
   }
 
   Level.prototype.newChallenge = function newChallenge() {
-    var number = random(9)
+    const getNumber = () => {
+      let number = this.queue.pop()
+
+      if (number === this.number) {
+        let canRecycle = ( this.queue.max() !== number
+                        || this.queue.min() !== number)
+
+        if ( canRecycle ) {
+          this.queue.recycle(number)
+          return getNumber()
+        } else {
+          // The rest of the queue is identical. Delete it
+          this.queue.length = 0
+          return
+        }
+      }
+
+      this.number = number
+
+      console.log(number, this.queue)
+
+      return number
+    }
+
+    var number = getNumber()
+
+    if (number === undefined) {
+      alert("Time for a new level (when it's ready)")
+      return this.startGame()
+    }
+
     var cue = monika.manager.getCue(number)
     var decoys = cue.decoys
     var answer = cue.answer

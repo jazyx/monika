@@ -8,7 +8,34 @@
   }
 
   monika.manager = ({
-    getCue: function getCue(number) {
+    getQueue: function getQueue() {
+      // TODO: Remember mistakes and add items to queue in proportion
+      // to past errors
+      
+      let queue = []
+      let ii = this.range.start
+      let end = this.range.end + 1
+      for ( ; ii < end; ii += 1) {
+        queue.push(ii, ii)
+      }
+
+      ii = queue.length
+      while (ii--) {
+        let random = Math.floor(Math.random() * ii)
+        temp = queue[random]
+        queue[random] = queue[ii]
+        queue[ii] = temp
+      }
+
+      queue.recycle = function (number) {
+        let ii = Math.max(Math.floor(Math.random()*this.length-2),0)
+        this.splice(ii, 0, number)
+      }
+
+      return queue
+    }
+
+  , getCue: function getCue(number) {
     // x = {
     //   path:   <path to media folder>
     // , name:  "ноль"
@@ -37,7 +64,7 @@
       , consonants: this.media.consonants
       }
 
-      cue = {
+      let cue = {
         answer: numberMedia
       , decoys: decoys
       }
@@ -56,15 +83,17 @@
         , decoy
 
       for (ii = start; ii < stop; ii += 1) {
-        available.push(ii)
+        if (ii === number) {
+          count -= 1
+        } else {
+          available.push(ii)
+        }
       }
 
       for ( ; count; count -=1 ) {
         random = Math.floor(Math.random() * count)
         decoy = available.splice(random, 1)[0]
-        if (decoy !== number) {
-          chosen.push(decoy)
-        }
+        chosen.push(decoy)
       }
 
       return chosen
@@ -80,9 +109,6 @@
         let name = this.media.numbers[number].name.match(/[^|]+/)[0]
         names[number] = name
       }
-
-console.log(names)
-
       return names
     }
 
@@ -98,7 +124,9 @@ console.log(names)
     }
 
   , setOptions: function setOptions(options) {
-      
+      for (let option in options) {
+        this[option] = options[option]
+      }
     }
 
     /**
