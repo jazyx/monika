@@ -4,6 +4,16 @@
 ;(function levelLoaded(monika){
   // monika = { map: { <name>: <object>, ... }, name: <string> }
   
+  function DEBUG() {
+    let report = ""
+
+    for (let key in monika) {
+      report += key + " "
+    }
+
+    document.querySelector("header").innerHTML = report
+  }
+
   function Level() {
     this.name = "Intro"
     this.queue = []
@@ -27,6 +37,8 @@
     var self = this
     var section = document.querySelector("main section")
     var target
+
+    DEBUG()
 
     monika.manager.setOptions({
       range: { start: 0, end: 9 }

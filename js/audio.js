@@ -58,7 +58,7 @@
         return this.notFoundAlert(src, "play")
       }
 
-      this.notFoundAlert(src)
+      //this.notFoundAlert(src)
 
       this.fileIsLoaded(src)
       this._playAudio()
