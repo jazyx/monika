@@ -18,7 +18,6 @@
 
     this.startGame()
 
-
     function levelComplete(event) {
       monika.completed(monika.level)
     }
@@ -29,7 +28,12 @@
     var section = document.querySelector("main section")
     var target
 
-    monika.manager.setOptions({ range: { start: 0, end: 9 } } )
+    monika.manager.setOptions({
+      range: { start: 0, end: 9 }
+    , repeats: 1
+    , consecutive: true
+    , audio: [ "numbers", "words" ]
+    })
     this.queue = monika.manager.getQueue()
 
     // const startTap = (event) => {
@@ -57,8 +61,9 @@
           this.queue.recycle(this.number)
 
         } else {
-          this.remaining--
-          if (!this.remaining) {
+          if (--this.remaining) {
+            monika.audio.play(this.audio)
+          } else {
             setTimeout(next, 500)
           }
         }
@@ -89,8 +94,9 @@
       let number = this.queue.pop()
 
       if (number === this.number) {
-        let canRecycle = ( this.queue.max() !== number
-                        || this.queue.min() !== number)
+        let canRecycle = this.queue.length
+                       && (( this.queue.max() !== number
+                          || this.queue.min() !== number))
 
         if ( canRecycle ) {
           this.queue.recycle(number)
@@ -118,13 +124,18 @@
 
     var cue = monika.manager.getCue(number)
     var decoys = cue.decoys
+    var media  = cue.media
     var answer = cue.answer
+    
+    monika.audio.preload(media.audio)
+
+    this.remaining = 3
+    this.audio = answer.audio[0]
 
     drawDots()
     showNames()
     showNumbers()
-
-    this.remaining = 3
+    monika.audio.play(this.audio)
 
     function getCueArray(total) {
       total -= 1
@@ -176,7 +187,7 @@
         let li = list[ii]
         let cue = cueArray[ii]
         let name = decoys.names[cue] || answer.name.match(/[^|]+/)[0]
-        let consonants = decoys.consonants[cue]
+        let consonants = media.consonants[cue]
         let regex = new RegExp ("[" + consonants + "]")
         let match = name.match(regex)
 

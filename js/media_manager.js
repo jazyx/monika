@@ -13,10 +13,13 @@
       // to past errors
       
       let queue = []
-      let ii = this.range.start
-      let end = this.range.end + 1
+      let repeats = this.options.repeats
+      let ii = this.options.range.start
+      let end = this.options.range.end + 1
       for ( ; ii < end; ii += 1) {
-        queue.push(ii, ii)
+        for (jj = 0; jj < repeats; jj += 1) {
+          queue.push(ii)
+        }
       }
 
       ii = queue.length
@@ -25,6 +28,19 @@
         temp = queue[random]
         queue[random] = queue[ii]
         queue[ii] = temp
+      }
+
+      if (this.options.consecutive) {
+        ii = end
+        end = this.options.range.start
+        for ( ; end < ii--; ) {
+          queue.push(ii)
+        }
+
+        if (!end) {
+          // Don't start with zero
+          queue.pop()
+        } 
       }
 
       queue.recycle = function (number) {
@@ -55,18 +71,24 @@
 
       let names = this.getNames(decoys)
       let words = this.getWords(decoys)
+      let audio = this.getAudio(decoys.concat([number]))
 
       decoys = {
         numbers:    decoys
       , names:      names
       , words:      words
       , images:     []
-      , consonants: this.media.consonants
+      }
+
+      let media = {
+        consonants: this.media.consonants
+      , audio:      audio
       }
 
       let cue = {
         answer: numberMedia
       , decoys: decoys
+      , media: media
       }
 
       return cue
@@ -75,8 +97,8 @@
   , getRandomDecoys: function getRandomDecoys(number) {
       var available = []
       var chosen = []
-      var start = this.range.start
-      var stop = this.range.end + 1
+      var start = this.options.range.start
+      var stop = this.options.range.end + 1
       var count = stop - start
       var ii
         , random
@@ -109,6 +131,7 @@
         let name = this.media.numbers[number].name.match(/[^|]+/)[0]
         names[number] = name
       }
+
       return names
     }
 
@@ -123,9 +146,57 @@
       return words
     }
 
+  , getAudio: function getAudio(numberArray) {
+      let audio = this.options.audio
+      let consonants = audio.indexOf("consonants") + 1
+      let numbers = audio.indexOf("numbers") + 1
+      let words = audio.indexOf("words") + 1
+      audio = []
+
+      addWords = (wordArray, whichRecordings) => {
+        // TODO: Allow for multiple recordings of multiple words
+        //
+        // wordArray = { 
+        //   default_word: "string"
+        // , "word:" : {
+        //      "audio": [...]
+        //    , "images" [...]
+        //    }
+        //  , ...
+        //  }
+
+        // for (let word in wordArray) {
+        //   let audioArray = wordArray[word].audio
+        //   if (audioArray) {
+        //     audio.push(audioArray[0])
+        //   }
+        // }
+
+        // Assume one audio for default word
+        audio.push(wordArray[wordArray.default_word].audio[0])
+      } 
+
+      for (let number in numberArray) {
+        number = this.media.numbers[numberArray[number]]
+        if (words) {
+          addWords(number.words, "default")
+        }
+
+        if (numbers) {
+          audio = audio.concat(number.audio)
+        }
+      }
+
+      if (consonants) {
+        // TODE
+      }
+
+      return audio
+    }
+
   , setOptions: function setOptions(options) {
       for (let option in options) {
-        this[option] = options[option]
+        this.options[option] = options[option]
       }
     }
 
@@ -190,8 +261,14 @@
       console.log("word_image_LUT", this.word_image_LUT)
     }
 
+  , options: {
+      range: { start: 0, end: 9 }
+    , consecutive: true
+    , repeats: 2
+    , audio: [ "numbers" ] // , "consonants", "words" ]
+    }
+
   , media: {}
-  , range: { start: 0, end: 9 }
   , number_word_LUT: {}
   , word_image_LUT: {}
 
