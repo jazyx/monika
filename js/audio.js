@@ -44,8 +44,7 @@
       let src = event.target.src
 
       if (event.type === "error") {
-        console.log("ERROR play: ", src, "not found")
-        return
+        return notFoundAlert(src, "play")
       }
 
       this.fileIsLoaded(src)
@@ -105,8 +104,7 @@
       let src = event.target.src
 
       if (event.type === "error") {
-        console.log("ERROR preload: ", src, "not found")
-        return
+        return this.notFoundAlert(src, "preload")
       }
 
       this.fileIsLoaded(src)
@@ -154,6 +152,12 @@
     src = src.substring(0, src.lastIndexOf("."))
 
     this.loaded.push(src)
+
+    alert ("File loaded: "+src)
+  }
+
+  Audio.prototype.notFoundAlert = function notFoundAlert(src, type) {
+    alert("ERROR "+type+": '"+src+"' not found")
   }
 
   monika.audio = new Audio()
