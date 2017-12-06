@@ -15,12 +15,12 @@
     this.timeout = 0
     this.canPlay = ""
 
-    this.debug = true
+    this.debug = false
 
     let audioTypes = {
       ".mp3":  "audio/mpeg"
     , ".ogg":  "audio/ogg"
-    , ".mp4":  "audio/mp4"
+    // , ".mp4":  "audio/mp4"
     // , ".aac":  "audio/aac"
     // , ".aacp": "audio/aacp"
     // , ".webm": "audio/webm"
@@ -161,7 +161,7 @@
   Audio.prototype.fileIsLoaded = function fileIsLoaded(src) {
     // Trim domain and extension
     src = decodeURIComponent(src)
-    src = src.match(/\/media\/.*$/)[0]
+    src = src.match(/\/monika\/.*$/)[0]
     src = src.substring(0, src.lastIndexOf("."))
 
     this.loaded.push(src)
@@ -171,13 +171,13 @@
     message = (type) ? "Error with " + src
                      : src + " ready to play"
 
-    document.querySelector("header").innerHTML = message
+    // document.querySelector("header").innerHTML = message
 
-    // if (this.debug) {
-    //    alert(message)
-    // } else {
-    //   console.log(message)
-    // }
+    if (this.debug) {
+       alert(message)
+    } else {
+      console.log(message)
+    }
   }
 
   monika.audio = new Audio()

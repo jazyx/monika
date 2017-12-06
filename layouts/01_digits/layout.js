@@ -5,13 +5,13 @@
   // monika = { map: { <name>: <object>, ... }, name: <string> }
   
   function DEBUG() {
-    let report = ""
+    // let report = ""
 
-    for (let key in monika) {
-      report += key + " "
-    }
+    // for (let key in monika) {
+    //   report += key + " "
+    // }
 
-    document.querySelector("header").innerHTML = report
+    // document.querySelector("header").innerHTML = report
   }
 
   function Level() {
