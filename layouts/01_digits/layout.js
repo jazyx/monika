@@ -137,11 +137,9 @@
 
     var cue = monika.manager.getCue(number)
     var decoys = cue.decoys
-    var media  = cue.media
+    var consonants = cue.consonants
     var answer = cue.answer
     
-    monika.audio.preload(media.audio)
-
     this.remaining = 3
     this.audio = answer.audio[0]
 
@@ -200,8 +198,8 @@
         let li = list[ii]
         let cue = cueArray[ii]
         let name = decoys.names[cue] || answer.name.match(/[^|]+/)[0]
-        let consonants = media.consonants[cue]
-        let regex = new RegExp ("[" + consonants + "]")
+        let mapped = consonants.map[cue]
+        let regex = new RegExp ("[" + mapped + "]")
         let match = name.match(regex)
 
         if (match) {

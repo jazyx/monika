@@ -75,14 +75,20 @@
 
         // TODO: Remember this as an number to be revised
         this.queue.recycle(this.number)
-
-      } else {
-
-        let forceAndUseCallback = (--this.remaining)
-                                 ? null
-                                 : this.newChallenge.bind(this)
-        monika.audio.play(this.audio, forceAndUseCallback)
+        return
       }
+
+      // The player clicked on an answer
+      let isConsonant = target.parentNode.classList.contains("consonants")
+
+      let src = (isConsonant)
+              ? target.src
+              : this.audio
+
+      let forceAndUseCallback = (--this.remaining)
+                               ? null
+                               : this.newChallenge.bind(this)
+      monika.audio.play(src, forceAndUseCallback)
     }
 
     section.onmousedown = section.ontouchstart = treatTap // startTap
@@ -118,17 +124,15 @@
     var number = getNumber()
 
     if (number === undefined) {
-      //alert("Time for a new level (when it's ready)")
+      alert("Time for a new level (when it's ready)")
       return this.startGame()
     }
 
     var cue = monika.manager.getCue(number)
     var decoys = cue.decoys
-    var media  = cue.media
+    var consonants = cue.consonants
     var answer = cue.answer
     
-    monika.audio.preload(media.audio)
-
     this.remaining = 3
     this.audio = answer.audio[0]
 
@@ -188,12 +192,12 @@
       // For Solo the consonant is chosen at random
 
       const getConsonant = (cue) => {
-        let consonants = media.consonants[cue]
+        let mapped = consonants.map[cue]
 
         switch (this.variant) {
           case "Even":
           case "Odd":
-            return consonants[0]
+            return mapped[0]
           break
           case "Multi":
 
@@ -206,6 +210,7 @@
         let li = list[ii]
         let cue = cueArray[ii]
         let consonant = getConsonant(cue)
+        li.src = consonants.audio[consonant][0]
 
         while (child = li.lastChild) {
           li.removeChild(child)
@@ -236,8 +241,8 @@
         let li = list[ii]
         let cue = cueArray[ii]
         let name = decoys.names[cue] || answer.name.match(/[^|]+/)[0]
-        let consonants = media.consonants[cue]
-        let regex = new RegExp ("[" + consonants + "]")
+        let mapped = consonants.map[cue]
+        let regex = new RegExp ("[" + mapped + "]")
         let match = name.match(regex)
 
         if (match) {

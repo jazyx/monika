@@ -88,7 +88,9 @@
 
       let names = this.getNames(decoys)
       let words = this.getWords(decoys)
-      let audio = this.getAudio(decoys.concat([number]))
+      let preload = this.getAudioToPreload(decoys.concat([number]))
+
+      monika.audio.preload(preload)
 
       decoys = {
         numbers:    decoys
@@ -97,15 +99,15 @@
       , images:     []
       }
 
-      let media = {
-        consonants: Object.assign({}, this.media.consonants.map)
-      , audio:      audio
+      let consonants = {
+        map:   Object.assign({}, this.media.consonants.map)
+      , audio: this.media.consonants.audio
       }
 
       let cue = {
         answer: numberMedia
       , decoys: decoys
-      , media: media
+      , consonants: consonants
       }
 
       return cue
@@ -202,7 +204,7 @@
       return words
     }
 
-  , getAudio: function getAudio(numberArray) {
+  , getAudioToPreload: function getAudioToPreload(numberArray) {
       let audio = this.options.audio
       let consonants = audio.indexOf("consonants") + 1
       let numbers = audio.indexOf("numbers") + 1
