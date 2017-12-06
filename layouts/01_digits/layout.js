@@ -41,10 +41,11 @@
     DEBUG()
 
     monika.manager.setOptions({
-      range: { start: 0, end: 9 }
+      cue_range: { start: 0, end: 9 }
+    , decoy_range: { start: 0, end: 9 }
     , repeats: 1
     , consecutive: true
-    , audio: [ "numbers", "words" ]
+    , audio: [ "numbers" ]
     })
     this.queue = monika.manager.getQueue()
 

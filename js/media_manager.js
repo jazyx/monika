@@ -13,16 +13,33 @@
       // to past errors
       
       let queue = []
+      let range = this.options.cue_range
       let repeats = this.options.repeats
-      let ii = this.options.range.start
-      let end = this.options.range.end + 1
-      for ( ; ii < end; ii += 1) {
-        for (jj = 0; jj < repeats; jj += 1) {
-          queue.push(ii)
+
+      const populateRangeQueue = () =>{
+        let ii = range.start
+        let end = range.end + 1
+        for ( ; ii < end; ii += 1) {
+          for (jj = 0; jj < repeats; jj += 1) {
+            queue.push(ii)
+          }
         }
       }
 
-      ii = queue.length
+      const populateDiscreteQueue = () => {
+        for (let ii = 0 ; ii < repeats; ii += 1) {
+          queue = queue.concat(range)
+        }
+      }
+
+      if (range instanceof Array) {
+        populateDiscreteQueue()
+      } else {
+        populateRangeQueue()
+      }
+
+      // Shuffle
+      let ii = queue.length
       while (ii--) {
         let random = Math.floor(Math.random() * ii)
         temp = queue[random]
@@ -30,14 +47,14 @@
         queue[ii] = temp
       }
 
+      // Start with the numbers in numerical order?
       if (this.options.consecutive) {
-        ii = end
-        end = this.options.range.start
-        for ( ; end < ii--; ) {
+        end = range.start - 1
+        for ( let ii = range.end ; end < ii; ii -= 1 ) {
           queue.push(ii)
         }
 
-        if (!end) {
+        if (end < 0) {
           // Don't start with zero
           queue.pop()
         } 
@@ -81,7 +98,7 @@
       }
 
       let media = {
-        consonants: this.media.consonants
+        consonants: Object.assign({}, this.media.consonants.map)
       , audio:      audio
       }
 
@@ -95,30 +112,69 @@
     }
 
   , getRandomDecoys: function getRandomDecoys(number) {
-      var available = []
       var chosen = []
-      var start = this.options.range.start
-      var stop = this.options.range.end + 1
-      var count = stop - start
-      var ii
-        , random
-        , decoy
+      var available = []
+      var range = this.options.decoy_range
+      var count
 
-      for (ii = start; ii < stop; ii += 1) {
-        if (ii === number) {
-          count -= 1
+      const makeRangeSelection = () => {
+        var start = range.start
+        var stop = range.end + 1
+        var ii
+          , random
+          , decoy
+
+        for (ii = start; ii < stop; ii += 1) {
+          if (ii !== number) {
+            available.push(ii)
+          }
+        }    
+      }
+
+      const makeDiscreteSelection = () => {
+        let index = range.indexOf(number)
+        available = available.concat(range)
+
+        if (index < 0) {
         } else {
-          available.push(ii)
+          available.splice(index, 1)
         }
       }
 
+      if (range instanceof Array) {
+        makeDiscreteSelection()
+      } else {
+        makeRangeSelection()
+      }
+
+      count = available.length
       for ( ; count; count -=1 ) {
         random = Math.floor(Math.random() * count)
         decoy = available.splice(random, 1)[0]
         chosen.push(decoy)
+      }  
+
+      switch (range.sortby) {
+        case "odd&even":
+          moveEvenToTheEnd(0)
+        break
+        case "even&odd":
+          moveEvenToTheEnd(1)
+        break
       }
 
       return chosen
+
+      function moveEvenToTheEnd(filter) {
+        let ii = chosen.length
+        for ( ; ii-- ; ) {
+          let number = chosen[ii]
+          if (filter === number % 2) {
+            chosen.splice(ii, 1)
+            chosen.push(number)
+          }
+        }
+      }
     }
 
   , getNames: function getNames(numberArray) {
@@ -188,7 +244,11 @@
       }
 
       if (consonants) {
-        // TODE
+        // Get all consonant recordings
+        let consonants = this.media.consonants.audio
+        for (let consonant in consonants) {
+          audio = audio.concat(consonants[consonant])
+        }
       }
 
       return audio
@@ -262,7 +322,8 @@
     }
 
   , options: {
-      range: { start: 0, end: 9 }
+      cue_range: { start: 0, end: 9 }
+    , decoy_range: { start: 0, end: 9 }
     , consecutive: true
     , repeats: 2
     , audio: [ "numbers" ] // , "consonants", "words" ]

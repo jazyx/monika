@@ -12,7 +12,6 @@
 ######################################################################
 
 source="$(dirname $(readlink -f $0))"
-media_file=$source/media.js
 
 echo $source
 
@@ -23,6 +22,9 @@ consonant_folder=consonants
 audio_folder=audio
 image_folder=images
 ignore="delete_me*"
+
+media_file=$source/$lang_code/media.js
+
 
 directory=$lang_code/$number_folder
 root_folder=/monika/media
@@ -185,6 +187,29 @@ get_audio_array() {
   echo "$_js_array"
 }
 
+add_consonant_audio() {
+  local _dir=$1
+  local _path=$2
+  local _index=0
+  local _consonant_dir _consonant _file_array 
+
+  for _consonant_dir in "$_dir"/*
+  do
+    _consonant=$(basename "$_consonant_dir")
+    _consonant_path=$_path/$_consonant
+    _file_array=$(get_audio_array $_consonant_dir $_consonant_path)
+
+    if [[ $_index == 0 ]]; then
+      echo "        $_consonant: $_file_array" >> $media_file
+      _index=1
+    else
+      echo "      , $_consonant: $_file_array" >> $media_file
+    fi
+  done
+
+  echo "      }" >> $media_file
+}
+
 get_images_array() {
   local _dir=$1
   local _path=$2
@@ -269,23 +294,33 @@ cat << EOF > $media_file
     errorSound: "media/interface/error/not" // ogg, mp3
 
   , consonants: {
-      0: "н"
-    , 1: "р"
-    , 2: "дт"
-    , 3: "кгх"
-    , 4: "чж"
-    , 5: "пб"
-    , 6: "шщл"
-    , 7: "сз"
-    , 8: "вф"
-    , 9: "м"
-    }
-
-  , numbers: {
+      map: {
+        0: "н"
+      , 1: "р"
+      , 2: "дт"
+      , 3: "кгх"
+      , 4: "чж"
+      , 5: "пб"
+      , 6: "шщл"
+      , 7: "сз"
+      , 8: "вф"
+      , 9: "м"
+      }
+    , audio: {
 EOF
 
 
-cd $directory
+path="$root_folder/$lang_code/consonants"
+
+add_consonant_audio $source/$lang_code/consonants $path
+
+
+cd $source/$lang_code/$number_folder
+
+cat << EOF >> $media_file
+    }
+  , numbers: {
+EOF
 
 index=0
 for dir in */
@@ -309,8 +344,8 @@ do
     path="$root_folder/$directory/$dir"
 
     cat << EOF >> $media_file
-       name: "$name"
-  // , path: "$root_folder/$directory/$dir"
+        name: "$name"
+   // , path: "$root_folder/$directory/$dir"
 EOF
 
     add_audio_array $source/$directory/$dir $path

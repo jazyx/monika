@@ -20,73 +20,12 @@
       , 8: "вф"
       , 9: "м"
       }
-    , audio: {
-        б: [
-  "/monika/media/ru/consonants/б/б"
-]
-      , в: [
-  "/monika/media/ru/consonants/в/в"
-]
-      , г: [
-  "/monika/media/ru/consonants/г/г"
-]
-      , д: [
-  "/monika/media/ru/consonants/д/д"
-]
-      , ж: [
-  "/monika/media/ru/consonants/ж/ж"
-]
-      , з: [
-  "/monika/media/ru/consonants/з/з"
-]
-      , к: [
-  "/monika/media/ru/consonants/к/к"
-]
-      , л: [
-  "/monika/media/ru/consonants/л/л"
-]
-      , м: [
-  "/monika/media/ru/consonants/м/м"
-]
-      , н: [
-  "/monika/media/ru/consonants/н/н"
-]
-      , п: [
-  "/monika/media/ru/consonants/п/п"
-]
-      , р: [
-  "/monika/media/ru/consonants/р/р"
-]
-      , с: [
-  "/monika/media/ru/consonants/с/с"
-]
-      , т: [
-  "/monika/media/ru/consonants/т/т"
-]
-      , ф: [
-  "/monika/media/ru/consonants/ф/ф"
-]
-      , х: [
-  "/monika/media/ru/consonants/х/х"
-]
-      , ц: [
-  "/monika/media/ru/consonants/ц/ц"
-]
-      , ч: [
-  "/monika/media/ru/consonants/ч/ч"
-]
-      , ш: [
-  "/monika/media/ru/consonants/ш/ш"
-]
-      , щ: [
-  "/monika/media/ru/consonants/щ/щ"
-]
-      }
-    }
+    , audio: []
+  }
   , numbers: {
       0: {
-        name: "ноль|нуль"
-   // , path: "/monika/media/ru/numbers/0/"
+       name: "ноль|нуль"
+  // , path: "/monika/media/ru/numbers/0/"
       , audio: [
   "/monika/media/ru/numbers/0/audio/0"
 ]
@@ -114,8 +53,8 @@
         }
       }
     , 1: {
-        name: "один|одна|одно|одни"
-   // , path: "/monika/media/ru/numbers/1/"
+       name: "один|одна|одно|одни"
+  // , path: "/monika/media/ru/numbers/1/"
       , audio: [
   "/monika/media/ru/numbers/1/audio/1"
 ]
@@ -135,8 +74,8 @@
         }
       }
     , 2: {
-        name: "два|две"
-   // , path: "/monika/media/ru/numbers/2/"
+       name: "два|две"
+  // , path: "/monika/media/ru/numbers/2/"
       , audio: [
   "/monika/media/ru/numbers/2/audio/2"
 ]
@@ -155,8 +94,8 @@
         }
       }
     , 3: {
-        name: "три"
-   // , path: "/monika/media/ru/numbers/3/"
+       name: "три"
+  // , path: "/monika/media/ru/numbers/3/"
       , audio: [
   "/monika/media/ru/numbers/3/audio/3"
 ]
@@ -176,8 +115,8 @@
         }
       }
     , 4: {
-        name: "четыре"
-   // , path: "/monika/media/ru/numbers/4/"
+       name: "четыре"
+  // , path: "/monika/media/ru/numbers/4/"
       , audio: [
   "/monika/media/ru/numbers/4/audio/4"
 ]
@@ -197,8 +136,8 @@
         }
       }
     , 5: {
-        name: "пять"
-   // , path: "/monika/media/ru/numbers/5/"
+       name: "пять"
+  // , path: "/monika/media/ru/numbers/5/"
       , audio: [
   "/monika/media/ru/numbers/5/audio/5"
 ]
@@ -233,8 +172,8 @@
         }
       }
     , 6: {
-        name: "шесть"
-   // , path: "/monika/media/ru/numbers/6/"
+       name: "шесть"
+  // , path: "/monika/media/ru/numbers/6/"
       , audio: [
   "/monika/media/ru/numbers/6/audio/6"
 ]
@@ -255,8 +194,8 @@
         }
       }
     , 7: {
-        name: "семь"
-   // , path: "/monika/media/ru/numbers/7/"
+       name: "семь"
+  // , path: "/monika/media/ru/numbers/7/"
       , audio: [
   "/monika/media/ru/numbers/7/audio/7"
 ]
@@ -276,8 +215,8 @@
         }
       }
     , 8: {
-        name: "восемь"
-   // , path: "/monika/media/ru/numbers/8/"
+       name: "восемь"
+  // , path: "/monika/media/ru/numbers/8/"
       , audio: [
   "/monika/media/ru/numbers/8/audio/8"
 ]
@@ -308,8 +247,8 @@
         }
       }
     , 9: {
-        name: "девять"
-   // , path: "/monika/media/ru/numbers/9/"
+       name: "девять"
+  // , path: "/monika/media/ru/numbers/9/"
       , audio: [
   "/monika/media/ru/numbers/9/audio/9"
 ]

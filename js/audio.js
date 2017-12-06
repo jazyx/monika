@@ -5,15 +5,23 @@
   }
 
   function Audio() {
-    this.audioElement = document.querySelector("audio")
     let audio = this.audioPreloader = document.createElement("audio")
+    this.audioElement = document.querySelector("audio")
+    this.audioElement.onended = (event) => {
+      this._playNext(event)
+    }
 
-    this.queue = []
-    this.loaded = []
-    this.url = ""
-    this.delay = 2000
-    this.timeout = 0
-    this.canPlay = ""
+    // List of files to preload and that have been loaded
+    this.queue   = []
+    this.loaded  = []
+
+    // Currently playing sound and status, and next to play
+    this.src     = ""
+    this.isBusy  = false
+    this.nextUp  = { src: 0, callback: null }
+
+    // File type to request from server
+    this.ext = "" // will be set to .mp3 or .ogg
 
     this.debug = false
 
@@ -29,28 +37,68 @@
     // , ".wav":  "audio/wav"
     }
 
-    let tried = "Tried:"
-
     if (this.audioPreloader.canPlayType) {
       for (let type in audioTypes) {
         let audioType = audioTypes[type]
         let canPlay = audio.canPlayType(audioType).replace(/no/, '')
-       
-        tried += " " + type
-       
+              
         if (canPlay) {
-          this.canPlay = type
-
-          tried += " (success)"
+          this.ext = type
           break
         }
       }
-    }
-
-    this.notFoundAlert(tried)
+    } // else ?? there will be no sound at all. Warn?
   }
 
-  Audio.prototype.play = function play(src) {
+
+
+  /**
+   * Sent by <level> at the beginning of a newChallenge()
+   *         <level> from treatTap() each time the player taps a good
+   *                 item.
+   *                 
+   * When sent by newChallenge() there should, by design, be no sound
+   * currently playing. When sent by treatTap, the current sound may
+   * not have finished, so the new sound must either be discarded or
+   * delayed.
+   * - If it is the same src, then it can be discarded.
+   * - If it is a different src (number|consonant|word) then it should
+   *   be played, unless the player is tapping really quickly, in
+   *   which case it may be replaced by.
+   * - If it is the last tap, callback will be a function. In this
+   *   case, it must be played (with or without a delay), and the
+   *   callback must be called when it is done. Otherwise, the next
+   *   challenge will not be shown.
+   * 
+   * @param  {string}   src      relative url, with no extension
+   * @param  {Function} callback null or a callback that will trigger
+   *                             the next challenge
+   */
+  Audio.prototype.play = function play(src, callback) {
+    this.nextUp.callback = callback
+
+    if (this.isBusy) {
+      if (callback || this.src !== src) {
+        // Callback sound must be played. When it finishes, it will
+        // trigger the next challenge. Different src may be played
+        // if it isn't replaced.
+        
+        this.nextUp.src = src
+
+      } // else just drop the duplicate sound
+
+      return
+    }
+
+    // If we get here, then we want to play this sound ... but it
+    // might not be loaded yet.
+
+    this._prepareToPlay(src)
+  }
+
+
+
+  Audio.prototype._prepareToPlay = function _prepareToPlay(src) {
     const playNow = (event) => {
       let src = event.target.src
 
@@ -58,44 +106,63 @@
         return this.notFoundAlert(src, "play")
       }
 
-      //this.notFoundAlert(src)
-
       this.fileIsLoaded(src)
       this._playAudio()
-      this.audioElement.oncanplaythrough = null
     }
 
-    if (this.src === src) {
-      if (this.timeout) {
-        // Allow a delay before repeating a sound
-        return
-      }
-    } else {
-      this.audioElement.src = src + this.canPlay
-      this.src = src
-    }
-
+    this.src = src
+    this.audioElement.src = src + this.ext
 
     if (this.loaded.indexOf(src) < 0) {
+      // this.isBusy is currently false. Use this audio element to
+      // load it. But if another request to _prepareToPlay is
+      // received, the current src file will be replaced.
+      
       this.audioElement.oncanplaythrough = playNow
       this.audioElement.onerror = playNow
+
     } else {
+      // An already-loaded file has priority, even if there's one
+      // just about to finish downloading.
+      
       this._playAudio();
     }
   }
 
+
+
   Audio.prototype._playAudio = function _playAudio() {
+    // Cancel any post-download call to _playAudio (which may have
+    // just been made by the current src)
+    
+    this.audioElement.oncanplaythrough = null
     this.audioElement.play()
+    this.isBusy = true
 
-    // Create a timeout so that the same file is not replayed
-    // immediately, if the user is tapping fast
-    // 
-    const timeup = () => {
-      this.timeout = 0
-    }
-
-    this.timeout = setTimeout(timeup, this.delay)
+    // When the file has finished playing, it will call _playNext, to
+    // see if anything has queued up in the meantime
   }
+
+
+
+  Audio.prototype._playNext = function _playNext() {
+    this.isBusy = false
+
+    let src = this.nextUp.src
+    let callback = this.nextUp.callback
+
+    if (src) {
+      this.nextUp.src = 0
+      this._prepareToPlay(src)
+
+    } else if (callback) {
+      // this.isBusy will be false while the callback is executing
+      callback()
+      this.nextUp.callback = null
+    }
+  }
+
+
 
   Audio.prototype.preload = function preload(srcArray, callback) {
     // Adds urls in srcArray in reverse order, so that the first src
@@ -138,7 +205,7 @@
       let src = srcArray[ii]
 
       if (this.loaded.indexOf(src) < 0 ) {
-        src += this.canPlay
+        src += this.ext
         let index = this.queue.indexOf(src)
 
         if (index < 0) {
@@ -158,6 +225,8 @@
     }
   }
 
+
+
   Audio.prototype.fileIsLoaded = function fileIsLoaded(src) {
     // Trim domain and extension
     src = decodeURIComponent(src)
@@ -166,6 +235,8 @@
 
     this.loaded.push(src)
   }
+
+
 
   Audio.prototype.notFoundAlert = function notFoundAlert(src, type) {
     message = (type) ? "Error with " + src
@@ -179,6 +250,8 @@
       console.log(message)
     }
   }
+
+
 
   monika.audio = new Audio()
 
