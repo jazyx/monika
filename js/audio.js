@@ -1,8 +1,5 @@
 ;(function (monika){
 
-  alert("audio.js loading")
-  document.body.style.backgroundColor="red"
-
   if (!monika) {
     monika = window.monika = {}
   }
@@ -155,12 +152,14 @@
     src = src.substring(0, src.lastIndexOf("."))
 
     this.loaded.push(src)
-
-    alert ("File loaded: "+src)
   }
 
   Audio.prototype.notFoundAlert = function notFoundAlert(src, type) {
-    alert("ERROR "+type+": '"+src+"' not found")
+    if (this.debug) {
+       alert("ERROR "+type+": '"+src+"' not found")
+    } else {
+      console.log("ERROR "+type+": '"+src+"' not found")
+    }
   }
 
   monika.audio = new Audio()

@@ -25,7 +25,7 @@ image_folder=images
 ignore="delete_me*"
 
 directory=$lang_code/$number_folder
-root_folder=/media
+root_folder=/monika/media
 
 ######################################################################
 
