@@ -49,7 +49,7 @@
         return this.notFoundAlert(src, "play")
       }
 
-      alert("Ready to play"+src)
+      this.notFoundAlert(src)
 
       this.fileIsLoaded(src)
       this._playAudio()
@@ -159,10 +159,15 @@
   }
 
   Audio.prototype.notFoundAlert = function notFoundAlert(src, type) {
+    message = (type) ? "Error with " + src
+                     : src + " ready to play"
+
+    document.querySelector("header").innerHTML = message
+
     if (this.debug) {
-       alert("ERROR "+type+": '"+src+"' not found")
+       alert(message)
     } else {
-      console.log("ERROR "+type+": '"+src+"' not found")
+      console.log(message)
     }
   }
 

@@ -1,7 +1,7 @@
 html, body {
 margin: 0;
 height: calc(100vh + 3em);
-background-color: #200;
+background-color: #210;
 
 display: flex;
 flex-direction: column;
@@ -16,6 +16,7 @@ text-align: center;
 user-select: none; 
 
 font-size: 8vmin; 
+font-size: 4vmin; 
 }
 
 header {
