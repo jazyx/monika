@@ -46,8 +46,10 @@
       let src = event.target.src
 
       if (event.type === "error") {
-        return notFoundAlert(src, "play")
+        return this.notFoundAlert(src, "play")
       }
+
+      alert("Ready to play"+src)
 
       this.fileIsLoaded(src)
       this._playAudio()
