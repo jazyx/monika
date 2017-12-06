@@ -15,6 +15,8 @@
     this.timeout = 0
     this.canPlay = ""
 
+    this.debug = true
+
     let audioTypes = {
       ".mp3":  "audio/mpeg"
     , ".ogg":  "audio/ogg"
