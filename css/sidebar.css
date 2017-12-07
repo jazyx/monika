@@ -1,0 +1,101 @@
+nav {
+position: fixed;
+top: 12vmin;
+bottom: 0;
+width: 0;
+background-color: rgba(255,255,255,0.8);
+/*overflow-x:;*/
+}
+
+nav input[type=checkbox] {
+opacity: 0;
+}
+
+nav label {
+position: fixed;
+top: 0;
+left: 0;
+width: 12vmin;
+height: 12vmin;
+
+display: flex;
+align-items: center;
+z-index: 1;
+
+text-align: left;
+background-color: none;
+transition: background 0s 0.2s, width 0.2s 0s linear;
+}
+
+nav label svg {
+height: 90%;
+width: 12vmin;
+fill: rgba(255,255,255,0.3333);
+}
+
+nav label:hover svg{
+fill: #fff;
+}
+
+nav input[type=checkbox]:checked ~ label {
+width:36vmin;
+background-color: #fff;
+border-bottom: 1px solid #999;
+/*transition: width 2s 1s linear;*/
+transition: background 0s 0s, width 0.2s 0.1s linear;
+}
+
+nav input[type=checkbox]:checked ~ label svg {
+fill: rgba(0,0,0,0.3333);
+}
+
+nav input[type=checkbox]:checked ~ label:hover svg {
+fill: #000;
+}
+
+nav input[type=checkbox]:checked ~ section {
+left: 0;
+}
+
+nav section {
+position: absolute;
+top: 0;
+width: 36vmin;
+height: 100%;
+background-color: #fff;
+overflow-y: auto;
+left: -36vmin;
+
+-webkit-transition: left 0.3s linear;
+transition: left 0.3s linear;
+}
+
+nav ul {
+position: relative;
+top: 2vmin;
+}
+
+nav li {
+height:33vmin ;
+position: relative; /*required so that locks appear correctly*/
+}
+
+nav li button {
+width: 30vmin;
+height:30vmin;
+margin: 0;
+font-size: 20vmin;
+border-radius: 4vmin;
+}
+
+nav button[disabled]::after {
+content: "";
+background: url(../img/lock.png) 0 0 no-repeat;
+background-size: cover;
+position: absolute;
+bottom: 4vmin;
+right: 3vmin;
+width: 8vmin;
+height: 12vmin;
+display: inline-block;
+}

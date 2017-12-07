@@ -1,0 +1,211 @@
+html, body {
+margin: 0;
+height: calc(100vh + 3em);
+background-color: #300;
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+color: #fff;
+
+text-align: center;
+
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none; 
+
+font-size: 8vmin; 
+}
+
+header {
+height: 3em;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+/* Optimal 6 x 4 mode */
+
+main {
+display: flex;
+flex-direction: row;
+justify-content: center;
+height: 100vmin;
+min-width: 150vmin;
+width: 100%;
+}
+
+main section {
+display: flex;
+flex-direction: column;
+justify-content: center;
+height: 100%;
+width: 150vmin;
+}
+
+section>p {
+font-size: 4vmin;
+}
+
+ul {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+main section ul {
+width: 100%;
+}
+
+
+ul.images {
+height: 50%;
+}
+
+ul.consonants, 
+ul.words {
+height: 25%;
+}
+
+ul.consonants {
+font-size: 20vmin;
+}
+
+ul.words {
+font-size: 12.5vmin;
+}
+
+ul.numbers {
+height: 25%;
+font-size: 20vmin;
+}
+
+ul.consonants li,
+ul.numbers li {
+width: 16.6666%;
+}
+
+ul.images li,
+ul.words li {
+width: 33.3333%;
+}
+
+main section li {
+height: 100%;
+
+display: inline-flex;
+flex-direction: column;
+justify-content: center;
+
+box-sizing: border-box;
+background-color: #888;
+
+border: 1vmin solid #666;
+border-radius: 2.5vmin;
+border-top-color: #999;
+border-left-color: #999;
+}
+
+main section li:not(.touched):hover {
+background-color: #999;
+border-color:#333;
+border-top-color: #ccc;
+border-left-color: #ccc;
+}
+
+main section li.touched {
+background-color: #777;
+border-color:#999;
+border-top-color: #555;
+border-left-color: #555;
+}
+
+main section li img {
+height: 100%;
+}
+
+main section li div {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+main section li p {
+margin:0;
+}
+
+span {
+color: #f90;
+}
+
+main section li.disabled {
+border-color:#999;
+background-color: #aaa;
+color: #bbb;
+}
+
+main section li.disabled span {
+color: #bbb;
+}
+
+main section li.disabled img,
+main section li.disabled svg {
+opacity: 0.2;
+}
+
+audio {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 999;
+}
+
+@media screen and (orientation:portrait) {
+
+  main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100vmin;
+  width: 100%;
+  min-width:100%;
+  }
+
+  main section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100vmin;
+  }
+
+  ul.consonants li,
+  ul.numbers li {
+  width: 25%;
+  }
+
+  ul.words li,
+  ul.images li {
+  width: 50%;
+  }
+
+  /* Hide all decoys... */
+  ul.consonants li.decoy,
+  ul.consonants li.decoy,
+  ul.images li.decoy,
+  ul.words li.decoy,
+  ul.numbers li.decoy {
+  display:none;
+  }
+
+  /* ... then reveal all but the first one or two */
+  ul.consonants li.decoy ~ li.decoy ~ li.decoy,
+  ul.images li.decoy ~ li.decoy,
+  ul.words li.decoy ~ li.decoy,
+  ul.numbers li.decoy ~ li.decoy ~ li.decoy {
+  display:inline-flex;
+  }
+
+}
