@@ -9,14 +9,8 @@
   <!-- General styling of the interface -->
   <link rel="stylesheet" type="text/css" href="css/page.css">
   <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+  <link rel="stylesheet" type="text/css" href="css/digits.css">
 
-  <!-- Specific styling of the current level -->
-  <link
-    class="level"
-    rel="stylesheet"
-    type="text/css"
-    href="layouts/splash/layout.css"
-  >
 </head>
 
 <bodY> <!-- oncontextmenu="return false;"> -->
@@ -64,51 +58,53 @@
     </label>
     <section>
       <ul>
-        <li><button>1</button></li>
-        <li><button>2</button></li>
-        <li><button disabled>3</button></li>
-        <li><button disabled>4</button></li>
-        <li><button disabled>5</button></li>
-        <li><button disabled>6</button></li>
-        <li><button>7</button></li>
-        <!-- <li><button>8</button></li>
-        <li><button>9</button></li>
-        <li><button disabled>10</button></li>
-        <li><button>11</button></li>
-        <li><button disabled>12</button></li>
-        <li><button>13</button></li>
-        <li><button>14</button></li>
-        <li><button disabled>15</button></li>
-        <li><button disabled>16</button></li>
-        <li><button disabled>17</button></li>
-        <li><button disabled>18</button></li>
-        <li><button>19</button></li>
-        <li><button disabled>20</button></li>
-        <li><button disabled>21</button></li>
-        <li><button disabled>22</button></li>
-        <li><button disabled>23</button></li>
-        <li><button>24</button></li>
-        <li><button disabled>25</button></li>
-        <li><button disabled>26</button></li>
-        <li><button disabled>27</button></li>
-        <li><button disabled>28</button></li>
-        <li><button>29</button></li>
-        <li><button disabled>30</button></li>
-        <li><button disabled>31</button></li>
-        <li><button disabled>32</button></li>
-        <li><button disabled>33</button></li>
-        <li><button>34</button></li>
-        <li><button disabled>35</button></li>
-        <li><button disabled>36</button></li>
-        <li><button disabled>37</button></li>
-        <li><button disabled>38</button></li>
-        <li><button>39</button></li>
-        <li><button>40</button></li> -->
+        <li class="active"><a href="#1">1</a></li>
+        <li disabled><a href="#2">2</a></li>
+        <li><a href="#3">3</a></li>
+        <li><a href="#4">4</a></li>
+        <li><a href="#5">5</a></li>
+        <li><a href="#6">6</a></li>
+        <li><a href="#7">7</a></li>
+   <!-- <li><a href="#8">8</a></li>
+        <li><a href="#9">9</a></li>
+        <li><a href="#10">10</a></li>
+        <li><a href="#11">11</a></li>
+        <li><a href="#12">12</a></li>
+        <li><a href="#13">13</a></li>
+        <li><a href="#14">14</a></li>
+        <li><a href="#15">15</a></li>
+        <li><a href="#16">16</a></li>
+        <li><a href="#17">17</a></li>
+        <li><a href="#18">18</a></li>
+        <li><a href="#19">19</a></li>
+        <li><a href="#20">20</a></li>
+        <li><a href="#21">21</a></li>
+        <li><a href="#22">22</a></li>
+        <li><a href="#23">23</a></li>
+        <li><a href="#24">24</a></li>
+        <li><a href="#25">25</a></li>
+        <li><a href="#26">26</a></li>
+        <li><a href="#27">27</a></li>
+        <li><a href="#28">28</a></li>
+        <li><a href="#29">29</a></li>
+        <li><a href="#30">30</a></li>
+        <li><a href="#31">31</a></li>
+        <li><a href="#32">32</a></li>
+        <li><a href="#33">33</a></li>
+        <li><a href="#34">34</a></li>
+        <li><a href="#35">35</a></li>
+        <li><a href="#36">36</a></li>
+        <li><a href="#37">37</a></li>
+        <li><a href="#38">38</a></li>
+        <li><a href="#39">39</a></li>
+        <li><a href="#40">40</a></li> -->
       </ul>
     </section>
   </nav>
 
-  <article> <!-- this element is replaced when the layout changes -->
+  <!-- <pre>Log:</pre> -->
+
+  <article class="home active">
     <header>
       Русские цифры, согласные, мнемоники!
     </header>
@@ -120,21 +116,92 @@
     </main>
   </article>
 
+  <article class="digits">
+    <header>
+      Consonant layout
+    </header>
+    <main>
+      <section>
+        <ul class="consonants">
+          <li></li><!--
+       --><li></li><!--
+       --><li></li><!--
+       --><li></li><!--
+       --><li></li><!--
+       --><li></li> 
+        </ul>
+        <ul class="names">
+          <li></li><!--
+       --><li></li><!--
+       --><li></li>
+        </ul>
+        <ul class="numbers">
+          <li></li><!--
+       --><li></li><!--
+       --><li></li>
+        </ul>
+      <section>
+    </main>
+  </article>
+
+  <article class="words">
+    <header>
+      Words layout
+    </header>
+    <main>
+      <section>
+        <ul class="images">
+          <li></li><!--
+       --><li></li><!--
+       --><li></li> 
+        </ul>
+
+        <ul class="words">
+          <li></li><!--
+       --><li></li><!--
+       --><li></li>
+        </ul>
+
+        <ul class="numbers">
+        <li></li><!--
+     --><li></li><!--
+     --><li></li><!--
+     --><li></li><!--
+     --><li></li><!--
+     --><li></li>
+        </ul>
+      <section>
+    </main>
+  </article>
+
   <audio src="">
     Your browser does not support the <code>audio</code> element. Please upgrade or use a different browser to play this game.
   </audio>
 
-  <script
-    src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous">
-  </script>
-
+  <!-- Prototype-level changes -->
   <script src="js/protos.js"></script>
-  <script class="level" src="layouts/splash/layout.js"></script>
-  <script src="js/audio.js"></script>
-  <script src="js/media_manager.js"></script>
+
+  <!-- Game scripts -->
+  <script class="level" src="js/game/game.js"></script>
+  <script class="level" src="js/game/layouts/digits.js"></script>
+  <script class="level" src="js/game/layouts/words.js"></script>
+
+  <!-- Level scripts -->
+  <script class="level" src="js/game/levels/01_intro.js"></script>
+  <script class="level" src="js/game/levels/02_even_consonants.js"></script>
+  <script class="level" src="js/game/levels/03_odd_consonants.js"></script>
+  <script class="level" src="js/game/levels/04_key_consonants.js"></script>
+  <script class="level" src="js/game/levels/05_multi_consonants.js"></script>
+  <script class="level" src="js/game/levels/06_solo_consonants.js"></script>
+  <script class="level" src="js/game/levels/07_words.js"></script>
+
+  <!-- Resource lists -->
   <script src="media/ru/media.js"></script>
-  <script src="js/monika.js"></script>
+  <script src="media/ru/levels.js"></script>
+
+  <!-- General scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/processor.js"></script>
+  <script src="js/menu.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 html, body {
 margin: 0;
 height: calc(100vh + 3em);
-background-color: #300;
+background-color: #002;
 
 display: flex;
 flex-direction: column;
@@ -16,6 +16,14 @@ text-align: center;
 user-select: none; 
 
 font-size: 8vmin; 
+}
+
+article {
+  display: none;
+}
+
+article.active {
+  display: block;
 }
 
 header {
@@ -64,6 +72,7 @@ height: 50%;
 }
 
 ul.consonants, 
+ul.names, 
 ul.words {
 height: 25%;
 }
@@ -72,6 +81,7 @@ ul.consonants {
 font-size: 20vmin;
 }
 
+ul.names,
 ul.words {
 font-size: 12.5vmin;
 }
@@ -87,6 +97,7 @@ width: 16.6666%;
 }
 
 ul.images li,
+ul.names li,
 ul.words li {
 width: 33.3333%;
 }
@@ -154,12 +165,21 @@ main section li.disabled svg {
 opacity: 0.2;
 }
 
-audio {
-  position: fixed;
+li.white span {
+color: #fff;
+}
+
+li.delay span {
+transition: color 1s 3s;
+}
+
+/* Only used in first level */
+article svg {
   width: 100%;
   height: 100%;
-  background-color: #000;
-  z-index: 999;
+  /*stroke: black;*/
+  fill: #fff;
+  opacity: 0.9;
 }
 
 @media screen and (orientation:portrait) {
@@ -187,25 +207,43 @@ audio {
   }
 
   ul.words li,
+  ul.names li,
   ul.images li {
   width: 50%;
   }
 
   /* Hide all decoys... */
-  ul.consonants li.decoy,
-  ul.consonants li.decoy,
-  ul.images li.decoy,
-  ul.words li.decoy,
-  ul.numbers li.decoy {
+  li.decoy {
   display:none;
   }
 
   /* ... then reveal all but the first one or two */
   ul.consonants li.decoy ~ li.decoy ~ li.decoy,
   ul.images li.decoy ~ li.decoy,
+  ul.names li.decoy ~ li.decoy,
   ul.words li.decoy ~ li.decoy,
   ul.numbers li.decoy ~ li.decoy ~ li.decoy {
   display:inline-flex;
   }
 
+}
+
+
+
+/* For log */
+pre {
+  position: fixed;
+  top: 0;
+  left: 12vmin;
+  margin: 0;
+  height: 10em;
+  width: calc(100% - 12vmin);
+
+  white-space: pre-wrap;
+  font-size: 2.4vmin;
+  text-align: left;
+  overflow: auto;
+
+  /*pointer-events: none;*/
+  background-color: rgba(0,0,0,0.8);
 }

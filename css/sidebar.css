@@ -4,7 +4,6 @@ top: 12vmin;
 bottom: 0;
 width: 0;
 background-color: rgba(255,255,255,0.8);
-/*overflow-x:;*/
 }
 
 nav input[type=checkbox] {
@@ -72,7 +71,7 @@ transition: left 0.3s linear;
 
 nav ul {
 position: relative;
-top: 2vmin;
+padding: 2vmin;
 }
 
 nav li {
@@ -80,22 +79,68 @@ height:33vmin ;
 position: relative; /*required so that locks appear correctly*/
 }
 
-nav li button {
+nav li a {
+display:block;
 width: 30vmin;
 height:30vmin;
 margin: 0;
 font-size: 20vmin;
-border-radius: 4vmin;
+
+background-color: #ccc;
+border: 1vmin solid #bbb;
+border-radius: 2.5vmin;
+border-top-color: #ddd;
+border-left-color: #ddd;
+
+text-decoration: none;
+padding: 2.7vmin 0;
+box-sizing: border-box;
+
+color: #666;
 }
 
-nav button[disabled]::after {
+nav li a:visited {
+color: #000;
+}
+
+nav li a:hover {
+border-color: #aaa;
+border-top-color: #e4e4e4;
+border-left-color: #e4e4e4;
+}
+
+nav li a:active {
+color: #000;
+background-color: #ccc;
+border-color: #ddd;
+border-top-color: #bbb;
+border-left-color: #bbb;
+}
+
+nav li.active a {
+color: #600;
+background-color: #c99;
+border-color: #daa;
+border-top-color: #b88;
+border-left-color: #b88;
+}
+
+nav li[disabled]::after {
 content: "";
 background: url(../img/lock.png) 0 0 no-repeat;
 background-size: cover;
 position: absolute;
 bottom: 4vmin;
-right: 3vmin;
+right: 1vmin;
 width: 8vmin;
 height: 12vmin;
 display: inline-block;
+}
+
+nav li[disabled] a {
+background-color: #fff;
+border: 1px solid #000;
+pointer-events: none;
+color: #000;
+opacity: 0.2;
 }

@@ -1,28 +1,29 @@
-main section li {
+.words main section li {
 background-color: #339;
 border-color: #006;
 border-top-color: #669;
 border-left-color: #669;
 }
 
-main section li:hover {
+.words main section li:hover {
 background-color: #44a;
 border-color:#003;
 border-top-color: #99c;
 border-left-color: #99c;
 }
 
-main section li:focus {
+.words main section li:focus {
 background-color: #282;
 border-color:#99c;
 border-top-color: #003;
 border-left-color: #003;
 }
 
-html, body {
+/*html, body {
 height: calc(100vh + 2em);
 }
 
 header {
 font-size: 6vmin; 
 }
+*/

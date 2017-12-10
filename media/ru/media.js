@@ -10,7 +10,7 @@
   , consonants: {
       map: {
         0: "н"
-      , 1: "р"
+      , 1: "рц"
       , 2: "дт"
       , 3: "кгх"
       , 4: "чж"
@@ -20,10 +20,11 @@
       , 8: "вф"
       , 9: "м"
       }
+
     , audio: {
         б: [
-  "/monika/media/ru/consonants/б/б"
-]
+          "/monika/media/ru/consonants/б/б"
+        ]
       , в: [
   "/monika/media/ru/consonants/в/в"
 ]
@@ -331,9 +332,9 @@
     }
 
   , initialize: function initialize() {
-      if (monika.manager) {
-        console.log("Initializing monika.media")
-        monika.manager.loadMedia(this)
+      if (monika.processor) {
+        console.log("Initializing monika.paths")
+        monika.processor.run(this)
       }
 
       return this

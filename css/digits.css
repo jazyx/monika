@@ -19,36 +19,24 @@ border-top-color: #030;
 border-left-color: #030;
 }*/
 
-ul.numbers {
+.digits ul.numbers {
 height: 50%;
 font-size: 40vmin;
 }
 
-ul.numbers li {
+.digits ul.numbers li {
 width: 33.3333%;
 }
 
 @media screen and (orientation:portrait) {
 
-  ul.numbers li {
+  .digits ul.numbers li {
   width: 50%;
   }
 
   /* Hide only one number when they're big */
-  ul.numbers li.decoy ~ li.decoy {
+  .digits ul.numbers li.decoy ~ li.decoy {
   display:inline-flex;
   }
 
-}
-
-article svg {
-  width: 100%;
-  height: 100%;
-  /*stroke: black;*/
-  fill: #fff;
-  opacity: 0.9;
-}
-
-li.decoy {
-  background-color: #888;
 }

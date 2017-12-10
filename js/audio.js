@@ -7,7 +7,6 @@
   function Audio() {
     let audio = this.audioPreloader = document.createElement("audio")
     this.audioElement = document.querySelector("audio")
-    this.audioElement.aaa = "aaa"
     this.audioElement.onended = (event) => {
       this._playNext(event)
     }
@@ -15,6 +14,7 @@
     // List of files to preload and that have been loaded
     this.queue   = []
     this.loaded  = []
+    this.missing = []
 
     // Currently playing sound and status, and next to play
     this.src     = ""
@@ -42,9 +42,10 @@
       for (let type in audioTypes) {
         let audioType = audioTypes[type]
         let canPlay = audio.canPlayType(audioType).replace(/no/, '')
-              
+
         if (canPlay) {
           this.ext = type
+          // log("Can play: " + type)
           break
         }
       }
@@ -57,35 +58,32 @@
    * Sent by <level> at the beginning of a newChallenge()
    *         <level> from treatTap() each time the player taps a good
    *                 item.
-   *                 
+   *
    * When sent by newChallenge() there should, by design, be no sound
    * currently playing. When sent by treatTap, the current sound may
    * not have finished, so the new sound must either be discarded or
    * delayed.
    * - If it is the same src, then it can be discarded.
    * - If it is a different src (number|consonant|word) then it should
-   *   be played, unless the player is tapping really quickly, in
-   *   which case it may be replaced by.
-   * - If it is the last tap, callback will be a function. In this
-   *   case, it must be played (with or without a delay), and the
-   *   callback must be called when it is done. Otherwise, the next
-   *   challenge will not be shown.
-   * 
+   *   be played.
+   * - If it is the last tap, callback will be a function. The sound
+   *   need not be played if it is a duplicate.
+   *   
    * @param  {string}   src      relative url, with no extension
    * @param  {Function} callback null or a callback that will trigger
    *                             the next challenge
    */
   Audio.prototype.play = function play(src, callback) {
+    // log(src + " (callback: " + (typeof callback === "function"
+    //                          ? "FUNCTION"
+    //                          : callback
+    //                            ? callback
+    //                            : "null") +")")
     this.nextUp.callback = callback
 
     if (this.isBusy) {
-      if (callback || this.src !== src) {
-        // Callback sound must be played. When it finishes, it will
-        // trigger the next challenge. Different src may be played
-        // if it isn't replaced.
-        
+      if (this.src !== src) {
         this.nextUp.src = src
-
       } // else just drop the duplicate sound
 
       return
@@ -100,53 +98,50 @@
 
 
   Audio.prototype._prepareToPlay = function _prepareToPlay(src) {
-    const playNow = (event) => {
-      let src = event.target.src
-
-      if (event.type === "error") {
-        return this.notFoundAlert(src, "play")
-      }
-
-      this.fileIsLoaded(src)
-      this._playAudio()
-    }
-
-    this.src = src
-    this.audioElement.src = src + this.ext
-
     if (this.loaded.indexOf(src) < 0) {
       // this.isBusy is currently false. Use this audio element to
-      // load it. But if another request to _prepareToPlay is
+      // load this file. But if another request to _prepareToPlay is
       // received, the current src file will be replaced.
-      
-      this.audioElement.oncanplaythrough = playNow
-      this.audioElement.onerror = playNow
 
-    } else {
-      // An already-loaded file has priority, even if there's one
-      // just about to finish downloading.
-      
-      this._playAudio();
+      // log("not found in this.loaded: " + src)
+
+      this.audioElement.oncanplaythrough = this._processed.bind(this)
+      this.audioElement.onerror = this._playNext.bind(this)
     }
-  }
 
+    // this.audioElement.oncanplaythrough = null
+ 
+    this.audioElement.src = src + this.ext
+    let promise = this.audioElement.play() // may be asynchronous
 
+    // if (!promise) {
+    //   log("No promise for play()")
 
-  Audio.prototype._playAudio = function _playAudio() {
-    // Cancel any post-download call to _playAudio (which may have
-    // just been made by the current src)
+    // } else {
+    //   promise.then(_ => {
+    //     log("Promise completed")
+    //   })
+    //   .catch(error => {
+    //     log("Promise error: " + error)
+    //   });
+    // }
     
-    this.audioElement.oncanplaythrough = null
-    this.audioElement.play()
-    this.isBusy = true
+    this.src = src
+    this.isBusy = true // a second call for the same src won't trigger
+   
+    // log(decodeURIComponent(this.audioElement.src))
 
-    // When the file has finished playing, it will call _playNext, to
-    // see if anything has queued up in the meantime
+    // // When the file has finished playing, it will call _playNext, to
+    // // see if anything has queued up in the meantime
   }
 
 
 
-  Audio.prototype._playNext = function _playNext() {
+  /** 
+   * Called each time audioElement finishes playing, or if it fails
+   * to play a particular src.
+   */
+  Audio.prototype._playNext = function _playNext(event) {
     this.isBusy = false
 
     let src = this.nextUp.src
@@ -170,28 +165,23 @@
     // in srcArray will be the first to be popped. If any urls are
     // already in the array, they will be re-orderd in a priority
     // position.
-    
+
     // TODO? Apply callback to each batch, so that the app knows when
     // all requested files have become available
 
     _startPreload = () => {
-
       this.audioPreloader.oncanplaythrough = _loadNext
       this.audioPreloader.onerror = _loadNext
 
       this.audioPreloader.src = this.queue.pop()
     }
 
-    _loadNext = (event) => {  
-      let src = event.target.src
+    _loadNext = (event) => {
+      let src = this._processed(event)
 
-      if (event.type === "error") {
-        return this.notFoundAlert(src, "preload")
+      while (this.loaded.indexOf(src) > -1) {
+        src = this.queue.pop()
       }
-
-      this.fileIsLoaded(src)
-
-      src = this.queue.pop()
 
       if (src) {
         this.audioPreloader.src = src
@@ -200,7 +190,7 @@
         this.audioPreloader.onerror = null
       }
     }
-    
+
     let ii = srcArray.length
 
     while (ii--) {
@@ -229,30 +219,28 @@
 
 
 
-  Audio.prototype.fileIsLoaded = function fileIsLoaded(src) {
-    // Trim domain and extension
+  Audio.prototype._processed = function _processed(event) {
+    let src = event.target.src   
     src = decodeURIComponent(src)
     src = src.match(/\/monika\/.*$/)[0]
     src = src.substring(0, src.lastIndexOf("."))
 
-    this.loaded.push(src)
-  }
-
-
-
-  Audio.prototype.notFoundAlert = function notFoundAlert(src, type) {
-    message = (type) ? "Error with " + src
-                     : src + " ready to play"
-
-    // document.querySelector("header").innerHTML = message
-
-    if (this.debug) {
-       alert(message)
-    } else {
-      console.log(message)
+    if (event.type === "error") {
+      this.missing.push(src) 
+      return  log("Error: missing" + src)
     }
-  }
 
+    // Trim domain and extension
+
+    if (this.loaded.indexOf(src) < 0) {
+      this.loaded.push(src)
+      // log(src + " added to .loaded list")
+    }
+
+
+    return src
+  }
+  
 
 
   monika.audio = new Audio()

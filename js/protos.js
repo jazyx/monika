@@ -17,3 +17,30 @@ Array.prototype.min = function() {
 Object.defineProperty(Array.prototype, "min", {
   enumerable: false
 })
+
+
+
+
+function log () {
+  let message = ""
+
+  for (let ii=arguments.length; ii--; ) {
+    let value = arguments[ii]
+
+    if (typeof value === "object") {
+      message = JSON.stringify(value) + " " + message
+    } else {
+      message = value + " " + message
+    }
+  }
+
+  // let pre = document.querySelector("pre")
+  // pre.textContent += '\n' + message
+  // pre.scrollTop = 9999
+
+  if (window._debug) {
+     alert(message)
+  } else {
+    console.log(message)
+  }
+}
