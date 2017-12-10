@@ -296,7 +296,7 @@ cat << EOF > $media_file
   , consonants: {
       map: {
         0: "н"
-      , 1: "р"
+      , 1: "рц"
       , 2: "дт"
       , 3: "кгх"
       , 4: "чж"
@@ -371,9 +371,9 @@ cat << EOF >> $media_file
     }
 
   , initialize: function initialize() {
-      if (monika.manager) {
+      if (monika.processor) {
         console.log("Initializing monika.media")
-        monika.manager.loadMedia(this)
+        monika.processor.run(this)
       }
 
       return this

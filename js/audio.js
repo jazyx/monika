@@ -7,6 +7,7 @@
   function Audio() {
     let audio = this.audioPreloader = document.createElement("audio")
     this.audioElement = document.querySelector("audio")
+    this.audioElement.aaa = "aaa"
     this.audioElement.onended = (event) => {
       this._playNext(event)
     }
@@ -174,6 +175,7 @@
     // all requested files have become available
 
     _startPreload = () => {
+
       this.audioPreloader.oncanplaythrough = _loadNext
       this.audioPreloader.onerror = _loadNext
 
@@ -220,7 +222,7 @@
       }
     }
 
-    if (!this.audioPreloader.oncanplaythrough) {
+    if (this.queue.length && !this.audioPreloader.oncanplaythrough) {
       _startPreload()
     }
   }
