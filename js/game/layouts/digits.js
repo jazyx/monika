@@ -51,10 +51,10 @@
         let consonant = this.getConsonant(cue)
 
         li.className = ""
+        li.src = monika.media.getAudioFor("consonant", consonant)
 
         if (cue === this.number) {
           li.innerHTML = "<span>" + consonant + "</span>"
-          li.src = monika.media.getAudioFor("consonant", consonant)
 
         } else {
           li.innerHTML = consonant       

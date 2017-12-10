@@ -83,10 +83,6 @@
 
       let random = Math.floor(Math.random() * count)
 
-if (cue === this.number) {
-  log(cue, consonants[random], random, consonants)
-}
-
       return consonants[random]
     } 
 
@@ -112,10 +108,9 @@ if (cue === this.number) {
         li.innerHTML = "<p>" + name + "</p>"
         li.className = ""
 
-        if (cue === this.number) {
-          li.src = monika.media.getAudioFor("number", cue)
+        li.src = monika.media.getAudioFor("number", cue)
 
-        } else {
+        if (cue !== this.number) {
           li.classList.add("decoy")
         }
       }
@@ -134,15 +129,15 @@ if (cue === this.number) {
         let cue = cueArray[ii]
         let consonant = this.getConsonant(cue)
 
-
         li.className = ""
+        li.src = monika.media.getAudioFor("consonant", consonant)
+
 
         // DELAY BEFORE COLOURING THE CONSONANTS
         if (cue === this.number) {
           li.innerHTML = "<span>" + consonant + "</span>"
           // li.innerHTML = consonant
           li.classList.add("delay", "white")    
-          li.src = monika.media.getAudioFor("consonant", consonant)
 
           cueLi = li
 

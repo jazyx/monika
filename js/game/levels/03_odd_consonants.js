@@ -50,10 +50,9 @@
         li.innerHTML = "<p>" + name + "</p>"
         li.className = ""
 
-        if (cue === this.number) {
-          li.src = monika.media.getAudioFor("number", cue)
+        li.src = monika.media.getAudioFor("number", cue)
 
-        } else {
+        if (cue !== this.number) {
           li.classList.add("decoy")
         }
       }

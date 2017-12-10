@@ -182,6 +182,21 @@ article svg {
   opacity: 0.9;
 }
 
+/* multiple images */
+
+li.multi img {
+margin: -0.5% 0;
+padding: 0;
+}
+
+main section li.nine img {
+width: 33.3333%;
+}
+
+main section li.four img {
+width: 50%;
+}
+
 @media screen and (orientation:portrait) {
 
   main {

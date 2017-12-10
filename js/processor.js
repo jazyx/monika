@@ -112,8 +112,24 @@
       }
 
       media.getImageFor = function getImageFor(word, allOrRandom) {
-        // TODO: create image_word_LUT to use with allOrRandom
-        return this.word_image_LUT[word]
+        var image
+        var number
+
+        switch (allOrRandom) {
+          default:
+            return this.word_image_LUT[word]
+          case "all":
+          case "random":
+            number = word_number_LUT[word]
+            image = this.numbers[number].words[word].images
+        }
+
+        if (allOrRandom === "random") {
+          let index = Math.floor(Math.random() * image.length)
+          image = image[index]
+        }
+
+        return image
       }
 
       media.getAudioFor = function getAudioFor(type, ref, allOrRandom) {

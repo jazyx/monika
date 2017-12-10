@@ -11,14 +11,14 @@
   }
 
   class Words extends monika.layouts.Words {
-    constructor (options) {
-      super(options)
-    }
+    // constructor (options) {
+    //   super(options)
+    // }
 
-    initialize () {
-      super.initialize()
-      log(this.name + " is initialized in Words")
-    }
+    // initialize () {
+    //   super.initialize()
+    //   log(this.name + " is initialized in Words")
+    // }
   }
 
 

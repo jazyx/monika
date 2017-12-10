@@ -21,6 +21,10 @@
       this.article = document.querySelector("article." + this.articleClass)
       this.section = this.article.querySelector("main section")
 
+      this.trackTouchEvent = {} // may not be necessary
+      this.tapStartData = { target: 0, time: 0}
+      this.delay = 250 // ms required to trigger an alternative action
+
       this.queue = []
       this.queue.recycle = function recycle(number) {
         let ii = Math.max(Math.floor(Math.random()*this.length-2), 0)
@@ -51,8 +55,8 @@
         "article."+this.articleClass+" main section"
       )
 
-      let treatTap = this.treatTap.bind(this)
-      this.section.onmousedown = this.section.ontouchstart = treatTap
+      let tapStart = this.tapStart.bind(this)
+      this.section.onmousedown = this.section.ontouchstart = tapStart
 
       this.number = -1
       this.renewQueue()
@@ -60,7 +64,7 @@
     }
 
 
-    treatTap (event) {
+    tapStart (event) {
       let target = event.target
 
       while (target && target.nodeName !== "LI") {
@@ -69,6 +73,48 @@
 
       if (!target) {
         return
+      }
+
+      let time = new Date().getTime()
+      this.tapStartData = { target: target, time: time}
+
+      let trackTouch = this.trackTouch.bind(this)
+      document.body.ontouchmove = trackTouch
+      this.trackTouch(event)
+
+      let tapEnd = this.tapEnd.bind(this)
+      document.body.onmouseup = document.body.ontouchend = tapEnd
+    }
+
+
+    /** 
+     * On a touch screen, the touchEnd event will not include a target
+     * so we have to keep track of the last 
+     */
+    trackTouch(event) {
+      this.trackTouchEvent = event
+    }
+
+
+    tapEnd (event) {
+      document.body.ontouchmove = null
+      document.body.onmouseup = document.body.ontouchend = null
+
+      let target = event.target || this.trackTouchEvent.target
+
+      while (target && target.nodeName !== "LI") {
+        target = target.parentNode
+      }
+
+      let timeNow = new Date().getTime()
+      let longTap = (timeNow - this.tapStartData.time) > this.delay
+
+      if (target !== this.tapStartData.target) {
+        return
+
+      } else if (longTap) {
+        return this.treatLongTap(target)
+        
       } else if (target.classList.contains("touched")) {
         return
       }
@@ -84,6 +130,56 @@
       }
 
       this.treatCorrectAnswer(target)
+    }
+
+
+    treatLongTap (target) {
+      let type = target.parentNode.className
+      // numbers | names | consonants | words | images
+
+      switch (type) {
+        case "images":
+          this.showAlternativeImages(target)
+        break
+        default:
+          monika.audio.play(target.src)
+      }
+    }
+
+
+    showAlternativeImages(liElement) {
+      let word = liElement.word
+      let imgURLs = monika.media.getImageFor(word, "all")
+      let count = imgURLs.length
+      var innerHTML
+
+      if (count > 8) {
+        innerHTML = this.getRandomImages(imgURLs, 9)
+        liElement.classList.add("multi", "nine")
+      } else if (count > 3) {
+        innerHTML = this.getRandomImages(imgURLs, 4)
+        liElement.classList.add("multi", "nine")
+      } else {
+        return
+      }
+
+      liElement.innerHTML = innerHTML
+    }
+
+
+    getRandomImages(imgURLs, ii) {
+      let innerHTML = ""
+      imgURLs = [].concat(imgURLs)
+
+      while (ii) {
+        let random = Math.floor(Math.random() * ii)
+        let imgURL = imgURLs.splice(random, 1)[0]
+        innerHTML += '<img src="' + imgURL + '"/>'
+
+        ii--
+      }
+
+      return innerHTML
     }
 
    
@@ -286,13 +382,9 @@
 
         li.className = ""
 
-        if (cue === this.number) {
-          li.src = monika.media.getAudioFor("number", cue)
+        li.src = monika.media.getAudioFor("number", cue)
 
-        } else {
-          // The <li> element may have an out-of-date src, but it
-          // won't be used
-          
+        if (cue !== this.number) {
           li.classList.add("decoy")
         }
       }
@@ -322,11 +414,10 @@
 
         li.innerHTML = "<p>" + name + "</p>"
         li.className = ""
+        
+        li.src = monika.media.getAudioFor("number", cue)
 
-        if (cue === this.number) {
-          li.src = monika.media.getAudioFor("number", cue)
-
-        } else {
+        if (cue !== this.number) {
           li.classList.add("decoy")
         }
       }
@@ -358,10 +449,9 @@
         li.innerHTML = "<p>" + word + "</p>"
         li.className = ""
 
-        if (cue === this.number) {
-          li.src = monika.media.getAudioFor("word", audio)
+        li.src = monika.media.getAudioFor("word", audio)
 
-        } else {
+        if (cue !== this.number) {
           li.classList.add("decoy")
         }
       }
@@ -384,14 +474,10 @@
         li.innerHTML = "<img src='" + img + "'/>"
 
         li.className = ""
+        li.word = word
+        li.src = monika.media.getAudioFor("word", word)
 
-        if (cue === this.number) {
-          li.src = monika.media.getAudioFor("word", word)
-
-        } else {
-          // The <li> element may have an out-of-date src, but it
-          // won't be used
-          
+        if (cue !== this.number) {
           li.classList.add("decoy")
         }
       }

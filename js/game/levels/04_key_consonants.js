@@ -26,6 +26,7 @@
         let consonant = this.getConsonant(cue)
 
         li.className = ""
+        li.src = monika.media.getAudioFor("consonant", consonant)
 
         if (cue === this.number) {
           if ([1,3,9].indexOf(this.number) < 0) {
@@ -33,8 +34,6 @@
           } else {
             li.innerHTML = "<span>" + consonant + "</span>"
           }
-
-          li.src = monika.media.getAudioFor("consonant", consonant)
 
         } else {
           li.innerHTML = consonant       
@@ -70,10 +69,9 @@
         li.innerHTML = "<p>" + name + "</p>"
         li.className = ""
 
-        if (cue === this.number) {
-          li.src = monika.media.getAudioFor("number", cue)
+        li.src = monika.media.getAudioFor("number", cue)
 
-        } else {
+        if (cue !== this.number) {
           li.classList.add("decoy")
         }
       }
