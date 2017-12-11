@@ -51,7 +51,21 @@
 
 
     initialize() {
-      let level = window.location.hash.substring(1)
+      let level = parseInt(window.location.hash.substring(1), 10)
+      let force = /[?&]force$/.test(window.location.href)
+
+      if (force) {
+        if (!isNaN(level) && level > 0) {
+          if (this.preferences.levels.indexOf(level) < 0) {
+            this.level = level
+            this.updateStatus()
+          }
+        }
+
+      } else {
+        level = Math.min(level, this.bestLevel())
+      }
+
       let success = this.setLevel(level, "dontOpen")
       if (success) {
         this.showActiveLevel()
@@ -161,7 +175,6 @@
 
             this.showActiveLevel()
             this.updateStatus()
-            this.updateMenu()
           }
 
           return true
@@ -236,13 +249,22 @@
 
       localStorage[STORAGE_NAME] = JSON.stringify(preferences)
       this.preferences = preferences
+
+      this.updateMenu()
+    }
+
+
+    bestLevel() {
+      let unlocked = this.preferences.levels
+      let bestLevel = Math.max.apply(null, unlocked)
+
+      return bestLevel
     }
 
 
     updateMenu() {
       let list = document.querySelectorAll("nav li")
-      let unlocked = this.preferences.levels
-      let bestLevel = Math.max.apply(null, unlocked)
+      let bestLevel = this.bestLevel()
 
       var total = list.length       
       for ( let ii = 0; ii < total; /* see below */ ) {
@@ -258,7 +280,6 @@
           li.classList.remove("active")
         }
 
-        // if (unlocked.indexOf(ii) < 0) {
         if (ii > bestLevel) {
           li.setAttribute("disabled", "")
         } else {
