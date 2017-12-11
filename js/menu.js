@@ -30,7 +30,9 @@
       this.menu = document.querySelector( 'nav ul' )
       this.check = document.querySelector( 'input[type=checkbox]' )
       this.links = [].slice.call(document.querySelectorAll("nav a"))
-      this.playedMap = { levels: [] }
+      this.preferences = {}
+
+      this.updateStatus()
 
       // Mouse events
       {
@@ -45,11 +47,15 @@
         document.body.addEventListener("mousedown", closeMenu, false)
         document.body.addEventListener("touchstart", closeMenu, false)
       }
+    }
 
-      let success = this.setLevel(window.location.hash.substring(1))
-      if (!success) {
-        this.updateStatus()
-        this.updateMenu()
+
+    initialize() {
+      let level = window.location.hash.substring(1)
+      let success = this.setLevel(level, "dontOpen")
+      if (success) {
+        this.showActiveLevel()
+        this.check.checked = true
       }
     }
 
@@ -135,7 +141,7 @@
     }
 
 
-    setLevel(level) {
+    setLevel(level, dontOpen) {
       log("Level", level, "selected")
       let options = monika.levelOptions[level]
       var intLevel = parseInt(level, 10)
@@ -148,12 +154,15 @@
             this.levelInstance.cleanUp()
           }
 
-          this.levelInstance = levelInstance.initialize(options)
           this.level = intLevel
 
-          this.showActiveLevel()
-          this.updateStatus()
-          this.updateMenu()
+          if (!dontOpen) {
+            this.levelInstance = levelInstance.initialize(options)
+
+            this.showActiveLevel()
+            this.updateStatus()
+            this.updateMenu()
+          }
 
           return true
         }
@@ -199,34 +208,40 @@
 
 
     updateStatus() {
-      let playedMap = undefined
+      let preferences
 
       try {
-        playedMap = JSON.parse(localStorage[STORAGE_NAME])
+        preferences = JSON.parse(localStorage[STORAGE_NAME])
       } catch(error) {}
 
-      if (!playedMap) {
-        playedMap = this.playedMap
+      if (!preferences) {
+        preferences = this.preferences
       }
 
-      let levelsPlayed = playedMap.levels
+      let user_images = preferences.user_images
+      if (!user_images) {
+        user_images = {}
+        preferences.user_images = user_images
+      }
+
+      let levelsPlayed = preferences.levels
       if (!levelsPlayed) {
         levelsPlayed = []
-        playedMap.levels = levelsPlayed
+        preferences.levels = levelsPlayed
       }
 
       if (this.level && (levelsPlayed.indexOf(this.level) < 0)) {
         levelsPlayed.push(this.level)
       }
 
-      localStorage[STORAGE_NAME] = JSON.stringify(playedMap)
-      this.playedMap = playedMap
+      localStorage[STORAGE_NAME] = JSON.stringify(preferences)
+      this.preferences = preferences
     }
 
 
     updateMenu() {
       let list = document.querySelectorAll("nav li")
-      let unlocked = this.playedMap.levels
+      let unlocked = this.preferences.levels
       let bestLevel = Math.max.apply(null, unlocked)
 
       var total = list.length       
@@ -251,9 +266,23 @@
         }
       }
     }
+
+
+    selectImageForWord(word, src) {
+      let user_images = this.preferences.user_images
+
+      if (!user_images) {
+        user_images = {}
+        this.preferences.user_images = user_images
+      }
+
+      user_images[word] = src
+      localStorage[STORAGE_NAME] = JSON.stringify(this.preferences)
+    }
   }
 
 
   monika.menu = new Menu()
+  monika.menu.initialize()
 
 })(window.monika)

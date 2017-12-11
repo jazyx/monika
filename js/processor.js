@@ -117,7 +117,8 @@
 
         switch (allOrRandom) {
           default:
-            return this.word_image_LUT[word]
+            return (monika.menu.preferences.user_images[word]
+                 || this.word_image_LUT[word])
           case "all":
           case "random":
             number = word_number_LUT[word]

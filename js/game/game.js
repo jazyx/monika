@@ -20,10 +20,14 @@
       this.articles = [].slice.call(document.querySelectorAll("article"))
       this.article = document.querySelector("article." + this.articleClass)
       this.section = this.article.querySelector("main section")
+      this.mask = document.getElementById("mask")
+
+      this.mask.onmouseup = this.mask.ontouchstart = this.tapEnd.bind(this)
 
       this.trackTouchEvent = {} // may not be necessary
       this.tapStartData = { target: 0, time: 0}
       this.delay = 250 // ms required to trigger an alternative action
+      this.liForSelectingAnImage = null
 
       this.queue = []
       this.queue.recycle = function recycle(number) {
@@ -65,6 +69,7 @@
 
 
     tapStart (event) {
+      event.preventDefault()
       let target = event.target
 
       while (target && target.nodeName !== "LI") {
@@ -101,9 +106,22 @@
       document.body.onmouseup = document.body.ontouchend = null
 
       let target = event.target || this.trackTouchEvent.target
+      let src
 
       while (target && target.nodeName !== "LI") {
         target = target.parentNode
+      }
+
+      if (this.liForSelectingAnImage) {
+        if (target) {
+          src = event.target.src
+        } else {
+          src = this.liForSelectingAnImage.firstElementChild.firstElementChild.src
+        }
+
+        src = decodeURIComponent(src.match(/\/monika\/.*$/)[0])
+
+        return this.selectImageForWord(this.liForSelectingAnImage, src)
       }
 
       let timeNow = new Date().getTime()
@@ -113,7 +131,7 @@
         return
 
       } else if (longTap) {
-        return this.treatLongTap(target)
+        return this.treatLongTap(target, event.target)
         
       } else if (target.classList.contains("touched")) {
         return
@@ -133,51 +151,78 @@
     }
 
 
-    treatLongTap (target) {
-      let type = target.parentNode.className
+    treatLongTap (liElement, target) {
+      let type = liElement.parentNode.className
       // numbers | names | consonants | words | images
 
       switch (type) {
         case "images":
-          this.showAlternativeImages(target)
+          this.showAlternativeImages(liElement, target)
         break
         default:
-          monika.audio.play(target.src)
+          monika.audio.play(liElement.src)
       }
     }
 
 
-    showAlternativeImages(liElement) {
+    showAlternativeImages(liElement, target) {
+      let src = target.src.match(/\/monika\/.*$/)[0]
+      src = decodeURIComponent(src)
+
       let word = liElement.word
       let imgURLs = monika.media.getImageFor(word, "all")
       let count = imgURLs.length
       var innerHTML
 
       if (count > 8) {
-        innerHTML = this.getRandomImages(imgURLs, 9)
+        innerHTML = this.getRandomImages(imgURLs, src, 8)
         liElement.classList.add("multi", "nine")
       } else if (count > 3) {
-        innerHTML = this.getRandomImages(imgURLs, 4)
-        liElement.classList.add("multi", "nine")
+        innerHTML = this.getRandomImages(imgURLs, src, 3)
+        liElement.classList.add("multi", "four")
       } else {
         return
       }
 
       liElement.innerHTML = innerHTML
+      this.mask.classList.add("multi")
+
+      setTimeout(function () {
+        liElement.classList.add("update")
+      }, 1)
+
+      monika.audio.play(liElement.src)
+      this.liForSelectingAnImage = liElement
     }
 
 
-    getRandomImages(imgURLs, ii) {
-      let innerHTML = ""
-      imgURLs = [].concat(imgURLs)
+    selectImageForWord(liElement, src) {
+      liElement.innerHTML = '<img src="' + src + '"/>'
 
-      while (ii) {
-        let random = Math.floor(Math.random() * ii)
+      liElement.classList.remove("multi", "four", "nine", "update")
+      this.mask.classList.remove("multi")
+
+      monika.menu.selectImageForWord(liElement.word, src)
+      this.liForSelectingAnImage = null
+    }
+
+
+    getRandomImages(imgURLs, src, count) {
+      let innerHTML = "<div><img src='" + src + "'/>" 
+
+      imgURLs = [].concat(imgURLs)
+      imgURLs.splice(imgURLs.indexOf(src), 1)
+      let remaining = imgURLs.length 
+
+      for ( let ii=0 ; ii < count ; ii += 1 ) {
+        let random = Math.floor(Math.random() * remaining)
         let imgURL = imgURLs.splice(random, 1)[0]
         innerHTML += '<img src="' + imgURL + '"/>'
 
-        ii--
+        remaining--
       }
+
+      innerHTML += "<div>"
 
       return innerHTML
     }
