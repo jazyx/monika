@@ -39,7 +39,11 @@
 
       this.pile = JSON.parse(JSON.stringify(this.stock))
 
+      monika.support.pause()
+
       super.initialize()
+
+      return this
     }
 
 
@@ -96,6 +100,8 @@
         let cue    = cueArray[ii]
         let name   = this.names[cue]
 
+        li.word = name
+
         // // DON'T colour the consonants
         // let mapped = monika.media.consonants.map[cue]
         // let regex  = new RegExp ("[" + mapped + "]")
@@ -107,11 +113,13 @@
 
         li.innerHTML = "<p>" + name + "</p>"
         li.className = ""
-
+        li.number = cue
         li.src = monika.media.getAudioFor("number", cue)
 
         if (cue !== this.number) {
           li.classList.add("decoy")
+        } else {
+          this.supportElements["consonants"] = li
         }
       }
     }
@@ -130,14 +138,14 @@
         let consonant = this.getConsonant(cue)
 
         li.className = ""
+        li.number = cue
         li.src = monika.media.getAudioFor("consonant", consonant)
-
 
         // DELAY BEFORE COLOURING THE CONSONANTS
         if (cue === this.number) {
           li.innerHTML = "<span>" + consonant + "</span>"
           // li.innerHTML = consonant
-          li.classList.add("delay", "white")    
+          li.classList.add("delay3", "white")    
 
           cueLi = li
 
@@ -150,6 +158,12 @@
       setTimeout(function startTransition () {
         cueLi.classList.remove("white")
       }, 1)
+    }
+ 
+
+    cleanUp() {
+      super.cleanUp()
+      monika.support.resume()
     }
   }
 

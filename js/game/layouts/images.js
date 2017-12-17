@@ -11,7 +11,7 @@
   }
 
 
-  class Digits extends monika.Game {
+  class Images extends monika.Game {
 
     /**
      * @param {object}  options  { className: <string>
@@ -30,12 +30,39 @@
       options.decoy_range = options.decoy_range || { start: 0, end: 9 }
       options.sortBy      = options.sortBy      || ""
 
-      super("digits", options) // class for <article> element
+      super("images", options) // class for <article> element
+    }
+
+
+    provideSupport(support) {
+      let htmlElement
+        , string
+      let instructions = {
+        forget:  2
+      }
+
+      monika.support.execute(instructions)
+
+      if (this.errorClass === "numbers") {
+        this.supportElement = this.supportElements["numbers"]
+        string = this.names[this.number]
+      } else {
+        this.supportElement = this.supportElements["images"]
+        string = this.words[this.number]
+      }
+
+      let options = {
+        htmlElement: this.supportElement.cloneWithStyle()
+      , string:      string
+      , callback:    this.callbackFromSupport.bind(this)
+      }
+
+      monika.customKeyboard.setInputCue(options)
     }
   }
 
 
-  monika.layouts["Digits"] = Digits
+  monika.layouts["Images"] = Images
 
 
 })(window.monika)

@@ -1,0 +1,29 @@
+@font-face {
+font-family: 'script';
+src: url('../fonts/script.eot');
+src: url('../fonts/script.eot') format('embedded-opentype')
+   , url('../fonts/script.woff') format('woff')
+   , url('../fonts/script.ttf') format('truetype')
+   , url('../fonts/script.svg') format('svg');
+font-weight: normal;
+font-style: normal;
+}
+
+.script {
+font-family: script;
+}
+
+@font-face {
+font-family: 'keyboard';
+src: url('../fonts/keyboard.eot');
+src: url('../fonts/keyboard.eot') format('embedded-opentype')
+   , url('../fonts/keyboard.woff') format('woff')
+   , url('../fonts/keyboard.ttf') format('truetype')
+   , url('../fonts/keyboard.svg') format('svg');
+font-weight: normal;
+font-style: normal;
+}
+
+.keyboard {
+font-family: keyboard;
+}

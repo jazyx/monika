@@ -1,0 +1,38 @@
+.images ul.numbers ,
+.images ul.words {
+height: 31.25%;
+}
+
+.images ul.images {
+height: 37.5%;
+}
+
+.images ul.numbers li,
+.images ul.words li,
+.images ul.images li {
+width: 25%;
+}
+
+@media screen and (orientation:portrait) {
+
+  .images ul.numbers,
+  .images ul.words,
+  .images ul.images {
+  height: 33.3333%;
+  }
+
+  .images ul.words li,
+  .images ul.images li {
+  width: 33.333%;
+  }
+
+  .images ul.numbers li {
+  width: 25%;
+  }
+
+  /* Show all numbers */
+  .images ul.numbers li.decoy {
+  display:inline-flex;
+  }
+
+}

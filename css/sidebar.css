@@ -80,12 +80,17 @@ height:33vmin ;
 position: relative; /*required so that locks appear correctly*/
 }
 
+nav div.ref a,
 nav li a {
 display:block;
 width: 30vmin;
 height:30vmin;
 margin: 0;
 font-size: 20vmin;
+
+display: flex;
+justify-content: center;
+align-items: center;
 
 background-color: #ccc;
 border: 1vmin solid #bbb;
@@ -94,10 +99,21 @@ border-top-color: #ddd;
 border-left-color: #ddd;
 
 text-decoration: none;
-padding: 2.7vmin 0;
 box-sizing: border-box;
 
 color: #666;
+}
+
+nav div.ref a {
+background-color: #cdc;
+border: 1vmin solid #bcb;
+border-radius: 2.5vmin;
+border-top-color: #ded;
+border-left-color: #ded;
+
+font-size: 12vmin;
+margin: 2vmin;
+color: #000;  
 }
 
 nav li a:visited {
@@ -124,6 +140,18 @@ background-color: #c99;
 border-color: #daa;
 border-top-color: #b88;
 border-left-color: #b88;
+}
+
+nav div.ref a.active {
+background-color: #8b8;
+border: 1vmin solid #9c9;
+border-radius: 2.5vmin;
+border-top-color: #7a7;
+border-left-color: #7a7;
+
+font-size: 12vmin;
+margin: 2vmin;
+color: #000;  
 }
 
 nav li[disabled]::after {

@@ -27,7 +27,7 @@
       this.level = 1
       this.levelInstance = null // will be instance of level class
       this.levelTarget = null   // will be button touched on menu
-      this.menu = document.querySelector( 'nav ul' )
+      this.menu = document.querySelector( 'nav section' )
       this.check = document.querySelector( 'input[type=checkbox]' )
       this.links = [].slice.call(document.querySelectorAll("nav a"))
       this.preferences = {}
@@ -109,6 +109,7 @@
 
 
     selectLevel(event) {
+      var success
       let level = this.levelTarget.innerHTML
 
       if (event.target !== this.levelTarget) {
@@ -122,14 +123,47 @@
         return // Leave the menu open
       }
 
-      let success = this.setLevel(level)
+      if (this.levelTarget.parentNode.classList.contains("ref")) {
+        success = this.showReference(this.levelTarget)
+      } else {
+        success = this.setLevel(level)
+      }
 
       if (success) {
         // Close the menu
         this.levelTarget = 0
         document.body.onmouseup = document.body.ontouchend = null
         this.check.checked = false
+
+        window.scrollTo(0, 1)
       }
+    }
+
+
+    showReference(link) {
+      let hash = decodeURIComponent(link.hash)
+      return this.displayRef(hash, )
+    }
+
+
+    displayRef(hash) {
+      let refLinks = document.querySelectorAll("nav div.ref a")
+
+      this.showActiveLevel(-1) // doesn't change this.level
+
+      var total = refLinks.length       
+      for (let ii = 0; ii < total; ii += 1) {
+        let refLink = refLinks[ii]
+        if (refLink.hash === hash) {
+          refLink.classList.add("active")
+        } else {
+          refLink.classList.remove("active")
+        }
+      }
+
+      this.setLevel(hash.substring(1))
+
+      return true
     }
 
 
@@ -155,10 +189,23 @@
     }
 
 
+    /**
+     * When called by initialize() on launch, dontOpen will be true.
+     * This simply opens the menu at the chosen level, so that the
+     * end user can tap and thus activate audio.
+     * 
+     * TODO: On a non-touch-screen device, there is no need for an
+     * extra click. We should detect the type of device and ignore
+     * `dontOpen` if it's not needed.
+     *
+     * @param      {Function}  level     The level
+     * @param      {<type>}    dontOpen  The don't open
+     * @return     {boolean}   { description_of_the_return_value }
+     */
     setLevel(level, dontOpen) {
       log("Level", level, "selected")
       let options = monika.levelOptions[level]
-      var intLevel = parseInt(level, 10)
+      var intLevel = parseInt(level, 10) || false
 
       if (options) {
         let levelInstance = this.getLevel(options)
@@ -168,13 +215,16 @@
             this.levelInstance.cleanUp()
           }
 
-          this.level = intLevel
-
+          if (intLevel) {
+            this.level = intLevel
+          }
+          
           if (!dontOpen) {
             this.levelInstance = levelInstance.initialize(options)
 
             this.showActiveLevel()
             this.updateStatus()
+            monika.customKeyboard.close()
           }
 
           return true
@@ -186,9 +236,9 @@
     }
 
 
-    showActiveLevel() {
+    showActiveLevel(levelIndex) {
       let list = document.querySelectorAll("nav li")
-      let levelIndex = this.level - 1
+      levelIndex = levelIndex || this.level - 1
 
       var total = list.length       
       for (let ii = 0; ii < total; ii += 1) {

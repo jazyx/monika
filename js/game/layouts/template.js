@@ -11,7 +11,7 @@
   }
 
 
-  class Digits extends monika.Game {
+  class NAME_GOES_HERE extends monika.Game {
 
     /**
      * @param {object}  options  { className: <string>
@@ -35,7 +35,7 @@
   }
 
 
-  monika.layouts["Digits"] = Digits
+  monika.layouts["NAME_GOES_HERE"] = NAME_GOES_HERE
 
 
 })(window.monika)

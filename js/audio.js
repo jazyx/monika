@@ -79,7 +79,15 @@
     //                          : callback
     //                            ? callback
     //                            : "null") +")")
+    
+    // if (this.nextUp.callback) {
+    //   this.nextUp.callback()
+    // }
     this.nextUp.callback = callback
+
+    if (this._pretendToPlay(src)) {
+      return
+    }
 
     if (this.isBusy) {
       if (this.src !== src) {
@@ -95,6 +103,31 @@
     this._prepareToPlay(src)
   }
 
+
+
+  Audio.prototype._pretendToPlay = function _pretendToPlay(src) {
+    let placeholder =  document.querySelector("aside")
+
+    if (src[0] !== "&") {
+      placeholder.innerHTML =""
+      return false
+    }
+
+    // No audio available. Just show text in the <aside>
+
+    if (!this.colours || !this.colours.length) {
+      this.colours = ["red", "orange", "yellow", "green", "cyan", "blue", "magenta"]
+    }
+
+    placeholder.innerHTML = src
+    placeholder.style.color = this.colours.pop()
+    
+    if (this.nextUp.callback) {
+      this.nextUp.callback()
+    }
+
+    return true
+  }
 
 
   Audio.prototype._prepareToPlay = function _prepareToPlay(src) {

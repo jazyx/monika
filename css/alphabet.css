@@ -1,0 +1,139 @@
+@font-face {
+font-family: 'script';
+src: url('../fonts/script.eot');
+src: url('../fonts/script.eot') format('embedded-opentype')
+   , url('../fonts/script.woff') format('woff')
+   , url('../fonts/script.ttf') format('truetype')
+   , url('../fonts/script.svg') format('svg');
+font-weight: normal;
+font-style: normal;
+}
+
+@font-face {
+font-family: 'keyboard';
+src: url('../fonts/keyboard.eot');
+src: url('../fonts/keyboard.eot') format('embedded-opentype')
+   , url('../fonts/keyboard.woff') format('woff')
+   , url('../fonts/keyboard.ttf') format('truetype')
+   , url('../fonts/keyboard.svg') format('svg');
+font-weight: normal;
+font-style: normal;
+}
+
+._abc main section {
+display: block;
+}
+
+._abc ul {
+max-width: 150vmin;
+width: 100%;
+height: 20vmin;
+display: flex;
+}
+
+._abc li {
+width: 14.2857%;
+height: 100%;
+}
+
+.blue main section li {
+font-size: 10vmin;
+background-color: #339;
+border-color: #009;
+border-top-color: #669;
+border-left-color: #669;
+}
+
+.blue main section li:not(.touched):hover {
+background-color: #44a;
+border-color: #008;
+border-top-color: #77a;
+border-left-color: #77a;
+}
+
+.blue main section li.touched {
+background-color: #228;
+border-color: #339;
+border-top-color: #117;
+border-left-color: #117;
+}
+
+main section li.vowel {
+background-color: #66c;
+border-color: #33c;
+border-top-color: #99c;
+border-left-color: #99c;
+}
+
+main section li.vowel:not(.touched):hover {
+background-color: #66c;
+border-color: #339;
+border-top-color: #aad;
+border-left-color: #aad;
+}
+
+main section li.vowel.touched {
+background-color: #55b;
+border-color: #99c;
+border-top-color: #339;
+border-left-color: #339;
+}
+
+._abc li.style,
+._abc li.toggle,
+._123 p.toggle {
+background-color: #888;
+border-color: #666;
+border-top-color: #999;
+border-left-color: #999;
+}
+
+._abc main section li.style:not(.touched):hover,
+._abc main section .toggle:not(.touched):hover,
+._123 main section p.toggle:not(.touched):hover {
+background-color: #999;
+border-color:#333;
+border-top-color: #ccc;
+border-left-color: #ccc;
+}
+
+._abc main section li.style.touched,
+._abc main section li.toggle.touched,
+._123 main section p.toggle.touched {
+background-color: #777;
+border-color:#999;
+border-top-color: #555;
+border-left-color: #555;
+}
+
+._abc.script {
+  font-family: 'Marck Script', cursive;
+}
+
+._abc.keyboard {
+  font-family: serif;
+}
+
+._abc.script li.style {
+  font-family: keyboard;
+}
+
+._abc.keyboard li.style {
+  font-family: script;
+}
+
+._abc li.style {
+  font-size: 12vmin;
+}
+
+._abc li.toggle {
+  font-family: sans-serif;
+}
+
+@media screen and (orientation:portrait) {
+
+  .blue main section li {
+  font-size: 7vmin;
+  }
+
+}

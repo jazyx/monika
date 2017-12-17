@@ -11,6 +11,12 @@
   }
 
   class KeyConsonants extends monika.layouts.Digits {
+    // initialize() {
+    //   this.ul = this.section.querySelector("ul.consonants")
+    //   this.ul.classList.add("helpers")
+    //   super.initialize()
+    // }
+
 
     showConsonants () {
       var list = this.section.querySelectorAll("ul.consonants li")
@@ -21,24 +27,48 @@
 
       var total = list.length    
       for (let ii = 0; ii < total; ii += 1) {
-        let li = list[ii]
-        let cue = cueArray[ii]
-        let consonant = this.getConsonant(cue)
+        let li = list[ii]      // <li>
+        let cue = cueArray[ii] // integer
+        let consonants = monika.media.consonants.map[cue]
+        let count = consonants.length
 
-        li.className = ""
-        li.src = monika.media.getAudioFor("consonant", consonant)
+        let innerHTML = ([1,3,9].indexOf(cue) < 0)
+                      ? '<span class="first">' + consonants[0] + "</span>"
+                      : '<span class="key">' + consonants[0] + "</span>"
 
-        if (cue === this.number) {
-          if ([1,3,9].indexOf(this.number) < 0) {
-            li.innerHTML = consonant 
-          } else {
-            li.innerHTML = "<span>" + consonant + "</span>"
+        li.src = monika.media.getAudioFor("consonant", consonants[0])
+
+        if (count > 1) {
+          let spans = ['<span class="helper"> ', '<span class="helper"> ']
+
+          let random = Math.floor(Math.random() * 2)
+          if (count === 2) {
+            // Use the same helper consonant twice, but make one of
+            // them invisible
+            consonants += consonants[1]
+            spans[random] = '<span class="filler"> '
+
+          } else if (random) {
+            // Swap the order of two helpers half the time
+            consonants = " " + consonants[2] + consonants[1]
           }
 
-        } else {
-          li.innerHTML = consonant       
-          li.classList.add("decoy")
+          let span = spans[0] + consonants[1] + " </span>"
+          innerHTML = span + innerHTML
+          span = spans[1] + consonants[2] + " </span>"
+          innerHTML += span
         }
+
+        li.className = ""
+        li.number = cue
+
+        if (cue !== this.number) {
+          li.classList.add("decoy")
+        } else {
+          this.supportElements["consonants"] = li
+        }
+        
+        li.innerHTML = "<div>" + innerHTML + "</div>"
       }
     }
 
@@ -68,11 +98,14 @@
 
         li.innerHTML = "<p>" + name + "</p>"
         li.className = ""
-
+        li.number = cue
+        li.word = name
         li.src = monika.media.getAudioFor("number", cue)
 
         if (cue !== this.number) {
           li.classList.add("decoy")
+        } else {
+          this.supportElements["names"] = li
         }
       }
     }

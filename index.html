@@ -9,8 +9,15 @@
   <!-- General styling of the interface -->
   <link rel="stylesheet" type="text/css" href="css/page.css">
   <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+  <link rel="stylesheet" type="text/css" href="css/alphabet.css">
+  <link rel="stylesheet" type="text/css" href="css/numbers.css">
   <link rel="stylesheet" type="text/css" href="css/digits.css">
+  <link rel="stylesheet" type="text/css" href="css/consonants.css">
+  <link rel="stylesheet" type="text/css" href="css/images.css">
+  <link rel="stylesheet" type="text/css" href="css/numberpad.css">
+  <link rel="stylesheet" type="text/css" href="css/keyboard.css">
 
+  <link href="https://fonts.googleapis.com/css?family=Marck+Script" rel="stylesheet">
 </head>
 
 <bodY> <!-- oncontextmenu="return false;"> -->
@@ -57,6 +64,10 @@
       </svg>
     </label>
     <section>
+      <div class="ref">
+        <a href="#_abc">АБВ</a>
+        <a href="#_123">123</a>
+      </div>
       <ul>
         <li class="active"><a href="#1">1</a></li>
         <li disabled><a href="#2">2</a></li>
@@ -65,11 +76,11 @@
         <li disabled><a href="#5">5</a></li>
         <li disabled><a href="#6">6</a></li>
         <li disabled><a href="#7">7</a></li>
-   <!-- <li disabled><a href="#8">8</a></li>
+        <li disabled><a href="#8">8</a></li>
         <li disabled><a href="#9">9</a></li>
         <li disabled><a href="#10">10</a></li>
         <li disabled><a href="#11">11</a></li>
-        <li disabled><a href="#12">12</a></li>
+        <!-- <li disabled><a href="#12">12</a></li>
         <li disabled><a href="#13">13</a></li>
         <li disabled><a href="#14">14</a></li>
         <li disabled><a href="#15">15</a></li>
@@ -112,6 +123,89 @@
       <section>
         <p>Лорем ипсум долор сит амет, ут яуо фиерент диспутандо. Аутем вирис еуисмод пер еи, новум неглегентур репрехендунт но нам. Не модо утрояуе цопиосае ест, еам ех толлит цотидиеяуе. Еа яуи долорем ехпетендис, фацете яуаестио иус не, яуо лаборе поссим ин.</p>
         <p>Неморе сцаевола яуаерендум вис ин. Ут одио лорем волумус вис. Меис индоцтум ехпетендис хас еи, ест цу аутем фиерент. Дицат дицант долорем хас еа. Пер ан вивендум ратионибус адверсариум, мел хинц регионе рецусабо ат. Еа пер иусто медиоцрем адиписцинг. Ест не цаусае цонвенире, пер цу идяуе бонорум репудиандае.</p>
+      </section>
+    </main>
+  </article>
+
+  <article class="_abc script blue">
+    <header>
+      Алфавит
+    </header>
+    <main>
+      <section>
+        <ul>
+          <li class="vowel">Аа</li><!--
+       --><li>Бб</li><!--
+       --><li>Вв</li><!--
+       --><li>Гг</li><!--
+       --><li>Дд</li><!--
+       --><li class="vowel">Ее</li><!--
+       --><li class="vowel">Ёё</li> 
+        </ul>
+        <ul>
+          <li>Жж</li><!--
+       --><li>Зз</li><!--
+       --><li class="vowel">Ии</li><!--
+       --><li>Йй</li><!--
+       --><li>Кк</li><!--
+       --><li>Лл</li><!--
+       --><li>Мм</li> 
+        </ul>
+        <ul>
+          <li>Нн</li><!--
+       --><li class="vowel">Оо</li><!--
+       --><li>Пп</li><!--
+       --><li>Рр</li><!--
+       --><li>Сс</li><!--
+       --><li>Тт</li><!--
+       --><li class="vowel">Уу</li> 
+        </ul>
+        <ul>
+          <li>Фф</li><!--
+       --><li>Хх</li><!--
+       --><li>Цц</li><!--
+       --><li>Чч</li><!--
+       --><li>Шш</li><!--
+       --><li>Щщ</li><!--
+       --><li class="style">&#xe800;</li>
+        </ul>
+        <ul>
+          <li class="vowel">ъ</li><!--
+       --><li class="vowel">ы</li><!--
+       --><li class="vowel">ь</li><!--
+       --><li class="vowel">Ээ</li><!--
+       --><li class="vowel">Юю</li><!--
+       --><li class="vowel">Яя</li><!--
+       --><li class="toggle">123</li> 
+        </ul>
+      </section>
+    </main>
+  </article>
+
+  <article class="_123 blue">
+    <header>
+      Цифры
+    </header>
+    <main>
+      <section>
+        <div>
+          <ul>
+            <li>1 – один</li>
+            <li>2 – два</li>
+            <li>3 – три</li>
+            <li>4 – четыре</li>
+            <li>5 – пять</li>
+            <li>6 – шесть</li>
+            <li>7 – семь</li>
+            <li>8 – восемь</li>
+            <li>9 – девять</li>
+            <li>0 – ноль</li>
+          </ul>
+          <div class="image">
+            <img src="/monika/media/ru/numbers/3/words/око/images/blue.jpg">
+            <div><p>око</p><p class="toggle">АБВ</p></div>
+          </div>
+        </div>
       </section>
     </main>
   </article>
@@ -174,6 +268,158 @@
     </main>
   </article>
 
+  <article class="consonants">
+    <header>
+      Consonant cue
+    </header>
+    <main>
+      <section>
+        <ul class="numbers">
+        <li></li><!--
+     --><li></li><!--
+     --><li></li><!--
+     --><li></li>
+        </ul>
+
+        <ul class="images">
+          <li></li><!--
+       --><li></li><!--
+       --><li></li> 
+        </ul>
+
+        <ul class="consonants">
+        <li></li><!--
+     --><li></li><!--
+     --><li></li><!--
+     --><li></li>
+        </ul>
+      <section>
+    </main>
+  </article>
+
+  <article class="images">
+    <header>
+      Image cue
+    </header>
+    <main>
+      <section>
+        <ul class="numbers">
+        <li></li><!--
+     --><li></li><!--
+     --><li></li><!--
+     --><li></li>
+        </ul>
+
+        <ul class="words">
+        <li></li><!--
+     --><li></li><!--
+     --><li></li><!--
+     --><li></li>
+        </ul>
+
+        <ul class="images">
+          <li></li><!--
+       --><li></li><!--
+       --><li></li><!--
+       --><li></li> 
+        </ul>
+      <section>
+    </main>
+  </article>
+
+  <article class="numberpad">
+    <header>
+      Number pad
+    </header>
+    <main>
+      <section>
+        <div class="image">
+          <img />
+          <p></p>
+          <div class="mask"></div>
+        </div>
+        <div class="numbers">
+          <div>
+            <ul><li>1</li><li>2</li><li>3</li></ul>
+            <ul><li>4</li><li>5</li><li>6</li></ul>
+            <ul><li>7</li><li>8</li><li>9</li></ul>
+            <ul><li><p>удалять</p></li><li>0</li><li>#</li></ul>
+          </div>
+          <div class="dialled">
+            <p></p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </article>
+
+  <aside></aside>
+
+  <footer class="">
+    <div class="input">
+      <div>
+        <input type="text" name="model" value="иней" disabled>
+        <input type="text" name="input" value="">
+      </div>
+      <!-- <button id="toggleKeyboard" type="button">&#xe800;</button> -->
+    </div>
+
+    <div class="display">
+      <div>
+        <ul id="frame">
+        </ul>
+      </div>
+    </div>
+
+    <div class="keyboard">
+      <ul>
+        <li id="й">й</li><!--
+     --><li id="ц">ц</li><!--
+     --><li id="у">у</li><!--
+     --><li id="к">к</li><!--
+     --><li id="е">е</li><!--
+     --><li id="н">н</li><!--
+     --><li id="г">г</li><!--
+     --><li id="ш">ш</li><!--
+     --><li id="щ">щ</li><!--
+     --><li id="з">з</li><!--
+     --><li id="х">х</li><!--
+     --><li id="ъ">ъ</li>
+      </ul>
+      <ul>
+        <li></li><!--
+     --><li id="ф">ф</li><!--
+     --><li id="ы">ы</li><!--
+     --><li id="в">в</li><!--
+     --><li id="а">а</li><!--
+     --><li id="п">п</li><!--
+     --><li id="р">р</li><!--
+     --><li id="о">о</li><!--
+     --><li id="л">л</li><!--
+     --><li id="д">д</li><!--
+     --><li id="ж">ж</li><!--
+     --><li id="э">э</li>
+      </ul>
+      <ul>
+        <li></li><!--
+     --><li></li><!--
+     --><li id="я">я</li><!--
+     --><li id="ч">ч</li><!--
+     --><li id="с">с</li><!--
+     --><li id="м">м</li><!--
+     --><li id="и">и</li><!--
+     --><li id="т">т</li><!--
+     --><li id="ь">ь</li><!--
+     --><li id="б">б</li><!--
+     --><li id="ю">ю</li><!--
+     --><li id="ё">ё</li>
+      </ul>
+      <ul>
+        <li class="pad"></li><!--
+     --><li id="space">пробел</li>
+      </ul>
+    </div>
+  </footer>
   <div id="mask"></div>
 
   <audio src="">
@@ -185,8 +431,16 @@
 
   <!-- Game scripts -->
   <script class="level" src="js/game/game.js"></script>
+  <script class="level" src="js/game/layouts/reference.js"></script>
   <script class="level" src="js/game/layouts/digits.js"></script>
   <script class="level" src="js/game/layouts/words.js"></script>
+  <script class="level" src="js/game/layouts/consonants.js"></script>
+  <script class="level" src="js/game/layouts/images.js"></script>
+  <!-- <script class="level" src="js/game/layouts/numberpad.js"></script> -->
+
+  <!-- Reference scripts -->
+  <script class="level" src="js/game/levels/alphabet.js"></script>
+  <script class="level" src="js/game/levels/numbers.js"></script>
 
   <!-- Level scripts -->
   <script class="level" src="js/game/levels/01_intro.js"></script>
@@ -196,12 +450,19 @@
   <script class="level" src="js/game/levels/05_multi_consonants.js"></script>
   <script class="level" src="js/game/levels/06_solo_consonants.js"></script>
   <script class="level" src="js/game/levels/07_words.js"></script>
+  <script class="level" src="js/game/levels/08_consonant_cue.js"></script>
+  <script class="level" src="js/game/levels/09_images_cue.js"></script>
+  <script class="level" src="js/game/levels/10_all_images.js"></script>
+  <script class="level" src="js/game/levels/numberpad.js"></script>
 
   <!-- Resource lists -->
   <script src="media/ru/media.js"></script>
   <script src="media/ru/levels.js"></script>
 
   <!-- General scripts -->
+  <script src="js/support.js"></script>
+  <script src="js/mobile_keyboard.js"></script>
+  <script src="js/custom_keyboard.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/processor.js"></script>
   <script src="js/menu.js"></script>

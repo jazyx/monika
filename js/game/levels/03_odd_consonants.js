@@ -33,6 +33,8 @@
         let cue    = cueArray[ii]
         let name   = this.names[cue]
 
+        li.word = name
+
         // Colour the consonants ONLY IF THE CUE CAN BE COLOURED
         if ([1, 3, 9].indexOf(this.number) < 0) {
           let mapped = monika.media.consonants.map[cue]
@@ -49,11 +51,13 @@
 
         li.innerHTML = "<p>" + name + "</p>"
         li.className = ""
-
+        li.number = cue
         li.src = monika.media.getAudioFor("number", cue)
 
         if (cue !== this.number) {
           li.classList.add("decoy")
+        } else {
+          this.supportElements["consonants"] = li
         }
       }
     }

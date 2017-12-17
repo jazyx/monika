@@ -44,11 +44,13 @@
         li.appendChild(svg)
 
         li.className = ""
-
+        li.number = cue
         li.src = monika.media.getAudioFor("number", cue)
 
         if (cue !== this.number) {
           li.classList.add("decoy")
+        } else {
+          this.supportElements["consonants"] = li
         }
       }
     }

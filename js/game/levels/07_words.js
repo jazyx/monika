@@ -19,6 +19,32 @@
     //   super.initialize()
     //   log(this.name + " is initialized in Words")
     // }
+
+    provideSupport(support) {
+      let htmlElement
+        , string
+      let instructions = {
+        forget:  2
+      }
+
+      monika.support.execute(instructions)
+
+      if (this.errorClass === "numbers") {
+        this.supportElement = this.supportElements["numbers"]
+        string = this.names[this.number]
+      } else {
+        this.supportElement = this.supportElements["images"]
+        string = this.words[this.number]
+      }
+
+      let options = {
+        htmlElement: this.supportElement.cloneWithStyle()
+      , string:      string
+      , callback:    this.callbackFromSupport.bind(this)
+      }
+
+      monika.customKeyboard.setInputCue(options)
+    }
   }
 
 

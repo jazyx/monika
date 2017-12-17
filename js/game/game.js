@@ -17,18 +17,27 @@
       this.options = options
       this.name = options.name || options.className
 
+      // HTML elements
       this.articles = [].slice.call(document.querySelectorAll("article"))
       this.article = document.querySelector("article." + this.articleClass)
+      this.header = this.article.querySelector("header")
       this.section = this.article.querySelector("main section")
       this.mask = document.getElementById("mask")
+      this.liForSelectingAnImage = null
 
+      this.support = options.support || "numbers"
+      this.supportElement = null
+      this.supportElements = {}
+      this.errorClass = ""
+
+      // Events
       this.mask.onmouseup = this.mask.ontouchstart = this.tapEnd.bind(this)
 
       this.trackTouchEvent = {} // may not be necessary
       this.tapStartData = { target: 0, time: 0}
       this.delay = 250 // ms required to trigger an alternative action
-      this.liForSelectingAnImage = null
 
+      // Challenges
       this.queue = []
       this.queue.recycle = function recycle(number) {
         let ii = Math.max(Math.floor(Math.random()*this.length-2), 0)
@@ -45,6 +54,11 @@
 
 
     initialize() {
+      // Listeners
+      let supportCallback = this.provideSupport.bind(this)
+      monika.support.addEventListener("failure", supportCallback)
+
+      // Display
       this.articles.forEach(article => {
         if (article === this.article) {
           article.classList.add("active")
@@ -53,8 +67,6 @@
         }
       })
 
-      //log("Article", this.articleClass, "activated")
-
       this.section = document.querySelector(
         "article."+this.articleClass+" main section"
       )
@@ -62,9 +74,12 @@
       let tapStart = this.tapStart.bind(this)
       this.section.onmousedown = this.section.ontouchstart = tapStart
 
+      this.setHeader()
       this.number = -1
       this.renewQueue()
       this.newChallenge()
+
+      return this
     }
 
 
@@ -107,6 +122,7 @@
 
       let target = event.target || this.trackTouchEvent.target
       let src
+      let result = 1
 
       while (target && target.nodeName !== "LI") {
         target = target.parentNode
@@ -144,10 +160,26 @@
 
         // TODO: Remember this as an number to be revised
         this.queue.recycle(this.number)
-        return
+        this.queue.recycle(target.number)
+        this.errorClass = this.getListClass(target)
+        result = 0
+
+      } else {
+        this.treatCorrectAnswer(target) 
       }
 
-      this.treatCorrectAnswer(target)
+      monika.support.treatResult(result)
+    }
+
+
+    getListClass(listElement) {
+      let className = listElement.parentNode.className
+      // May contain active or some other words. Assume that at least
+      // one of the words in the regex below is applied.
+      className = className.match(/numbers|names|consonants|words|images/)
+      className = className[0]
+
+      return className
     }
 
 
@@ -227,7 +259,15 @@
       return innerHTML
     }
 
+
+    ////
    
+
+    setHeader() {
+      this.header.innerHTML = this.options.header || "Missing header"
+    }
+
+
     renewQueue() {
       let queue = this.queue
       queue.length = 0
@@ -259,14 +299,7 @@
         populateRangeQueue()
       }
 
-      // Shuffle
-      let ii = queue.length
-      while (ii--) {
-        let random = Math.floor(Math.random() * ii)
-        let temp = queue[random]
-        queue[random] = queue[ii]
-        queue[ii] = temp
-      }
+      this.shuffle(queue)
 
       // Start with the numbers in numerical order?
       if (this.options.consecutive) {
@@ -279,6 +312,17 @@
           // Don't start with zero
           queue.pop()
         } 
+      }
+    }
+
+
+    shuffle(array) {
+      let ii = array.length
+      while (ii--) {
+        let random = Math.floor(Math.random() * ii)
+        let temp = array[random]
+        array[random] = array[ii]
+        array[ii] = temp
       }
     }
 
@@ -385,25 +429,34 @@
     }
 
 
-    setWordsAndImages() {
-      let word = this.words[this.number] = getWord(this.number)
-      this.images[word] = monika.media.getImageFor(word)
+    setWords(number) {        
+      this.words[this.number] = monika.media.getWordFor(this.number)
 
       this.decoys.forEach(decoy => {
-        let word = this.words[decoy] = getWord(decoy)
-        this.images[word] = monika.media.getImageFor(word)
-      })
-
-      function getWord(number) {        
-        return monika.media.getWordFor(number)
-      }
+        this.words[decoy] = monika.media.getWordFor(decoy)
+      })  
     }
 
 
-    getCueArray(total) {
+    setImages() {
+      var word = this.words[this.number]
+      this.images[word] = monika.media.getImageFor(word)
+
+      this.decoys.forEach(decoy => {
+        word = this.words[decoy]
+        this.images[word] = monika.media.getImageFor(word)
+      })
+    }
+
+
+    getCueArray(total, dontAddAnswer) {
       total -= 1
       var cueArray = this.decoys.splice(0, total)
-      cueArray.splice(random(total), 0, this.number)
+
+      if (!dontAddAnswer) {
+        cueArray.splice(random(total), 0, this.number)
+      }
+
       return cueArray
       
       function random(max) {
@@ -424,13 +477,14 @@
         let cue = cueArray[ii]
 
         li.innerHTML = cue
-
         li.className = ""
-
+        li.number = cue
         li.src = monika.media.getAudioFor("number", cue)
 
         if (cue !== this.number) {
           li.classList.add("decoy")
+        } else {
+          this.supportElements["numbers"] = li
         }
       }
     }
@@ -447,6 +501,8 @@
         let li     = list[ii]
         let cue    = cueArray[ii]
         let name   = this.names[cue]
+       
+        li.word = name
 
         // Colour the consonants
         let mapped = monika.media.consonants.map[cue]
@@ -459,11 +515,13 @@
 
         li.innerHTML = "<p>" + name + "</p>"
         li.className = ""
-        
+        li.number = cue
         li.src = monika.media.getAudioFor("number", cue)
 
         if (cue !== this.number) {
           li.classList.add("decoy")
+        } else {
+          this.supportElements["names"] = li
         }
       }
     }
@@ -493,11 +551,14 @@
 
         li.innerHTML = "<p>" + word + "</p>"
         li.className = ""
-
+        li.number = cue
+        li.word = word
         li.src = monika.media.getAudioFor("word", audio)
 
         if (cue !== this.number) {
           li.classList.add("decoy")
+        } else {
+          this.supportElements["words"] = li
         }
       }
     }
@@ -516,21 +577,60 @@
         let word = monika.media.getWordFor(cue)
         let img = monika.media.getImageFor(word)
 
+if (img[0] === "&") {
+  li.innerHTML = img
+} else {
         li.innerHTML = "<img src='" + img + "'/>"
-
+}
         li.className = ""
+        li.number = cue
         li.word = word
         li.src = monika.media.getAudioFor("word", word)
 
         if (cue !== this.number) {
+          li.classList.add("decoy")
+        } else {
+          this.supportElements["images"] = li
+        }
+      }
+    }
+
+
+    getConsonant (cue) {
+      return monika.media.consonants.map[cue][0]
+    }
+
+
+    showConsonants () {
+      var list = this.section.querySelectorAll("ul.consonants li")
+      var total = list.length    
+      var child
+
+      var cueArray = this.getCueArray(total) 
+
+      for (let ii = 0; ii < total; ii += 1) {
+        let li = list[ii]
+        let cue = cueArray[ii]
+        let consonant = this.getConsonant(cue)
+
+        li.className = ""
+        li.number = cue
+        li.src = monika.media.getAudioFor("consonant", consonant)
+
+        if (cue === this.number) {
+          li.innerHTML = "<span>" + consonant + "</span>"
+           this.supportElements["consonants"] = li
+       } else {
+          li.innerHTML = consonant       
           li.classList.add("decoy")
         }
       }
     }
 
 
-    showConsonants() {
-
+    setCue() {
+      let audioCue = monika.media.getAudioFor("number", this.number)
+      monika.audio.play(audioCue)
     }
 
 
@@ -545,18 +645,18 @@
 
       this.setDecoys()
       this.setNames()
-      this.setWordsAndImages()
+      this.setWords()
+      this.setImages()
 
-      this.showConsonants()
       this.showNumbers()
       this.showNames()
       this.showWords()
       this.showImages()
+      this.showConsonants() // placed last to allow > 10 possibilities
 
       this.remaining = 3
 
-      let audioCue = monika.media.getAudioFor("number", this.number)
-      monika.audio.play(audioCue)
+      this.setCue()
     }
 
 
@@ -569,17 +669,58 @@
                               ? null
                               : this.newChallenge.bind(this)
       monika.audio.play(src, forceAndUseCallback)
-    }
+    } 
 
+
+    provideSupport(support) {
+      let instructions = {
+        pause:   false // don't count errors until `resume` is called
+      , skip:    0     // ignore the next n errors
+      , absolve: false // reset successArray to all 1s
+      , forgive: 0     // replace the n most recent 0s with 1s
+      , forget:  2     // replace the n oldest 0s with 1s
+      }
+
+      monika.support.execute(instructions)
+
+      this.supportElement = this.supportElements[this.support]
+      let string = this.names[this.number]
+
+      let options = {
+        htmlElement: this.supportElement.cloneWithStyle()
+      , string:      string
+      // , options: {
+      //     highlightNext: true
+      //   , enableKeys: true
+      //   , showModel: true
+      //   }
+      //, audio:       audio
+      , callback:    this.callbackFromSupport.bind(this)
+      }
+
+      monika.customKeyboard.setInputCue(options)
+    }
+     
+
+    callbackFromSupport(message) {
+      switch (message) {
+        case "open": 
+        case "done": // fallthrough
+          if (this.supportElement && this.supportElement.src) {
+            monika.audio.play(this.supportElement.src)
+          }
+        break
+      }
+    }
+ 
 
     cleanUp() {
-      // TODO: remove all touchstart and mousedown event handlers
       this.section.onmousedown = this.section.ontouchstart = null
-      log (this.name, "(clean)")
+      monika.support.removeEventListener("failure", "all")
     }
   }
 
 
   monika.Game = Game
 
-})(window.monika)
+})(window.monika) 

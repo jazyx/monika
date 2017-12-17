@@ -29,23 +29,12 @@
       options.consecutive = options.consecutive || false
       options.decoy_range = options.decoy_range || { start: 0, end: 9 }
       options.sortBy      = options.sortBy      || ""
+
+      options.support     = "images"
+
       
       super("words", options) // class for <article> element
-      // log(this.name + "is instantiated in Words")
     }
-
-    // initialize (options) {
-    //   log(this.name, "is initialized in Words")
-    //   super.initialize()
-    // }
-
-    // newChallenge() {
-    //   log(this.name, "newChallenge")
-    // }
-
-    // treatCorrectAnswer(target) {
-    //   log(this.name, "answer")
-    // }
   }
 
   monika.layouts["Words"] = Words

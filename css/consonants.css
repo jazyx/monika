@@ -1,0 +1,14 @@
+.consonants ul.numbers li,
+.consonants ul.consonants li {
+width: 25%;
+}
+
+@media screen and (orientation:portrait) {
+
+  /* Show all number and consonant decoys... */
+  .consonants ul.numbers li.decoy,
+  .consonants ul.consonants li.decoy {
+  display:inline-flex;
+  }
+  
+}

@@ -1,6 +1,10 @@
-html, body {
+/*html,*/
+body {
+height: calc(100vh + 3em); 
+}
+
+body {
 margin: 0;
-/*height: calc(100vh + 3em);*/
 background-color: #002;
 
 display: flex;
@@ -49,9 +53,22 @@ justify-content: center;
 align-items: center;
 }
 
+header h1,
+header p {
+font-size: 8vmin;
+max-width: 150vmin;
+}
+
+header p {
+font-size: 4vmin;
+text-align: left;
+max-width: 150vmin;
+}
+
 /* Optimal 6 x 4 mode */
 
 main {
+position: relative;
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -61,6 +78,7 @@ width: 100%;
 }
 
 main section {
+position: relative;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -166,6 +184,40 @@ span {
 color: #f90;
 }
 
+ul.consonants div{
+  flex-direction: row;
+  height: 100%;
+}
+
+ul.consonants span{
+  line-height: 25vmin;
+}
+
+ul.consonants span.helper,
+ul.consonants span.filler {
+  line-height: 29.6vmin; /* Adjustment required to keep li's level */
+}
+
+span.first,
+span.key {
+font-size: 15vmin;
+}
+
+span.helper,
+span.filler {
+font-size: 8vmin;
+opacity: 0.5;
+}
+
+span.helper,
+span.key {
+color: #fff;
+}
+
+span.filler {
+opacity: 0;
+}
+
 main section li.disabled {
 border-color:#999;
 background-color: #aaa;
@@ -185,8 +237,16 @@ li.white span {
 color: #fff;
 }
 
-li.delay span {
+li.delay3 span {
 transition: color 1s 3s;
+}
+
+li.delay5 span {
+transition: color 1s 5s;
+}
+
+li.delay7 span {
+transition: color 1s 7s;
 }
 
 /* Only used in first level */
@@ -291,4 +351,17 @@ pre {
 
   /*pointer-events: none;*/
   background-color: rgba(0,0,0,0.8);
+}
+
+aside {
+opacity: 0.5;
+position: fixed;
+top: 0;
+width: 100%;
+position: absolute;
+z-index: 999;
+}
+
+aside:empty {
+display: none;
 }
