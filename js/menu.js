@@ -13,14 +13,7 @@
 
 
   const STORAGE_NAME = "monika"
-  const STATUS = { 
-      locked: "locked"
-    , active: "active"
-    , unlocked: "unlocked"
-    , started: "started"
-    , completed: "completed"
-    , archived: "archived" // may be synonym for completed
-    }
+
 
   class Menu {
     constructor () {
@@ -50,12 +43,16 @@
     }
 
 
+    // PRIVATE METHODS
+
+
+    // Called automatically immediately after constructor()
     initialize() {
-      let level = parseInt(window.location.hash.substring(1), 10)
+      let level = parseInt(window.location.hash.substring(1), 10) || 0
       let force = /[?&]force$/.test(window.location.href)
 
       if (force) {
-        if (!isNaN(level) && level > 0) {
+        if (level > 0) {
           if (this.preferences.levels.indexOf(level) < 0) {
             this.level = level
             this.updateStatus()
@@ -66,14 +63,17 @@
         level = Math.min(level, this.bestLevel())
       }
 
-      let success = this.setLevel(level, "dontOpen")
-      if (success) {
-        this.showActiveLevel()
-        this.check.checked = true
+      if (level) {
+        let success = this.setLevel(level, "dontOpen")
+        if (success) {
+          this.showActiveLevel()
+          this.check.checked = true
+        }
       }
     }
 
 
+    // Called by mousedown|touchstart anywhere but on the menu
     closeMenu(event) {
       let target = event.target
 
@@ -90,6 +90,7 @@
     }
 
 
+    // Called by mousedown|touchstart on the menu
     touchLevel(event) {
       let target = event.target
 
@@ -108,6 +109,7 @@
     }
 
 
+    // Called by a mouseup|touchend, as set in touchLevel
     selectLevel(event) {
       var success
       let level = this.levelTarget.innerHTML
@@ -134,39 +136,18 @@
         this.levelTarget = 0
         document.body.onmouseup = document.body.ontouchend = null
         this.check.checked = false
-
-        window.scrollTo(0, 1)
       }
     }
 
 
+    // Called by selectLevel when user selects АБВ or 123 pre-levels
     showReference(link) {
       let hash = decodeURIComponent(link.hash)
       return this.displayRef(hash, )
     }
 
 
-    displayRef(hash) {
-      let refLinks = document.querySelectorAll("nav div.ref a")
-
-      this.showActiveLevel(-1) // doesn't change this.level
-
-      var total = refLinks.length       
-      for (let ii = 0; ii < total; ii += 1) {
-        let refLink = refLinks[ii]
-        if (refLink.hash === hash) {
-          refLink.classList.add("active")
-        } else {
-          refLink.classList.remove("active")
-        }
-      }
-
-      this.setLevel(hash.substring(1))
-
-      return true
-    }
-
-
+    // Called by setLevel
     getLevel(options) {
       let className = options.className
       let levelName = options.name || className
@@ -190,6 +171,8 @@
 
 
     /**
+     * Called by initialize, selectLevel, displayRef and completeLevel
+     *
      * When called by initialize() on launch, dontOpen will be true.
      * This simply opens the menu at the chosen level, so that the
      * end user can tap and thus activate audio.
@@ -202,7 +185,7 @@
      * @param      {<type>}    dontOpen  The don't open
      * @return     {boolean}   { description_of_the_return_value }
      */
-    setLevel(level, dontOpen) {
+    setLevel(level, dontOpen, dontScroll) {
       log("Level", level, "selected")
       let options = monika.levelOptions[level]
       var intLevel = parseInt(level, 10) || false
@@ -225,6 +208,10 @@
             this.showActiveLevel()
             this.updateStatus()
             monika.customKeyboard.close()
+
+            if (!dontScroll) {
+              window.scrollTo(0, 1)
+            }
           }
 
           return true
@@ -236,6 +223,7 @@
     }
 
 
+    // Called by initialize, displayLevel and setLevel
     showActiveLevel(levelIndex) {
       let list = document.querySelectorAll("nav li")
       levelIndex = levelIndex || this.level - 1
@@ -253,23 +241,7 @@
     }
 
 
-    completeLevel() {
-      let level = (this.level || 0) + 1
-      let success = this.setLevel(level)
-
-      // Placeholder jubilation
-
-      if (success) {
-        alert (
-          "**** Fireworks display! ****\n\n"
-        + "You've reached the next level!\n\n"
-        + "Молодец!")
-      } else {         
-        alert ("You've reached the end! Congratulations")
-      }
-    }
-
-
+    // Called by constructor, initialize and setLevel
     updateStatus() {
       let preferences
 
@@ -304,6 +276,7 @@
     }
 
 
+    // Called by initialize and updateMenu
     bestLevel() {
       let unlocked = this.preferences.levels
       let bestLevel = Math.max.apply(null, unlocked)
@@ -312,6 +285,7 @@
     }
 
 
+    // Called by updateStatus
     updateMenu() {
       let list = document.querySelectorAll("nav li")
       let bestLevel = this.bestLevel()
@@ -338,8 +312,29 @@
       }
     }
 
+    // PUBLIC METHODS
 
-    selectImageForWord(word, src) {
+
+    // Called by the newChallenge method in game.js and its inheritors
+    completeLevel() {
+      let level = (this.level || 0) + 1
+      let success = this.setLevel(level)
+
+      // Placeholder jubilation
+
+      if (success) {
+        alert (
+          "**** Fireworks display! ****\n\n"
+        + "You've reached the next level!\n\n"
+        + "Молодец!")
+      } else {         
+        alert ("You've reached the end! Congratulations")
+      }
+    }
+
+
+    // Called by selectImageForWord in game.js
+    setImageForWord(word, src) {
       let user_images = this.preferences.user_images
 
       if (!user_images) {
@@ -349,6 +344,28 @@
 
       user_images[word] = src
       localStorage[STORAGE_NAME] = JSON.stringify(this.preferences)
+    }
+
+
+    // Called by showReference and also by toggleType in layout/reference.js
+    displayRef(hash, dontScroll) {
+      let refLinks = document.querySelectorAll("nav div.ref a")
+
+      this.showActiveLevel(-1) // doesn't change this.level
+
+      var total = refLinks.length       
+      for (let ii = 0; ii < total; ii += 1) {
+        let refLink = refLinks[ii]
+        if (refLink.hash === hash) {
+          refLink.classList.add("active")
+        } else {
+          refLink.classList.remove("active")
+        }
+      }
+
+      this.setLevel(hash.substring(1), false, dontScroll)
+
+      return true
     }
   }
 

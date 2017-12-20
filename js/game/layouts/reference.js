@@ -23,13 +23,13 @@
       super.initialize()
      
       let toggleType = this.toggleType.bind(this)
-      this.toggle.onmousedown = this.toggle.ontouchstart = toggleType
+      this.toggle.onmouseup = this.toggle.ontouchend = toggleType
       
       return this
     }
 
     toggleType(event) {
-      monika.menu.displayRef(this.options.toggle)
+      monika.menu.displayRef(this.options.toggle, "dontScroll")
     }
 
 

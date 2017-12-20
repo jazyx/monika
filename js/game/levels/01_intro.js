@@ -61,6 +61,7 @@
       let svgns = "http://www.w3.org/2000/svg"
       let radiusMap = []
       let centreMap = []
+      let s = 2 * Math.sin(Math.PI / 3)
       var radius
         , a
         , b
@@ -68,7 +69,6 @@
         , d
         , h
         , r
-        , s
         , centre
 
       for (let ii = 1; ii < 10; ii += 1) {
@@ -140,21 +140,36 @@
       , { x: b, y: a }
       ]
 
-      // Six dots in a hexagon without a centre
-      r = radiusMap[6]
-      s = 2 * Math.sin(Math.PI / 3)
-      a = 0.5 - r
-      b = 0.5 + r
-      c = 0.5 - (r * s)
-      d = 0.5 + (r * s)
-      centreMap[6] = [
-        { x: a, y: c }
-      , { x: b, y: c }
-      , { x: 0.5 - 2*r, y: 0.5 }
+      // // Six dots in a hexagon without a centre
+      // r = radiusMap[6]
+      // s = 2 * Math.sin(Math.PI / 3)
+      // a = 0.5 - r
+      // b = 0.5 + r
+      // c = 0.5 - (r * s)
+      // d = 0.5 + (r * s)
+      // centreMap[6] = [
+      //   { x: a, y: c }
+      // , { x: b, y: c }
+      // , { x: 0.5 - 2*r, y: 0.5 }
 
-      , { x: 0.5 + 2*r, y: 0.5 }
-      , { x: a, y: d }
-      , { x: b, y: d }
+      // , { x: 0.5 + 2*r, y: 0.5 }
+      // , { x: a, y: d }
+      // , { x: b, y: d }
+      // ]
+
+      // Six dots in a ramp
+      r = radiusMap[6]
+      a = 0.5 - r * 2
+      b = 0.5 + r * 2
+      centreMap[6] = [
+        { x: b, y: a }
+
+      , { x: 0.5, y: 0.5 }
+      , { x: b, y: 0.5 }
+
+      , { x: a, y: b }
+      , { x: 0.5, y: b }
+      , { x: b, y: b }
       ]
 
       // Seven dots in a hexagon
@@ -173,21 +188,40 @@
       , { x: b, y: d }
       ]
 
-      // Eight dots in a square with an empty centre
-      r = radiusMap[8]
-      a = 0.5 - 2 * r
-      b = 0.5
-      c = 0.5 + 2 * r
-      centreMap[8] = [
-        { x: a, y: a }
-      , { x: b, y: a }
-      , { x: c, y: a }
-      , { x: a, y: b }
+      // // Eight dots in a square with an empty centre
+      // r = radiusMap[8]
+      // a = 0.5 - 2 * r
+      // b = 0.5
+      // c = 0.5 + 2 * r
+      // centreMap[8] = [
+      //   { x: a, y: a }
+      // , { x: b, y: a }
+      // , { x: c, y: a }
+      // , { x: a, y: b }
 
-      , { x: c, y: b }
+      // , { x: c, y: b }
+      // , { x: a, y: c }
+      // , { x: b, y: c }
+      // , { x: c, y: c }
+      // ]
+
+      // Eight dots in three columns
+      r = radiusMap[8]
+      a = 0.5 - (r * s)
+      b = 0.5 - (r * 2)
+      c = 0.5 + (r * 2)
+      d = 0.5 + (r * s)     
+      centreMap[8] = [
+        { x: a, y: b }
+      , { x: a, y: 0.5 }
       , { x: a, y: c }
-      , { x: b, y: c }
-      , { x: c, y: c }
+
+      , { x: 0.5, y: 0.5 - r }
+      , { x: 0.5, y: 0.5 + r }
+
+      , { x: d, y: b }
+      , { x: d, y: 0.5 }
+      , { x: d, y: c }
       ]
 
       // Nine dots in a square

@@ -23,11 +23,11 @@
 
       this.style = this.article.querySelector("._abc li.style")
       let switchStyle = this.switchStyle.bind(this)
-      this.style.onmousedown = this.style.ontouchstart = switchStyle
+      this.style.onmouseup = this.style.ontouchend = switchStyle
 
       this.section = this.article.querySelector("section")
       let playAudio = this.playAudio.bind(this)
-      this.section.onmousedown = this.section.ontouchstart = playAudio
+      this.section.onmouseup = this.section.ontouchend = playAudio
 
       this.list = this.section.querySelectorAll("li")
     }
@@ -51,6 +51,12 @@
 
     playAudio (event) {
       let target = event.target
+      if (target.classList.contains("style")
+       || target.classList.contains("toggle")) {
+        // Ignore .style and .toggle buttons
+        return
+      }
+
       let letter = target.innerHTML[0]
       let src = monika.media.getAudioFor("alphabet", letter)
 

@@ -1,0 +1,42 @@
+{
+  "short_name": "Мнемоника"
+, "name": "Мнемоника"
+, "dir": "ltr"
+, "lang": "ru"
+, "start_url": "index.html?launcher=true"
+, "background_color": "#000000" 
+, "theme_color": "#000022"
+, "display": "standalone"
+, "icons": [
+    {
+      "src": "img/launcher-icon-1x.png"
+    , "type": "image/png"
+    , "sizes": "48x48"
+    }
+  , {
+      "src": "img/launcher-icon-2x.png"
+    , "type": "image/png"
+    , "sizes": "96x96"
+    }
+  , {
+      "src": "img/launcher-icon-4x.png"
+    , "type": "image/png"
+    , "sizes": "192x192"
+    }
+  , {
+      "src": "img/splashscreen256.jpg"
+    , "type": "image/jpg"
+    , "sizes": "256x256"
+    }
+  , {
+      "src": "img/splashscreen384.jpg"
+    , "type": "image/jpg"
+    , "sizes": "384x384"
+    }
+  , {
+      "src": "img/splashscreen512.jpg"
+    , "type": "image/jpg"
+    , "sizes": "512x512"
+    }
+  ]
+}

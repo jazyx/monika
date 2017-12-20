@@ -17,6 +17,12 @@
     initialize() {
       super.initialize()
       monika.support.pause()
+
+      this.answered = {
+        consonants: 0
+      , names: 0
+      , numbers: 0
+      }
       
       return this
     }
@@ -52,7 +58,8 @@
 
       this.shuffle(consonants)
 
-      let delays = [ "delay7", "delay5", "delay3" ]
+      // let delays = [ "delay7", "delay5", "delay3" ]
+      let delays = [ "delay3", "delay3", "delay3" ]
  
       for (let ii = 0; ii < total; ii += 1) {
         let li = list[ii]
@@ -74,18 +81,38 @@
           li.classList.add("decoy")
         }
       }
-
-      setTimeout (() => {
-        this.allRequiredConsonantLIs.forEach( LI => {
-          LI.classList.remove("white")
-        })
-      }, 1)
     }
 
 
     newChallenge() {
       super.newChallenge()
       this.remaining = 2 + this.allRequiredConsonantLIs.length
+    }
+
+
+    performCustomAction (target) {
+      let className = target.parentNode.className
+      // "consonants", "names", "numbers"
+
+      if (!target.classList.contains("decoy")) {
+        // This was a correct answer
+        this.answered[className] += 1
+
+        if (className === "consonants") {
+          if (target.classList.contains("white")) {
+            // Don't let this consanant change to orange later
+            target.classList.add("stay-white")
+          }
+
+        } else if ( this.answered.names && this.answered.numbers ) { 
+          // Fade in the colour of any unfound consonants
+          this.allRequiredConsonantLIs.forEach( LI => {
+            LI.classList.remove("white")
+            // If "stay-white" is on the same <li> element, its colour
+            // won't change
+          })
+        }
+      }
     }
  
 

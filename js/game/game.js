@@ -28,10 +28,10 @@
       this.support = options.support || "numbers"
       this.supportElement = null
       this.supportElements = {}
-      this.errorClass = ""
+      this.lastErrorClass = ""
 
       // Events
-      this.mask.onmouseup = this.mask.ontouchstart = this.tapEnd.bind(this)
+      this.mask.onmouseup = this.mask.ontouchend = this.tapEnd.bind(this)
 
       this.trackTouchEvent = {} // may not be necessary
       this.tapStartData = { target: 0, time: 0}
@@ -82,6 +82,8 @@
       return this
     }
 
+
+    // TOUCH EVENTS
 
     tapStart (event) {
       event.preventDefault()
@@ -153,33 +155,7 @@
         return
       }
 
-      target.classList.add("touched")
-
-      if (target.classList.contains("decoy")) {
-        target.classList.add("disabled")
-
-        // TODO: Remember this as an number to be revised
-        this.queue.recycle(this.number)
-        this.queue.recycle(target.number)
-        this.errorClass = this.getListClass(target)
-        result = 0
-
-      } else {
-        this.treatCorrectAnswer(target) 
-      }
-
-      monika.support.treatResult(result)
-    }
-
-
-    getListClass(listElement) {
-      let className = listElement.parentNode.className
-      // May contain active or some other words. Assume that at least
-      // one of the words in the regex below is applied.
-      className = className.match(/numbers|names|consonants|words|images/)
-      className = className[0]
-
-      return className
+      this.treatAnswer(target)
     }
 
 
@@ -196,6 +172,8 @@
       }
     }
 
+
+    // ALTERNATIVE IMAGES
 
     showAlternativeImages(liElement, target) {
       let src = target.src.match(/\/monika\/.*$/)[0]
@@ -234,7 +212,7 @@
       liElement.classList.remove("multi", "four", "nine", "update")
       this.mask.classList.remove("multi")
 
-      monika.menu.selectImageForWord(liElement.word, src)
+      monika.menu.setImageForWord(liElement.word, src)
       this.liForSelectingAnImage = null
     }
 
@@ -260,7 +238,7 @@
     }
 
 
-    ////
+    // PREPARE CHALLENGE
    
 
     setHeader() {
@@ -660,17 +638,82 @@ if (img[0] === "&") {
     }
 
 
-    treatCorrectAnswer(target) {
-      //log(this.name, "answer")
+    // ANSWERS 
 
-      let src = target.src
+    treatAnswer(target) {
+      target.classList.add("touched")
 
-      let forceAndUseCallback = (--this.remaining)
-                              ? null
-                              : this.newChallenge.bind(this)
-      monika.audio.play(src, forceAndUseCallback)
+      let result = !(target.classList.contains("decoy"))
+
+      if (result) {
+        this.treatCorrectAnswer(target)
+
+      } else {
+        this.treatWrongAnswer(target) 
+      }
+
+      this.performCustomAction(target)
+
+      monika.support.treatResult(result)
+    }
+
+
+    performCustomAction (target) {
+      // Do nothing. May be overridden by inheritors.
+    }
+
+
+    // ERRORS
+
+    getListClass(listElement) {
+      let className = listElement.className // "" at least
+      while (listElement && !className) {
+        listElement = listElement.parentNode
+        className = listElement.className
+      }
+
+      // May contain active or some other words. Assume that at least
+      // one of the words in the regex below is applied.
+      className = className.match(/numbers|names|consonants|words|images/)
+      if (className) {
+        className = className[0]
+      } else {
+        className = ""
+      }
+
+      return className
+    }
+
+    numberIsInRange(wrongNumber) {
+      let range = this.options.cue_range // ? decoy_range
+      let max = range.end
+      if (!max) {
+        max = Math.max.apply(null, range)
+      }
+
+      return !(wrongNumber > max)
+    }
+
+
+    treatWrongAnswer(target) {
+      let wrongNumber = target.number
+      let wrongInRange = this.numberIsInRange(wrongNumber)
+
+      // TODO: Remember this as an number to be revised everywhere
+
+      if (wrongInRange) {
+        this.queue.recycle(wrongNumber)
+      }
+      this.queue.recycle(this.number)
+
+      
+      this.lastErrorClass = this.getListClass(target)
+
+      target.classList.add("disabled")
     } 
 
+
+    // MULTIPLE ERRORS
 
     provideSupport(support) {
       let instructions = {
@@ -711,6 +754,18 @@ if (img[0] === "&") {
           }
         break
       }
+    }
+
+
+    // CORRECT ANSWERS
+
+    treatCorrectAnswer(target) {
+      let src = target.src
+
+      let forceAndUseCallback = (--this.remaining)
+                              ? null
+                              : this.newChallenge.bind(this)
+      monika.audio.play(src, forceAndUseCallback)
     }
  
 

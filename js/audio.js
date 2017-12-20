@@ -19,7 +19,7 @@
     // Currently playing sound and status, and next to play
     this.src     = ""
     this.isBusy  = false
-    this.nextUp  = { src: 0, callback: null }
+    this.nextUp  = { src: [], callback: null }
 
     // File type to request from server
     this.ext = "" // will be set to .mp3 or .ogg
@@ -80,9 +80,6 @@
     //                            ? callback
     //                            : "null") +")")
     
-    // if (this.nextUp.callback) {
-    //   this.nextUp.callback()
-    // }
     this.nextUp.callback = callback
 
     if (this._pretendToPlay(src)) {
@@ -91,7 +88,7 @@
 
     if (this.isBusy) {
       if (this.src !== src) {
-        this.nextUp.src = src
+        this.nextUp.src.push(src)
       } // else just drop the duplicate sound
 
       return
@@ -116,7 +113,7 @@
     // No audio available. Just show text in the <aside>
 
     if (!this.colours || !this.colours.length) {
-      this.colours = ["red", "orange", "yellow", "green", "cyan", "blue", "magenta"]
+      this.colours = ["red", "orange", "yellow", "3f3", "cyan", "#3f3", "magenta"]
     }
 
     placeholder.innerHTML = src
@@ -136,34 +133,16 @@
       // load this file. But if another request to _prepareToPlay is
       // received, the current src file will be replaced.
 
-      // log("not found in this.loaded: " + src)
-
       this.audioElement.oncanplaythrough = this._processed.bind(this)
       this.audioElement.onerror = this._playNext.bind(this)
     }
-
-    // this.audioElement.oncanplaythrough = null
  
     this.audioElement.src = src + this.ext
     let promise = this.audioElement.play() // may be asynchronous
-
-    // if (!promise) {
-    //   log("No promise for play()")
-
-    // } else {
-    //   promise.then(_ => {
-    //     log("Promise completed")
-    //   })
-    //   .catch(error => {
-    //     log("Promise error: " + error)
-    //   });
-    // }
     
     this.src = src
     this.isBusy = true // a second call for the same src won't trigger
    
-    // log(decodeURIComponent(this.audioElement.src))
-
     // // When the file has finished playing, it will call _playNext, to
     // // see if anything has queued up in the meantime
   }
@@ -177,11 +156,10 @@
   Audio.prototype._playNext = function _playNext(event) {
     this.isBusy = false
 
-    let src = this.nextUp.src
+    let src = this.nextUp.src.shift()
     let callback = this.nextUp.callback
 
     if (src) {
-      this.nextUp.src = 0
       this._prepareToPlay(src)
 
     } else if (callback) {

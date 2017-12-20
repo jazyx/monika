@@ -23,6 +23,7 @@
 
 
     initialize() {
+      this.cueLi = null
       this.stock = {
         1: ["р", "ц", "ц", "ц"]
       , 2: ["д", "т", "т", "т"]
@@ -38,6 +39,11 @@
       }
 
       this.pile = JSON.parse(JSON.stringify(this.stock))
+      this.answered = {
+        consonants: 0
+      , names: 0
+      , numbers: 0
+      }
 
       monika.support.pause()
 
@@ -76,6 +82,7 @@
       }
     }
 
+
     getConsonant (cue) {
       let consonants = this.pile[cue]
       let count = consonants.length
@@ -90,7 +97,8 @@
       return consonants[random]
     } 
 
-   showNames() {
+
+    showNames() {
       var list = this.section.querySelectorAll("ul.names li")
       var total = list.length
       var cueArray = this.getCueArray(total)
@@ -147,17 +155,37 @@
           // li.innerHTML = consonant
           li.classList.add("delay3", "white")    
 
-          cueLi = li
+          this.cueLi = li
 
         } else {
           li.innerHTML = consonant       
           li.classList.add("decoy")
         }
       }
+    }
 
-      setTimeout(function startTransition () {
-        cueLi.classList.remove("white")
-      }, 1)
+
+    performCustomAction (target) {
+      let className = target.parentNode.className
+      // "consonants", "names", "numbers"
+
+      if (!target.classList.contains("decoy")) {
+        // This was a correct answer
+        this.answered[className] += 1
+
+        if (className === "consonants") {
+          if (target.classList.contains("white")) {
+            // Don't let this consanant change to orange later
+            target.classList.add("stay-white")
+          }
+
+        } else if ( this.answered.names && this.answered.numbers ) { 
+          // Fade in the colour of any unfound consonants
+          this.cueLi.classList.remove("white")
+          // If "stay-white" is on the same <li> element, its colour
+          // won't change
+        }
+      }
     }
  
 

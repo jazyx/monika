@@ -93,7 +93,7 @@
 
       monika.support.execute(instructions)
 
-      if (this.errorClass === "numbers") {
+      if (this.lastErrorClass === "numbers") {
         this.supportElement = this.supportElements["numbers"]
         string = this.names[this.number]
       } else {

@@ -200,12 +200,12 @@ ul.consonants span.filler {
 
 span.first,
 span.key {
-font-size: 15vmin;
+font-size: 14vmin;
 }
 
 span.helper,
 span.filler {
-font-size: 8vmin;
+font-size: 7vmin;
 opacity: 0.5;
 }
 
@@ -247,6 +247,10 @@ transition: color 1s 5s;
 
 li.delay7 span {
 transition: color 1s 7s;
+}
+
+li.stay-white span {
+color: #fff;
 }
 
 /* Only used in first level */
@@ -356,10 +360,12 @@ pre {
 aside {
 opacity: 0.5;
 position: fixed;
-top: 0;
+top: 60vmin;
 width: 100%;
 position: absolute;
 z-index: 999;
+text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+pointer-events: none;
 }
 
 aside:empty {
