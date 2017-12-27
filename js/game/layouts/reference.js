@@ -16,11 +16,11 @@
     constructor (layout, options) {
       super(layout, options)
 
-      this.toggle = this.article.querySelector(".toggle")
+      this.toggle = this.section.querySelector(".toggle")
     }
 
     initialize () {
-      super.initialize()
+      this.display() // super.initialize()
      
       let toggleType = this.toggleType.bind(this)
       this.toggle.onmouseup = this.toggle.ontouchend = toggleType
@@ -40,27 +40,25 @@
       }
     }
     
+    // renewQueue () {}
+    // newChallenge () {}
 
-    setHeader () {}
-    renewQueue () {}
-    newChallenge () {}
+    // setDecoys () {}
+    // setNames () {}
+    // setWords () {}
+    // setImages () {}
 
-    setDecoys () {}
-    setNames () {}
-    setWords () {}
-    setImages () {}
+    // showNumbers () {}
+    // showNames () {}
+    // showWords () {}
+    // showImages () {}
+    // showConsonants () {}
 
-    showNumbers () {}
-    showNames () {}
-    showWords () {}
-    showImages () {}
-    showConsonants () {}
+    // setCue () {}
 
-    setCue () {}
-
-    tapEnd() {}
-    treatLongTap() {}
-    treatCorrectAnswer() {}
+    // tapEnd() {}
+    // treatLongTap() {}
+    // treatCorrectAnswer() {}
 
   }
 

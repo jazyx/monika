@@ -18,6 +18,8 @@
   <link rel="stylesheet" type="text/css" href="css/images.css">
   <link rel="stylesheet" type="text/css" href="css/numberpad.css">
   <link rel="stylesheet" type="text/css" href="css/keyboard.css">
+  <link rel="stylesheet" type="text/css" href="css/feedback.css">
+  <link rel="stylesheet" type="text/css" href="css/pass.css">
 
   <link href="https://fonts.googleapis.com/css?family=Marck+Script" rel="stylesheet">
 
@@ -41,7 +43,7 @@
   <script src="js/main.js"></script>
 </head>
 
-<bodY> <!-- oncontextmenu="return false;"> -->
+<body> <!-- oncontextmenu="return false;"> -->
   <nav>
     <input type="checkbox" name="menu" id="menu" value="">
     <label for="menu">
@@ -136,24 +138,39 @@
 
   <!-- <pre>Log:</pre> -->
 
-  <article class="home active">
-    <header>
-      Русские цифры, согласные, мнемоники!
-    </header>
-    <main>
-      <section>
-        <p>Лорем ипсум долор сит амет, ут яуо фиерент диспутандо. Аутем вирис еуисмод пер еи, новум неглегентур репрехендунт но нам. Не модо утрояуе цопиосае ест, еам ех толлит цотидиеяуе. Еа яуи долорем ехпетендис, фацете яуаестио иус не, яуо лаборе поссим ин.</p>
-        <p>Неморе сцаевола яуаерендум вис ин. Ут одио лорем волумус вис. Меис индоцтум ехпетендис хас еи, ест цу аутем фиерент. Дицат дицант долорем хас еа. Пер ан вивендум ратионибус адверсариум, мел хинц регионе рецусабо ат. Еа пер иусто медиоцрем адиписцинг. Ест не цаусае цонвенире, пер цу идяуе бонорум репудиандае.</p>
-      </section>
-    </main>
-  </article>
 
-  <article class="_abc keyboard blue">
+  <article id="levels" class="timeless">
     <header>
-      Алфавит
+      <h1></h1>
+      <div>
+        <h3>Добро пожаловать в</h3><h2>Русский fun</h2>
+      </div>
     </header>
+
     <main>
-      <section>
+      <div id='feedback'>
+        <div id="progress">
+          <div class="current"></div>
+          <div class="ghost"></div>
+        </div>
+        <svg id="timer"
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="-100 -100 200 200">
+          <circle cx="0" cy="0" r="100"/>
+          <path class="timer"  d="" />
+          <path class="target" d="" />
+          <text font-size="100" y="35" text-anchor="middle"></text>
+        </svg>
+      </div>
+
+      <section class="active">
+        <p>Лорем ипсум долор сит амет, ут яуо фиерент диспутандо. Аутем вирис еуисмод пер еи, новум неглегентур репрехендунт но нам. Не модо утрояуе цопиосае ест, еам ех толлит цотидиеяуе. Еа яуи долорем ехпетендис, фацете яуаестио иус не, яуо лаборе поссим ин.
+        </p>
+        <p>Неморе сцаевола яуаерендум вис ин. Ут одио лорем волумус вис. Меис индоцтум ехпетендис хас еи, ест цу аутем фиерент. Дицат дицант долорем хас еа. Пер ан вивендум ратионибус адверсариум, мел хинц регионе рецусабо ат. Еа пер иусто медиоцрем адиписцинг. Ест не цаусае цонвенире, пер цу идяуе бонорум репудиандае.
+        </p>
+      </section>
+
+      <section class="_abc keyboard blue">
         <ul>
           <li class="vowel">Аа</li><!--
        --><li>Бб</li><!--
@@ -200,15 +217,8 @@
        --><li class="toggle">123</li> 
         </ul>
       </section>
-    </main>
-  </article>
 
-  <article class="_123 blue">
-    <header>
-      Цифры
-    </header>
-    <main>
-      <section>
+      <section class="_123 blue">
         <div>
           <ul>
             <li>1 – один</li>
@@ -228,15 +238,8 @@
           </div>
         </div>
       </section>
-    </main>
-  </article>
 
-  <article class="digits">
-    <header>
-      Consonant layout
-    </header>
-    <main>
-      <section>
+      <section class="digits">
         <ul class="consonants">
           <li></li><!--
        --><li></li><!--
@@ -255,16 +258,9 @@
        --><li></li><!--
        --><li></li>
         </ul>
-      <section>
-    </main>
-  </article>
+      </section>
 
-  <article class="words">
-    <header>
-      Words layout
-    </header>
-    <main>
-      <section>
+      <section class="words">
         <ul class="images">
           <li></li><!--
        --><li></li><!--
@@ -278,28 +274,21 @@
         </ul>
 
         <ul class="numbers">
-        <li></li><!--
-     --><li></li><!--
-     --><li></li><!--
-     --><li></li><!--
-     --><li></li><!--
-     --><li></li>
+          <li></li><!--
+       --><li></li><!--
+       --><li></li><!--
+       --><li></li><!--
+       --><li></li><!--
+       --><li></li>
         </ul>
-      <section>
-    </main>
-  </article>
+      </section>
 
-  <article class="consonants">
-    <header>
-      Consonant cue
-    </header>
-    <main>
-      <section>
+      <section class="consonants">
         <ul class="numbers">
-        <li></li><!--
-     --><li></li><!--
-     --><li></li><!--
-     --><li></li>
+          <li></li><!--
+       --><li></li><!--
+       --><li></li><!--
+       --><li></li>
         </ul>
 
         <ul class="images">
@@ -309,33 +298,26 @@
         </ul>
 
         <ul class="consonants">
-        <li></li><!--
-     --><li></li><!--
-     --><li></li><!--
-     --><li></li>
+          <li></li><!--
+       --><li></li><!--
+       --><li></li><!--
+       --><li></li>
         </ul>
-      <section>
-    </main>
-  </article>
+      </section>
 
-  <article class="images">
-    <header>
-      Image cue
-    </header>
-    <main>
-      <section>
+      <section class="images">
         <ul class="numbers">
         <li></li><!--
-     --><li></li><!--
-     --><li></li><!--
-     --><li></li>
+       --><li></li><!--
+       --><li></li><!--
+       --><li></li>
         </ul>
 
         <ul class="words">
-        <li></li><!--
-     --><li></li><!--
-     --><li></li><!--
-     --><li></li>
+          <li></li><!--
+       --><li></li><!--
+       --><li></li><!--
+       --><li></li>
         </ul>
 
         <ul class="images">
@@ -344,16 +326,9 @@
        --><li></li><!--
        --><li></li> 
         </ul>
-      <section>
-    </main>
-  </article>
+      </section>
 
-  <article class="numberpad">
-    <header>
-      Number pad
-    </header>
-    <main>
-      <section>
+      <section class="numberpad">
         <div class="image">
           <img />
           <p></p>
@@ -373,6 +348,29 @@
       </section>
     </main>
   </article>
+
+  <article id="pass">
+    <div class="outer-frame">
+      <div class="inner-frame">
+        <h1></h1>
+        <p></p>
+        <div class="buttons">
+          <button type="button" class="progress" disabled></button>
+          <button type="button" class="repeat"></button>
+          <button type="button" class="nextLevel"></button>
+        </div>
+      </div>
+    </div>
+
+    <section class="progress">
+      <div>
+        Information about progress will go here.
+        <button type="button" class="close">&#10006;</button>
+      </div>
+    </section>
+  </article>
+
+  <article id="preferences"></article>
 
   <aside></aside>
 
@@ -450,6 +448,13 @@
   <!-- Prototype-level changes -->
   <script src="js/protos.js"></script>
 
+  <!-- Timer scripts -->
+  <script src="js/timer/timer_svg.js"></script>
+  <script src="js/timer/timer_progress.js"></script>
+  <script src="js/timer/timer_current.js"></script>
+  <script src="js/timer/timer_ghost.js"></script>
+  <script src="js/timer/timer.js"></script>
+
   <!-- Game scripts -->
   <script src="js/game/game.js"></script>
   <script src="js/game/layouts/reference.js"></script>
@@ -479,6 +484,7 @@
   <!-- Resource lists -->
   <script src="media/ru/media.js"></script>
   <script src="media/ru/levels.js"></script>
+  <script src="js/pass.js"></script> <!-- depends on media.js -->
 
   <!-- General scripts -->
   <script src="js/support.js"></script>

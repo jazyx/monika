@@ -12,12 +12,22 @@
 
   class MultiConsonants extends monika.layouts.Digits {    
 
+    // this.answersPerChallenge is ignored
+    // 
     // this.allRequiredConsonantLIs
+    // this.answersExpected
 
     initialize() {
       super.initialize()
       monika.support.pause()
 
+      this.answersExpected = 0
+      var total = this.queue.length
+      for ( let ii = 0; ii < total; ii += 1 ) {
+        let cue = this.queue[ii]
+        this.addToAnswerCount(cue)
+      }
+     
       this.answered = {
         consonants: 0
       , names: 0
@@ -25,6 +35,13 @@
       }
       
       return this
+    }
+
+
+    addToAnswerCount(cue) {
+      let consonants = monika.media.consonants.map[cue]
+      this.answersExpected += (2 + consonants.length)
+      log(this.answersExpected)
     }
 
 
@@ -90,6 +107,32 @@
     }
 
 
+    treatWrongAnswer(target) {
+      let wrongNumber = target.number
+      let wrongInRange = this.numberIsInRange(wrongNumber)
+
+      // Only add this cue number once per error
+      if (!this.errorInChallenge) {
+        this.queue.recycle(this.number)
+        // Use the exact number of answers expected
+        this.addToAnswerCount(this.number)
+        this.errorInChallenge = true
+      }
+
+      // TODO: Remember this as an number to be revised everywhere
+
+      if (wrongInRange) {
+        this.queue.recycle(wrongNumber)
+        this.addToAnswerCount(wrongNumber)
+      }
+
+      
+      this.lastErrorClass = this.getListClass(target)
+
+      target.classList.add("disabled")
+    } 
+
+
     performCustomAction (target) {
       let className = target.parentNode.className
       // "consonants", "names", "numbers"
@@ -99,10 +142,8 @@
         this.answered[className] += 1
 
         if (className === "consonants") {
-          if (target.classList.contains("white")) {
-            // Don't let this consanant change to orange later
-            target.classList.add("stay-white")
-          }
+          // Don't let this consonant change to orange later
+          target.classList.add("stay-white")
 
         } else if ( this.answered.names && this.answered.numbers ) { 
           // Fade in the colour of any unfound consonants
@@ -113,6 +154,15 @@
           })
         }
       }
+    }
+
+
+    updateTimer() {
+      // Variable number of answers per challenge: use answersExpected
+      // instead
+      let soFar = this.correctAnswers / this.answersExpected
+
+      monika.timer.addWayPoint(soFar)
     }
  
 

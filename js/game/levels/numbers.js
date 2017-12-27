@@ -13,9 +13,10 @@
   class Numbers extends monika.layouts.Reference {
    constructor (options) {
       options.toggle = "#_abc"
+      options.timeless = true
       super("_123", options)
 
-      this.ul = this.article.querySelector("ul")
+      this.ul = this.section.querySelector("ul")
       this.list = this.ul.querySelectorAll("li")
       let playAudio = this.playAudio.bind(this)
       this.ul.onmousedown = this.ul.ontouchstart = playAudio

@@ -14,6 +14,7 @@
   class Alphabet extends monika.layouts.Reference {
     constructor (options) {
       options.toggle = "#_123"
+      options.timeless = true
       super("_abc", options)
     }
 
@@ -21,11 +22,10 @@
     initialize() {
       super.initialize()
 
-      this.style = this.article.querySelector("._abc li.style")
+      this.style = this.section.querySelector("._abc li.style")
       let switchStyle = this.switchStyle.bind(this)
       this.style.onmouseup = this.style.ontouchend = switchStyle
 
-      this.section = this.article.querySelector("section")
       let playAudio = this.playAudio.bind(this)
       this.section.onmouseup = this.section.ontouchend = playAudio
 
@@ -35,7 +35,7 @@
 
     switchStyle(event) {
       let target = event.target
-      while (target && target.nodeName !== "ARTICLE") {
+      while (target && target.nodeName !== "SECTION") {
         target = target.parentNode
       }
 

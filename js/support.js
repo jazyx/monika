@@ -8,7 +8,7 @@
     constructor() {
       // << HARD-CODED
       let successRate = 0.5
-      this.trackLastNAttempts = 12
+      this.trackLastNAttempts = 4 // 12
       // HARD-CODED >>
 
       this.successArray = []

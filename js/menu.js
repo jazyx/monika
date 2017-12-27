@@ -23,9 +23,7 @@
       this.menu = document.querySelector( 'nav section' )
       this.check = document.querySelector( 'input[type=checkbox]' )
       this.links = [].slice.call(document.querySelectorAll("nav a"))
-      this.preferences = {}
-
-      this.updateStatus()
+      this.localData = this.readLocalData()
 
       // Mouse events
       {
@@ -53,9 +51,10 @@
 
       if (force) {
         if (level > 0) {
-          if (this.preferences.levels.indexOf(level) < 0) {
+          if (this.localData.levelsPlayed.indexOf(level) < 0) {
             this.level = level
-            this.updateStatus()
+            this.unlockLevel(level)
+            this.showActiveLevel(level)
           }
         }
 
@@ -64,12 +63,21 @@
       }
 
       if (level) {
-        let success = this.setLevel(level, "dontOpen")
-        if (success) {
-          this.showActiveLevel()
-          this.check.checked = true
-        }
+        this.setLevel(level, { dontStart: true })
       }
+    }
+
+
+    /**
+     * Sent by setLevel if dontStart is true. Highlights the
+     * appropriate level in the menu and slides the menu open.
+     *
+     * @param      {<type>}  level    The level
+     * @param      {<type>}  options  The options
+     */
+    openMenu(level, options) {
+      this.showActiveLevel(level, options)
+      this.check.checked = true
     }
 
 
@@ -139,11 +147,79 @@
       }
     }
 
+    /**
+     * Called by initialize, selectLevel, displayRef and the playLevel
+     * method of the Pass instance.
+     *
+     * When called by initialize() on launch, dontStart will be true.
+     * This simply opens the menu at the chosen level, so that the
+     * end user can tap and thus activate audio.
+     * 
+     * TODO: On a non-touch-screen device, there is no need for an
+     * extra click. We should detect the type of device and ignore
+     * `dontStart` if it's not needed.
+     *
+     * @param      {integer}  level     The level
+     * @param      {options}  { dontStart:        <true on launch>
+     *                        , dontScrollPage:   <true if same level>
+     *                        , scrollToPrevious: <true if next level>
+     *                        , unlockNext:       <true if same level>
+     *                        }
+     * @return     {boolean}   { description_of_the_return_value }
+     */
+    setLevel(level, options = {}) {
+      log("Level", level, "selected")
+
+      let levelOptions = monika.levelOptions[level]
+      var intLevel = parseInt(level, 10) || false
+
+      if (levelOptions) {
+        let levelInstance = this.getLevel(levelOptions)
+
+        if (levelInstance) {
+          if (this.levelInstance) {
+            this.levelInstance.cleanUp()
+          }
+
+          if (intLevel) {
+            this.level = intLevel
+          }
+          
+          if (options.dontStart) {
+            this.openMenu(intLevel, options)
+
+          } else {
+            this.levelInstance = levelInstance.initialize(levelOptions)
+
+            this.unlockLevel(intLevel)
+            this.showActiveLevel(intLevel, options)
+            monika.customKeyboard.close()
+            monika.timer.stop("reset")
+
+            // hash will already have been set if the call came from
+            // initialize or a click on the menu. It really only needs
+            // to be set if the call came from the Continue button in
+            // the Pass instance. But hey!
+            window.location.hash = intLevel
+
+            if (!options.dontScrollPage) {
+              window.scrollTo(0, 1)
+            }
+          }
+
+          return true
+        }
+      }
+
+      log("No level options found for level", level)
+      return false
+    }
+
 
     // Called by selectLevel when user selects АБВ or 123 pre-levels
     showReference(link) {
       let hash = decodeURIComponent(link.hash)
-      return this.displayRef(hash, )
+      return this.displayRef(hash)
     }
 
 
@@ -171,139 +247,52 @@
 
 
     /**
-     * Called by initialize, selectLevel, displayRef and completeLevel
-     *
-     * When called by initialize() on launch, dontOpen will be true.
-     * This simply opens the menu at the chosen level, so that the
-     * end user can tap and thus activate audio.
+     * Called by initialize, displayLevel and setLevel
      * 
-     * TODO: On a non-touch-screen device, there is no need for an
-     * extra click. We should detect the type of device and ignore
-     * `dontOpen` if it's not needed.
-     *
-     * @param      {Function}  level     The level
-     * @param      {<type>}    dontOpen  The don't open
-     * @return     {boolean}   { description_of_the_return_value }
+     * @param {integer | undefined} level  Level to highlight and
+     *                                     scroll to
+     * @param {undefined | 0 | 1}   scrollToPrevious  if 1, then
+     *                                     scroll the the button for
+     *                                     the previous level into
+     *                                     view
      */
-    setLevel(level, dontOpen, dontScroll) {
-      log("Level", level, "selected")
-      let options = monika.levelOptions[level]
-      var intLevel = parseInt(level, 10) || false
+    showActiveLevel(levelIndex, options) {
+      let list             = document.querySelectorAll("nav li")
+      let scrollToPrevious = options.scrollToPrevious
+      let bestLevel        = this.bestLevel()
 
-      if (options) {
-        let levelInstance = this.getLevel(options)
-
-        if (levelInstance) {
-          if (this.levelInstance) {
-            this.levelInstance.cleanUp()
-          }
-
-          if (intLevel) {
-            this.level = intLevel
-          }
-          
-          if (!dontOpen) {
-            this.levelInstance = levelInstance.initialize(options)
-
-            this.showActiveLevel()
-            this.updateStatus()
-            monika.customKeyboard.close()
-
-            if (!dontScroll) {
-              window.scrollTo(0, 1)
-            }
-          }
-
-          return true
-        }
+      if (isNaN(scrollToPrevious)) {
+        scrollToPrevious = false
+      } else if (scrollToPrevious !== false) {
+        scrollToPrevious = levelIndex - 1 // a number from 0 up
       }
 
-      log("No level options found for level", level)
-      return false
-    }
-
-
-    // Called by initialize, displayLevel and setLevel
-    showActiveLevel(levelIndex) {
-      let list = document.querySelectorAll("nav li")
-      levelIndex = levelIndex || this.level - 1
-
-      var total = list.length       
-      for (let ii = 0; ii < total; ii += 1) {
-        let li = list[ii]
-        if (ii === levelIndex) {
-          li.classList.add("active")
-          li.scrollIntoView()
-        } else {
-          li.classList.remove("active")
-        }
-      }
-    }
-
-
-    // Called by constructor, initialize and setLevel
-    updateStatus() {
-      let preferences
-
-      try {
-        preferences = JSON.parse(localStorage[STORAGE_NAME])
-      } catch(error) {}
-
-      if (!preferences) {
-        preferences = this.preferences
-      }
-
-      let user_images = preferences.user_images
-      if (!user_images) {
-        user_images = {}
-        preferences.user_images = user_images
-      }
-
-      let levelsPlayed = preferences.levels
-      if (!levelsPlayed) {
-        levelsPlayed = []
-        preferences.levels = levelsPlayed
-      }
-
-      if (this.level && (levelsPlayed.indexOf(this.level) < 0)) {
-        levelsPlayed.push(this.level)
-      }
-
-      localStorage[STORAGE_NAME] = JSON.stringify(preferences)
-      this.preferences = preferences
-
-      this.updateMenu()
-    }
-
-
-    // Called by initialize and updateMenu
-    bestLevel() {
-      let unlocked = this.preferences.levels
-      let bestLevel = Math.max.apply(null, unlocked)
-
-      return bestLevel
-    }
-
-
-    // Called by updateStatus
-    updateMenu() {
-      let list = document.querySelectorAll("nav li")
-      let bestLevel = this.bestLevel()
-
+      // Note special treatment below to deal with this particularity:
+      // * Numbering for li elements starts at 0
+      // * Numbering for levels starts at 1
+      
       var total = list.length       
       for ( let ii = 0; ii < total; /* see below */ ) {
         // Increment ii after getting the list item
         let li = list[ii++]
         // ii is now equal to the level for the li element
 
-        if (ii === this.level) {
+        if (ii === levelIndex) {
           li.classList.add("active")
-          li.scrollIntoView()
+
+          if (scrollToPrevious === false) {
+            li.scrollIntoView()
+          }
 
         } else {
           li.classList.remove("active")
+
+          if (scrollToPrevious === ii) {
+            li.scrollIntoView() 
+          }
         }
 
+        // LOCKS
         if (ii > bestLevel) {
           li.setAttribute("disabled", "")
         } else {
@@ -312,46 +301,116 @@
       }
     }
 
+
+    // Called by constructor, initialize and setLevel
+    readLocalData() {
+      let localData
+
+      try {
+        localData = JSON.parse(localStorage[STORAGE_NAME])
+      } catch(error) {}
+
+      if (!localData) {
+        localData = {}
+      }
+
+      // ALTERNATIVE IMAGES
+      let user_images = localData.user_images
+      if (!user_images) {
+        user_images = {}
+        localData.user_images = user_images
+      }
+
+      // LEVELS PLAYED
+      let levelsPlayed = localData.levelsPlayed
+      if (!levelsPlayed) {
+        levelsPlayed = []
+        localData.levelsPlayed = levelsPlayed
+      }
+
+      // TIMING DATA
+      let levelTimes = localData.levelTimes
+      if (!levelTimes) {
+        levelTimes = {}
+        localData.levelTimes = levelTimes
+      }
+
+      return localData
+    }
+
+
+    unlockLevel(level) {
+      let levelsPlayed = this.localData.levelsPlayed
+
+      if (level && (levelsPlayed.indexOf(level) < 0)) {
+        levelsPlayed.push(level)
+        localStorage[STORAGE_NAME] = JSON.stringify(this.localData)
+      }
+    }
+
+
+    // Called by initialize and showActiveLevel
+    bestLevel() {
+      let unlocked = this.localData.levelsPlayed
+      let bestLevel = Math.max.apply(null, unlocked)
+
+      return Math.max(bestLevel, 2)
+    }
+
+
     // PUBLIC METHODS
 
-
-    // Called by the newChallenge method in game.js and its inheritors
-    completeLevel() {
-      let level = (this.level || 0) + 1
-      let success = this.setLevel(level)
-
-      // Placeholder jubilation
-
-      if (success) {
-        alert (
-          "**** Fireworks display! ****\n\n"
-        + "You've reached the next level!\n\n"
-        + "Молодец!")
-      } else {         
-        alert ("You've reached the end! Congratulations")
+    /**
+     * Called by initialize, selectLevel, displayRef and the playLevel
+     * method of the Pass instance.
+     *
+     * @param {integer} deltaLevel will be 1 if the user clicked on
+     *                             Continue, 0 if s/he clicked on
+     *                             Repeat This Level
+     */
+    completeLevel(deltaLevel) {
+      let options = { 
+        scrollToPrevious: !!deltaLevel // true if going up a level
+      , dontScrollPage: !deltaLevel // true if staying at the same level
       }
+
+      if (!deltaLevel) {
+        // Ensure that the next level is unlocked anyway
+        this.unlockLevel(this.level + 1)
+      }
+
+      this.setLevel(this.level + deltaLevel, options)
     }
 
 
     // Called by selectImageForWord in game.js
-    setImageForWord(word, src) {
-      let user_images = this.preferences.user_images
+    setUserImageForWord(word, src) {
+      let user_images = this.localData.user_images
 
       if (!user_images) {
         user_images = {}
-        this.preferences.user_images = user_images
+        this.localData.user_images = user_images
       }
 
       user_images[word] = src
-      localStorage[STORAGE_NAME] = JSON.stringify(this.preferences)
+      localStorage[STORAGE_NAME] = JSON.stringify(this.localData)
+    }
+
+
+    // Called by selectImageForWord in game.js
+    getUserImageForWord(word) {
+      let user_images = this.localData.user_images
+      let src = user_images[word]
+
+      return src
     }
 
 
     // Called by showReference and also by toggleType in layout/reference.js
-    displayRef(hash, dontScroll) {
+    displayRef(hash, dontScrollPage) {
       let refLinks = document.querySelectorAll("nav div.ref a")
 
-      this.showActiveLevel(-1) // doesn't change this.level
+      this.showActiveLevel(0) // doesn't change this.level
 
       var total = refLinks.length       
       for (let ii = 0; ii < total; ii += 1) {
@@ -363,9 +422,21 @@
         }
       }
 
-      this.setLevel(hash.substring(1), false, dontScroll)
+      this.setLevel(hash.substring(1), { dontScroll: dontScrollPage })
 
       return true
+    }
+
+
+    getLevelTimes(levelName) {
+      let levelTimes = this.localData.levelTimes[levelName]
+      return Object.assign({}, levelTimes)
+    }
+
+
+    setLevelTimes(levelName, levelTimes) {
+      this.localData.levelTimes[levelName] = levelTimes
+      localStorage[STORAGE_NAME] = JSON.stringify(this.localData)
     }
   }
 

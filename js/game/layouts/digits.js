@@ -25,10 +25,13 @@
      */
     constructor (options) {
       options.cue_range   = options.cue_range   || { start: 0, end: 9 }
-      options.repeat      = options.repeat      || 2
       options.consecutive = options.consecutive || false
       options.decoy_range = options.decoy_range || { start: 0, end: 9 }
       options.sortBy      = options.sortBy      || ""
+
+      if (isNaN(options.repeat)) {
+        options.repeat = 2
+      }
 
       super("digits", options) // class for <article> element
     }

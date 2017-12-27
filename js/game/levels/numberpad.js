@@ -112,6 +112,8 @@
       this.queue.forEach((cue, index, array) => {
         array[index] = "" + cue
       })
+
+      return queue.length
     }
 
 
@@ -157,7 +159,7 @@
 
 
     treatWrongAnswer(target) {
-      super.treatWrongAnswer(target) // neadlessly adds class "disabled"
+      super.treatWrongAnswer(target) // needlessly adds class "disabled"
       target.classList.remove("disabled")
 
       monika.audio.play(this.src)

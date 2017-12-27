@@ -20,59 +20,66 @@ font-weight: normal;
 font-style: normal;
 }
 
-._abc main section {
+section._abc.active {
 display: block;
 }
 
-._abc ul {
-max-width: 150vmin;
+section._abc ul {
+max-width: 150vh;
 width: 100%;
 height: 20vmin;
 display: flex;
 }
 
-._abc li {
+section._abc li {
 width: 14.2857%;
 height: 100%;
 }
 
-.blue main section li {
-font-size: 10vmin;
+
+/* BLUE */
+
+section.blue li {
 background-color: #339;
 border-color: #009;
 border-top-color: #669;
 border-left-color: #669;
+
+font-size: 10vh;
 }
 
-.blue main section li:not(.touched):hover {
+section.blue li:not(.touched):hover {
 background-color: #44a;
 border-color: #008;
 border-top-color: #77a;
 border-left-color: #77a;
 }
 
-.blue main section li.touched {
+section.blue li.touched {
 background-color: #228;
 border-color: #339;
 border-top-color: #117;
 border-left-color: #117;
 }
 
-main section li.vowel {
+
+/* VOWELS */
+
+li.vowel {
 background-color: #66c;
 border-color: #33c;
 border-top-color: #99c;
 border-left-color: #99c;
 }
 
-main section li.vowel:not(.touched):hover {
+li.vowel:not(.touched):hover {
 background-color: #66c;
 border-color: #339;
 border-top-color: #aad;
 border-left-color: #aad;
 }
 
-main section li.vowel.touched {
+li.vowel.touched {
 background-color: #55b;
 border-color: #99c;
 border-top-color: #339;
@@ -88,18 +95,18 @@ border-top-color: #999;
 border-left-color: #999;
 }
 
-._abc main section li.style:not(.touched):hover,
-._abc main section .toggle:not(.touched):hover,
-._123 main section p.toggle:not(.touched):hover {
+section._abc li.style:not(.touched):hover,
+section._abc .toggle:not(.touched):hover,
+section._123 p.toggle:not(.touched):hover {
 background-color: #999;
 border-color:#333;
 border-top-color: #ccc;
 border-left-color: #ccc;
 }
 
-._abc main section li.style.touched,
-._abc main section li.toggle.touched,
-._123 main section p.toggle.touched {
+section._abc li.style.touched,
+section._abc li.toggle.touched,
+section._123 p.toggle.touched {
 background-color: #777;
 border-color:#999;
 border-top-color: #555;
@@ -123,17 +130,21 @@ border-left-color: #555;
 }
 
 ._abc li.style {
-  font-size: 12vmin;
+  font-size: 16vh;
 }
 
 ._abc li.toggle {
   font-family: sans-serif;
 }
 
-@media screen and (orientation:portrait) {
+@media (max-aspect-ratio: 8/5) {
 
-  .blue main section li {
-  font-size: 7vmin;
+  section.blue li {
+  font-size: 6vw;
+  }
+
+  ._abc li.style {
+    font-size: 10vw;
   }
 
 }

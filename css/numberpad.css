@@ -27,7 +27,7 @@ opacity: 1;
 
 /* Superimpose numberpad and image */
 
-.numberpad section>div {
+section.numberpad > div {
 position: absolute;
 top: 0;
 left: 0;

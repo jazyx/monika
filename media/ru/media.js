@@ -7,8 +7,25 @@
   monika.media = ({
     errorSound: "media/interface/error/not" // ogg, mp3
 
+  , pass: {
+      rewards: {
+        header:    "Congratulations!"
+      , record:    "You're setting new records!"
+      , target:    "You've beaten the target time!"
+      , bestYet:   "You've beaten your personal best!"
+      , goodStart: "You're off to a good start!"
+      , complete:  'You completed level <span class="level">1</span>!'
+      , gameOver:  "You've reached the end of the game."
+      }
+    , buttons: {
+        progress:  "See your progress"
+      , repeat:    "Repeat this level"
+      , nextLevel: "Continue"
+      }
+    }
+
   , number_names_LUT: {
-       0: "нoль"
+    0: "нoль"
     ,  1: "один"
     ,  2: "два"
     ,  3: "три"
@@ -114,77 +131,77 @@
   , consonants: {
       map: {
         0: "н"
-      , 1: "рц"
-      , 2: "дт"
-      , 3: "кгх"
-      , 4: "чж"
-      , 5: "пб"
-      , 6: "шщл"
-      , 7: "сз"
-      , 8: "вф"
-      , 9: "м"
+        , 1: "рц"
+        , 2: "дт"
+        , 3: "кгх"
+        , 4: "чж"
+        , 5: "пб"
+        , 6: "шщл"
+        , 7: "сз"
+        , 8: "вф"
+        , 9: "м"
       }
     , audio: {
-        б: [
-  "/monika/media/ru/consonants/б/б"
-]
+      б: [
+          "/monika/media/ru/consonants/б/б"
+        ]
       , в: [
-  "/monika/media/ru/consonants/в/в"
-]
+          "/monika/media/ru/consonants/в/в"
+        ]
       , г: [
-  "/monika/media/ru/consonants/г/г"
-]
+          "/monika/media/ru/consonants/г/г"
+        ]
       , д: [
-  "/monika/media/ru/consonants/д/д"
-]
+          "/monika/media/ru/consonants/д/д"
+        ]
       , ж: [
-  "/monika/media/ru/consonants/ж/ж"
-]
+          "/monika/media/ru/consonants/ж/ж"
+        ]
       , з: [
-  "/monika/media/ru/consonants/з/з"
-]
+          "/monika/media/ru/consonants/з/з"
+        ]
       , к: [
-  "/monika/media/ru/consonants/к/к"
-]
+          "/monika/media/ru/consonants/к/к"
+        ]
       , л: [
-  "/monika/media/ru/consonants/л/л"
-]
+          "/monika/media/ru/consonants/л/л"
+        ]
       , м: [
-  "/monika/media/ru/consonants/м/м"
-]
+          "/monika/media/ru/consonants/м/м"
+        ]
       , н: [
-  "/monika/media/ru/consonants/н/н"
-]
+          "/monika/media/ru/consonants/н/н"
+        ]
       , п: [
-  "/monika/media/ru/consonants/п/п"
-]
+          "/monika/media/ru/consonants/п/п"
+        ]
       , р: [
-  "/monika/media/ru/consonants/р/р"
-]
+          "/monika/media/ru/consonants/р/р"
+        ]
       , с: [
-  "/monika/media/ru/consonants/с/с"
-]
+          "/monika/media/ru/consonants/с/с"
+        ]
       , т: [
-  "/monika/media/ru/consonants/т/т"
-]
+          "/monika/media/ru/consonants/т/т"
+        ]
       , ф: [
-  "/monika/media/ru/consonants/ф/ф"
-]
+          "/monika/media/ru/consonants/ф/ф"
+        ]
       , х: [
-  "/monika/media/ru/consonants/х/х"
-]
+          "/monika/media/ru/consonants/х/х"
+        ]
       , ц: [
-  "/monika/media/ru/consonants/ц/ц"
-]
+          "/monika/media/ru/consonants/ц/ц"
+        ]
       , ч: [
-  "/monika/media/ru/consonants/ч/ч"
-]
+          "/monika/media/ru/consonants/ч/ч"
+        ]
       , ш: [
-  "/monika/media/ru/consonants/ш/ш"
-]
+          "/monika/media/ru/consonants/ш/ш"
+        ]
       , щ: [
-  "/monika/media/ru/consonants/щ/щ"
-]
+          "/monika/media/ru/consonants/щ/щ"
+        ]
       }
     }
   , numbers: {

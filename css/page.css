@@ -1,96 +1,173 @@
-/*html,*/
+
+/********************************************************************/
+/* FONT-SIZE CALCULATIONS *  CALCULATIONS  * FONT-SIZE CALCULATIONS */
+/********************************************************************/
+
+/*
+ ASPECT  
+        > 16:10      < 16:10      < 15:11      < 10:11 (portrait)
+ cell   25   vh       15.5vw      16.67vw      25   vh
+                    (≈15  vw)
+ h3     16   vh       10  vw
+ h2     10+5pvh     6.25+5vw
+ h1      6.25vh       3.75vw       
+ p       5   vh       3   vw
+ c/#    20   vh      12.5 vw      13.33vw      20   vh
+ n/w    12.5 vh       7.5 vw       8.33vw      12.5 vh
+ sp1    14   vh       8.4 vw     ≈ 9   vw      14   vh
+ sp+     7   vh       4.2 vw     ≈ 4.5 vw       7   vh
+ */
+
+
+
+ /*html,*/
 body {
 height: calc(100vh + 3em); 
 }
 
 body {
-margin: 0;
-background-color: #002;
+  height: calc(64vh + 100vh);     /* will be overruled by @media rules */
+  min-height: 110vh; /* ensure that page will scroll on phones */
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: #002;
 
-display: flex;
-flex-direction: column;
-justify-content: center;
-color: #fff;
+  color: #fff;
 
-text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; 
 
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none; 
-
-font-size: 8vmin; 
+  text-align: center;
 }
 
+/* MASK shown for selection of alternative images */
 #mask {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: 9;
-background-color: rgba(0,0,0,0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  background-color: rgba(0,0,0,0.8);
 
-display: none;
+  display: none;
 }
 
 #mask.multi {
-display: block;
+  display: block;
 }
 
-article {
-display: none;
-}
-
-article.active {
-display: block;
+article#levels {
+  display: flex;
+  flex-direction: column;
+  width: calc(150vh + 20vh);
+  height: 100%;  
 }
 
 header {
-height: 3em;
-display: flex;
-justify-content: center;
-align-items: center;
+  height: 64vh; /* will be overruled by @media */
+  color: white;
+  overflow-y: auto;
 }
 
-header h1,
+header h1 {
+  padding: 0.5em 0 0.1em;
+  margin: 0;
+  height: 6.25vh;
+  font-size: 6.25vh;
+}
+
+header h2 {
+  font-size: 15vh;
+}
+
+header h3 {
+  font-size: 10vh;
+  padding: 5vh 0 0;
+}
+
+header div {
+  height: 30vh;
+}
+
 header p {
-font-size: 8vmin;
-max-width: 150vmin;
+  margin: 0 ;
+  font-size: 5vh;
+  padding: 0.5em 1em;
+  text-align: left;
 }
 
-header p {
-font-size: 4vmin;
-text-align: left;
-max-width: 150vmin;
-}
-
-/* Optimal 6 x 4 mode */
+/* Optimal 6 x 4 mode, with aspect-ratio > 17:10 */
+/* Cells are n x 25vh (= 5/17 of article#levels width) */
 
 main {
-position: relative;
-display: flex;
-flex-direction: row;
-justify-content: center;
-height: 100vmin;
-min-width: 150vmin;
-width: 100%;
+  display: flex;
+  height: 100vh;
 }
 
-main section {
-position: relative;
-display: flex;
-flex-direction: column;
-justify-content: center;
-height: 100%;
-width: 150vmin;
+section {
+  position: relative;
+  flex-direction: column;
+  width: 150vh;
+  height: 100%;
+
+  display: none;
 }
 
-section>p {
-font-size: 4vmin;
+div#feedback {
+  display: flex;
+  flex-direction: column;
+  width: 20vh;
+  height: 100%;
+  order: 1;
+}
+
+div#progress {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  order: 1;
+  display: inline-block;
+}
+
+div#progress .current {
+  position: relative;
+  width: 75%;
+  height: 100%;
+  background-color: #66c;
+}
+
+div#progress .ghost {
+  position: absolute;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  background-color: #fff;
+  opacity: 0.2;
+}
+
+div#feedback svg {
+  height: 20vh;
+  width: 20vh;
+  fill: #66c;
+}
+
+
+/* NO TIMER for Introduction, Alphabet and Numbers */
+article#levels.timeless {
+  width: 150vh;
+}
+
+article#levels.timeless div#feedback {
+  display: none;
 }
 
 ul {
+display: flex;
 list-style: none;
 margin: 0;
 padding: 0;
@@ -100,34 +177,30 @@ main section ul {
 width: 100%;
 }
 
-
 ul.images {
 height: 50%;
 }
 
 ul.consonants, 
 ul.names, 
-ul.words {
+ul.words,
+ul.numbers  {
 height: 25%;
 }
 
-ul.consonants {
-font-size: 20vmin;
+ul.consonants,
+ul.numbers {
+font-size: 20vh;
 }
 
 ul.names,
 ul.words {
-font-size: 12.5vmin;
-}
-
-ul.numbers {
-height: 25%;
-font-size: 20vmin;
+font-size: 12.5vh;
 }
 
 ul.consonants li,
 ul.numbers li {
-width: 16.6666%;
+width: 16.6667%;
 }
 
 ul.images li,
@@ -174,6 +247,7 @@ main section li div {
 display: flex;
 flex-direction: column;
 justify-content: center;
+align-items: center;
 }
 
 main section li p {
@@ -191,11 +265,6 @@ ul.consonants div{
 
 ul.consonants span{
   line-height: 25vmin;
-}
-
-ul.consonants span.helper,
-ul.consonants span.filler {
-  line-height: 29.6vmin; /* Adjustment required to keep li's level */
 }
 
 span.first,
@@ -254,7 +323,7 @@ color: #fff;
 }
 
 /* Only used in first level */
-article svg {
+article#levels section.digits svg {
   width: 100%;
   height: 100%;
   /*stroke: black;*/
@@ -292,33 +361,283 @@ height: 49.9%;
 float: right;
 }
 
-
 main section li.update img {
 float: left;
 }
 
-@media screen and (orientation:portrait) {
+
+/* SHRINK TIMER ON RIGHT */
+/* Cells are n x 25vh = 31.25vw) */
+
+@media (max-aspect-ratio: 17/10) {
+
+  body {
+    background-color: #033;
+  }
+
+  article#levels {
+    width: 100%;
+  }
+
+  div#feedback {
+    width: calc(100vw - 150vh);
+    height: 100%;
+  }
+
+  div#progress {
+    height: calc(250vh - 100vw);
+  }
+
+  div#feedback svg {
+    height: calc(100vw - 150vh);
+    width: calc(100vw - 150vh);
+  }
+
+  /* NO TIMER for Introduction, Alphabet and Numbers */
+  article#levels.timeless,
+  article#levels.timeless section {
+    width: 150vh;
+  }
+
+}
+
+
+/* DECREASE HEIGHT TO FIT WIDTH */
+/* Cells are 31.25vw */
+
+@media (max-aspect-ratio: 16/10) {
+
+  html, body {
+    height: calc(40vw + 62vw);
+    background-color: #030;
+  }
+
+  header {
+    height: 40vw;
+  }
+
+  header h1 {
+    font-size: 3.75vw;
+    height: 2.4vw;
+  }
+
+  header h2 {
+    font-size: 10vw;
+  }
+
+  header h3 {
+    font-size: 6vw;
+    padding: 3vw 0 0;
+  }
+
+  header p {
+    font-size: 3vw;
+  }
+
+  article#levels {
+    width: 100vw;
+  }
 
   main {
-  height: 100vmin;
-  width: 100%;
-  min-width:100%;
+    height: 62vw;
   }
 
-  main section {
-  height: 100%;
-  width: 100vmin;
+  section {
+    width: 93vw;
   }
 
+  div#feedback {
+    width: 7vw;
+  }
+
+  div#progress {
+    height: calc(62vw - 6.25vw);
+  }
+
+  div#feedback svg {
+    height: 6.25vw;
+    width: 6.25vw;
+  }
+
+  /* NO TIMER for Introduction, Alphabet and Numbers */
+  article#levels.timeless section {
+    width: 100vw;
+  }
+
+  /* At this and narrower widths, cell size depends on width */
+  ul.consonants,
+  ul.numbers {
+    font-size: 12.5vw;
+  }
+
+  ul.names,
+  ul.words {
+    font-size: 7.5vw;
+  }
+
+  span.first,
+  span.key {
+    font-size: 8.4vw;
+  }
+
+  span.helper,
+  span.filler {
+    font-size: 4.2vw;
+  }
+}
+
+/* TIMER ABOVE: expanding */
+@media (max-aspect-ratio: 15/11) {
+
+  html, body {
+    height: calc(40vw + 100vh);
+    background-color: #330;
+  }
+
+  main {
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  section {
+    width: 100vw;
+    height: 66.6667vw;
+  }
+
+  div#feedback {
+    flex-direction: row;
+    width: 100vw;
+    height: calc(100vh - 66.6667vw);
+    order: 0;
+  }
+
+  div#progress {
+    height: 100%;
+    width: calc(166.6667vw - 100vh);
+    order: 0;
+  }
+
+  div#progress .current {
+    height: 75%;
+    width: 100%;
+  }
+
+  div#progress .ghost {
+    left: 0;
+    top: 50%;
+    height: 50%;
+    width: 100%;
+  }
+
+  div#feedback svg {
+    height: 100%;
+    width: calc(100vh - 66.6667vw);
+  }
+
+  /* At this and narrower 3x2 widths, cell size is 1/6 width */
+  ul.consonants,
+  ul.numbers {
+    font-size: 13.3333vw;
+  }
+
+  ul.words,
+  ul.names {
+    font-size: 8.3333vw;
+  }
+
+  span.first,
+  span.key {
+    font-size: 9vw;
+  }
+
+  span.helper,
+  span.filler {
+    font-size: 4.5vw;
+  }
+}
+
+/* TIMER ABOVE: 20% */
+@media (max-aspect-ratio: 15/12) {
+
+  html, body {
+    height: calc(40vw + 80vw);
+    background-color: #300;
+  }
+
+  main {
+    height: 80vw;
+  }
+
+  section {
+    width: 100vw;
+    height: 66.6667vw;
+  }
+
+  div#feedback {
+    height: 13.6667vw;
+  }
+
+  div#progress {
+    width: 90%;
+  }
+
+  div#feedback svg {
+    width: 13.6667vw;
+  }
+
+}
+
+/* PORTRAIT MODE: expanding */
+@media (max-aspect-ratio: 10/11) {
+
+  html, body {
+    height: calc(40vw + 100vh);
+    background-color: #033;
+  }
+
+  main {
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  div#feedback {
+    height: calc(100vh - 100vw);
+  }
+
+  div#progress {
+    width: calc(200vw - 100vh);
+  }
+
+  div#feedback svg {
+    width: calc(100vh - 100vw);
+  }
+
+  section {
+    height: 100vw;
+  }
+
+  /* At this and narrower widths, cell size is 1/4 width */
   ul.consonants li,
   ul.numbers li {
-  width: 25%;
+    width: 25%;
+    font-size: 20vw;
   }
 
   ul.words li,
   ul.names li,
   ul.images li {
   width: 50%;
+  font-size: 12.5vw;
+  }
+
+  span.first,
+  span.key {
+    font-size: 14vw;
+  }
+
+  span.helper,
+  span.filler {
+    font-size: 7vw;
   }
 
   /* Hide all decoys... */
@@ -334,10 +653,72 @@ float: left;
   ul.numbers li.decoy ~ li.decoy ~ li.decoy {
   display:inline-flex;
   }
-
 }
 
 
+/* PORTRAIT MODE: timer 20% */
+@media (max-aspect-ratio: 5/6) {
+
+  html, body {
+    height: calc(40vw + 120vw);
+    background-color: #003;
+  }
+
+  main {
+    height: 120vw;
+    flex-direction: column;
+  }
+
+  div#feedback {
+    height: 20vw;
+  }
+
+  div#progress {
+    width: 80%;
+  }
+
+  div#feedback svg {
+    width: 20vw;
+  }
+}
+
+
+/* Centre in space available*/
+@media (max-aspect-ratio: 20/37) {
+
+  html, body {
+    height: 186vw;
+    background-color: #033;
+  }
+
+  header {
+    height: calc(50vh - 60vw);
+  }
+
+}
+
+/* NARROW SCREEN */
+@media (max-width: 400px) {
+
+  header h1 {
+    font-size: 20px;
+  }
+
+  header p {
+    font-size: 16px;
+  }
+}
+
+
+section.active {
+  display: flex;
+}
+
+
+
+/********************************************************************/
+/* TEMPORARY  *  TEMPORARY  *  TEMPORARY  *  TEMPORARY  * TEMPORARY */
+/********************************************************************/
 
 /* For log */
 pre {
@@ -360,9 +741,9 @@ pre {
 aside {
 opacity: 0.5;
 position: fixed;
-top: 60vmin;
+top: 70vmin;
 width: 100%;
-position: absolute;
+font-size: 8vmin;
 z-index: 999;
 text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 pointer-events: none;

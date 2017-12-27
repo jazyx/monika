@@ -1,4 +1,4 @@
-._123 main section>div {
+section._123>div {
 display: flex;
 flex-direction: row;
 }
@@ -10,7 +10,7 @@ width: 70vmin;
 }
 
 
-._123 main section li {
+section._123 li {
 width: 100%;
 height: 10vmin;
 
@@ -69,29 +69,29 @@ flex-direction: row;
 align-items: center;
 }
 
-@media screen and (orientation:portrait) {
+@media (max-aspect-ratio: 10/11) {
 
-  ._123 main section>div {
+  section._123>div {
   width: 100vmin;
   }
 
-  ._123 div.image {
+  section._123 div.image {
   width: 66.6666vmin;
   }
 
-  ._123 main section ul {
+  section._123 ul {
   width: 33.3333vmin;  }
 
-  ._123 main section li {
+  section._123 li {
   padding-left: 2vmin;
   }
 
-  ._123 p.toggle{
+  section._123 p.toggle{
   width: 14.2857vmin;
   font-size: 7vmin;
   }
 
-  ._123 .image div {
+  section._123 .image div {
   display: flex;
   flex-direction: column;
   align-items: flex-end;

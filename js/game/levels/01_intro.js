@@ -20,10 +20,13 @@
       this.SVG = this.generateSVG()
     }
 
-    // initialize (options) {
-    //   log(this.name + " is initialized in Intro")     
-    //   super.initialize(options)
-    // }
+    initialize (options) {
+      super.initialize(options)
+      this.dontRecycle = true
+      this.queue.recycle = function recycle(number) {}
+      // wait until 9 is the cue
+    }
+
 
     showConsonants () {
       var list = this.section.querySelectorAll("ul.consonants li")
@@ -54,6 +57,36 @@
         }
       }
     }
+
+
+    treatWrongAnswer(target) {
+      if (this.dontRecycle) {
+        // Just do the minimum
+        this.lastErrorClass = this.getListClass(target)
+        target.classList.add("disabled")
+
+      } else {
+        // Recycle numbers as usual, now that the whole consecutive
+        // list has been treated
+        super.treatWrongAnswer(target)
+      }
+    }
+
+
+    treatCorrectAnswer(target) {
+      super.treatCorrectAnswer(target)
+
+      if (this.number === 8 & this.dontRecycle) {
+        // The next cue is 9, so we can start recycling
+        this.dontRecycle = false
+
+        this.queue.recycle = function recycle(number) {
+          let ii = Math.max(Math.floor(Math.random()*this.length-2), 0)
+          this.splice(ii, 0, number)
+        }
+      }
+    }
+
 
     generateSVG() {
       let svgMap = {}

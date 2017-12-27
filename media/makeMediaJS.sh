@@ -293,6 +293,22 @@ cat << EOF > $media_file
   monika.media = ({
     errorSound: "media/interface/error/not" // ogg, mp3
 
+  , pass: {
+      rewards: {
+        header:    "Congratulations!"
+      , record:    "You're setting new records!"
+      , target:    "You've beaten the target time!"
+      , bestYet:   "You've beaten your personal best!"
+      , goodStart: "You're off to a good start!"
+      , complete:  'You completed level <span class="level">1</span>!'
+      , gameOver:  "You've reached the end of the game."
+      }
+    , buttons{
+        progress:  "See your progress"
+      , repeat:    "Repeat this level"
+      , nextLevel: "Continue"
+    }
+
   , number_names_LUT: {
        0: "нoль"
     ,  1: "один"

@@ -28,10 +28,19 @@ font-size: 40vmin;
 width: 33.3333%;
 }
 
-@media screen and (orientation:portrait) {
+@media (max-aspect-ratio: 8/5) {
+
+ .digits ul.numbers li {
+  font-size: 24vw
+  }
+
+}
+
+@media (max-aspect-ratio: 10/11) {
 
   .digits ul.numbers li {
   width: 50%;
+  font-size: 40vw
   }
 
   /* Hide only one number when they're big */

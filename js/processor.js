@@ -132,7 +132,7 @@
 
         switch (allOrRandom) {
           default:
-            image = monika.menu.preferences.user_images[word]
+            image = monika.menu.getUserImageForWord(word)
                  || this.word_image_LUT[word]
           break
           case "all":

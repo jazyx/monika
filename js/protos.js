@@ -95,3 +95,12 @@ function log () {
     console.log(message)
   }
 }
+
+
+
+window.addEventListener(
+  "resize"
+, function () {
+    window.scroll(0, 0) // 999)
+  }
+, false)

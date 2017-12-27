@@ -80,6 +80,8 @@
         queue[random] = queue[ii]
         queue[ii] = temp
       }
+
+      return queue.length
     }
 
 
@@ -174,10 +176,8 @@
         this.answered[className] += 1
 
         if (className === "consonants") {
-          if (target.classList.contains("white")) {
-            // Don't let this consanant change to orange later
-            target.classList.add("stay-white")
-          }
+          // Don't let this consonant change to orange later
+          target.classList.add("stay-white")
 
         } else if ( this.answered.names && this.answered.numbers ) { 
           // Fade in the colour of any unfound consonants
