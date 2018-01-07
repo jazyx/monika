@@ -108,15 +108,15 @@ color: #666;
 }
 
 nav div.ref a {
-background-color: #cdc;
-border: 1vmin solid #bcb;
+background-color: #ccd;
+border: 1vmin solid #bbc;
 border-radius: 2.5vmin;
-border-top-color: #ded;
-border-left-color: #ded;
+border-top-color: #dde;
+border-left-color: #dde;
 
 font-size: 12vmin;
 margin: 2vmin;
-color: #000;  
+color: #006;  
 }
 
 nav li a:visited {
@@ -146,14 +146,12 @@ border-left-color: #b88;
 }
 
 nav div.ref a.active {
-background-color: #8b8;
-border: 1vmin solid #9c9;
+background-color: #88b;
+border: 1vmin solid #99c;
 border-radius: 2.5vmin;
-border-top-color: #7a7;
-border-left-color: #7a7;
+border-top-color: #77a;
+border-left-color: #77a;
 
-font-size: 12vmin;
-margin: 2vmin;
 color: #000;  
 }
 

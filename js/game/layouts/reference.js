@@ -23,7 +23,8 @@
       this.display() // super.initialize()
      
       let toggleType = this.toggleType.bind(this)
-      this.toggle.onmouseup = this.toggle.ontouchend = toggleType
+      this.toggle.onmouseup = toggleType
+      // this.toggle.onmouseup = this.toggle.ontouchend = toggleType
       
       return this
     }

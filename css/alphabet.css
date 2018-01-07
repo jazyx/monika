@@ -65,21 +65,21 @@ border-left-color: #117;
 
 /* VOWELS */
 
-li.vowel {
+section.blue li.vowel {
 background-color: #66c;
 border-color: #33c;
 border-top-color: #99c;
 border-left-color: #99c;
 }
 
-li.vowel:not(.touched):hover {
+section.blue li.vowel:not(.touched):hover {
 background-color: #66c;
 border-color: #339;
 border-top-color: #aad;
 border-left-color: #aad;
 }
 
-li.vowel.touched {
+section.blue li.vowel.touched {
 background-color: #55b;
 border-color: #99c;
 border-top-color: #339;

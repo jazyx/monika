@@ -2,6 +2,8 @@ String.prototype.replaceAt=function(index, replacement) {
   return this.substr(0, index) + replacement + this.substr(index+1);
 }
 
+
+
 Array.prototype.max = function() {
   return Math.max.apply(null, this);
 };
@@ -17,6 +19,8 @@ Array.prototype.min = function() {
 Object.defineProperty(Array.prototype, "min", {
   enumerable: false
 })
+
+
 
 
 // https://stackoverflow.com/a/1848489/1927589
@@ -67,8 +71,11 @@ HTMLElement.prototype.cloneWithStyle = function cloneWithStyle() {
 
 
 
-
-
+window.oncontextmenu = function(event) {
+  // event.preventDefault();
+  // event.stopPropagation();
+  // return false;
+}
 
 
 
@@ -98,9 +105,23 @@ function log () {
 
 
 
-window.addEventListener(
-  "resize"
-, function () {
-    window.scroll(0, 0) // 999)
-  }
-, false)
+// window.addEventListener(
+//   "resize"
+// , function () {
+//     window.scroll(0, 0) // 999)
+//   }
+// , false)
+
+
+document.body.addEventListener("touchstart", function preventZoom(e) {
+  var t2 = e.timeStamp;
+  var t1 = e.currentTarget.dataset.lastTouch || t2;
+  var dt = t2 - t1;
+  var fingers = e.touches.length;
+  e.currentTarget.dataset.lastTouch = t2;
+
+  if (!dt || dt > 500 || fingers > 1) return; // not double-tap
+
+  e.preventDefault();
+  e.target.click();
+}, false)

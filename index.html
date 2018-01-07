@@ -17,9 +17,11 @@
   <link rel="stylesheet" type="text/css" href="css/consonants.css">
   <link rel="stylesheet" type="text/css" href="css/images.css">
   <link rel="stylesheet" type="text/css" href="css/numberpad.css">
+  <link rel="stylesheet" type="text/css" href="css/numberdictation.css">
   <link rel="stylesheet" type="text/css" href="css/keyboard.css">
-  <link rel="stylesheet" type="text/css" href="css/feedback.css">
-  <link rel="stylesheet" type="text/css" href="css/pass.css">
+<!--   <link rel="stylesheet" type="text/css" href="css/feedback.css">
+ -->  <link rel="stylesheet" type="text/css" href="css/pass.css">
+  <link rel="stylesheet" type="text/css" href="css/challenge.css">
 
   <link href="https://fonts.googleapis.com/css?family=Marck+Script" rel="stylesheet">
 
@@ -37,13 +39,13 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- Viewport -->
-  <meta name = "viewport" content = "width = device-width, initial-scale = 1.0, user-scalable=no">
+  <meta name = "viewport" content = "width = device-width, initial-scale = 1.0"> <!-- , user-scalable=no"> -->
 
   <!-- Android progressive web app requirements -->
   <script src="js/main.js"></script>
 </head>
 
-<body> <!-- oncontextmenu="return false;"> -->
+<body class="timeless">
   <nav>
     <input type="checkbox" name="menu" id="menu" value="">
     <label for="menu">
@@ -136,10 +138,7 @@
     </section>
   </nav>
 
-  <!-- <pre>Log:</pre> -->
-
-
-  <article id="levels" class="timeless">
+  <article id="levels">
     <header>
       <h1></h1>
       <div>
@@ -163,7 +162,7 @@
         </svg>
       </div>
 
-      <section class="active">
+      <section class="splash active">
         <p>Лорем ипсум долор сит амет, ут яуо фиерент диспутандо. Аутем вирис еуисмод пер еи, новум неглегентур репрехендунт но нам. Не модо утрояуе цопиосае ест, еам ех толлит цотидиеяуе. Еа яуи долорем ехпетендис, фацете яуаестио иус не, яуо лаборе поссим ин.
         </p>
         <p>Неморе сцаевола яуаерендум вис ин. Ут одио лорем волумус вис. Меис индоцтум ехпетендис хас еи, ест цу аутем фиерент. Дицат дицант долорем хас еа. Пер ан вивендум ратионибус адверсариум, мел хинц регионе рецусабо ат. Еа пер иусто медиоцрем адиписцинг. Ест не цаусае цонвенире, пер цу идяуе бонорум репудиандае.
@@ -260,6 +259,67 @@
         </ul>
       </section>
 
+      <section class="challenge">
+        <div class="texts">
+          <div class="question">
+            <p class="selectable"></p>
+
+            <button type="button" class="translate">
+              <img src="img/translate.png">
+            </button>
+            <p class="tooltip">Tooltip goes here</p>
+          </div>
+
+          <div class="word clue">
+            <div class="answer">
+              <div>
+                <span class="number"></span>
+                <span class="units"></span>
+              </div>
+            </div>
+
+            <input type="checkbox" class="hint" disabled/>
+
+            <div class="words">
+              <p></p>
+            </div>
+
+            <button type="button" class="continue"></button> 
+          </div>
+        </div>
+
+        <div class="images">
+           <div class="question"><img /></div>
+
+           <div class="clue">
+             <input type="checkbox" class="hint"/> 
+             <img />
+           </div>
+        </div>
+
+        <div class="landscape">
+          <div class="answer">
+            <div>
+              <span class="units"></span>
+              <span class="number"></span>
+            </div>
+          </div> 
+
+          <div>
+            <button type="button" class="continue"></button> 
+          </div> <!-- column -->
+        </div>
+
+        <div class="number-pad-parent">
+          <div id="number-pad">
+            <ul><li>1</li><li>2</li><li>3</li></ul>
+            <ul><li>4</li><li>5</li><li>6</li></ul>
+            <ul><li>7</li><li>8</li><li>9</li></ul>
+            <ul><li class="hash">#</li><li>0</li><li class="del">удалять</li></ul>
+          </div>
+        </div>
+      </section>
+
       <section class="words">
         <ul class="images">
           <li></li><!--
@@ -328,19 +388,17 @@
         </ul>
       </section>
 
-      <section class="numberpad">
+      <section class="number-dictation">
         <div class="image">
           <img />
           <p></p>
           <div class="mask"></div>
         </div>
         <div class="numbers">
-          <div>
-            <ul><li>1</li><li>2</li><li>3</li></ul>
-            <ul><li>4</li><li>5</li><li>6</li></ul>
-            <ul><li>7</li><li>8</li><li>9</li></ul>
-            <ul><li><p>удалять</p></li><li>0</li><li>#</li></ul>
+          <div class="number-pad-parent">
+            <!-- <div id="number-pad"> will go here -->
           </div>
+
           <div class="dialled">
             <p></p>
           </div>
@@ -457,12 +515,18 @@
 
   <!-- Game scripts -->
   <script src="js/game/game.js"></script>
+  <script src="js/game/challenge.js"></script>
   <script src="js/game/layouts/reference.js"></script>
   <script src="js/game/layouts/digits.js"></script>
   <script src="js/game/layouts/words.js"></script>
   <script src="js/game/layouts/consonants.js"></script>
   <script src="js/game/layouts/images.js"></script>
-  <!-- <script src="js/game/layouts/numberpad.js"></script> -->
+
+  <!-- Localisation -->
+  <script src="js/l10n.js"></script>
+
+  <!-- Number pade -->
+  <script src="js/numberpad.js"></script>
 
   <!-- Reference scripts -->
   <script src="js/game/levels/alphabet.js"></script>
@@ -479,7 +543,7 @@
   <script src="js/game/levels/08_consonant_cue.js"></script>
   <script src="js/game/levels/09_images_cue.js"></script>
   <script src="js/game/levels/10_all_images.js"></script>
-  <script src="js/game/levels/numberpad.js"></script>
+  <script src="js/game/levels/11_number_dictation.js"></script>
 
   <!-- Resource lists -->
   <script src="media/ru/media.js"></script>

@@ -19,11 +19,12 @@
       this.name = options.name = options.name || options.className
 
       // HTML elements
-      this.sections = [].slice.call(document.querySelectorAll("section"))
-      this.section = document.querySelector("section." + this.sectionClass)
+      let main = document.querySelector("main")
+      this.sections = [].slice.call(main.querySelectorAll("section"))
+      this.section = main.querySelector("section." + this.sectionClass)
+      this.challengeSection = main.querySelector("section.challenge")
       this.header = document.querySelector("header h1")
       this.text = document.querySelector("header div")
-      this.feedback = document.getElementById("feedback")
       this.mask = document.getElementById("mask")
 
       // Alternate images
@@ -63,27 +64,44 @@
 
 
     initialize() {
-      // Show timer?
-      let article = document.querySelector("article")
+      let challenge = this.options.challenge
+      let challengeAccepted = false
 
-      if (this.options.timeless || monika.timeless) {
-        article.classList.add("timeless")
-      } else {
-        article.classList.remove("timeless")         
+      if (challenge) {
+        let prepareLevel = this.prepareLevel.bind(this)
+        let challengeInstance = new monika.Challenge(
+          challenge.folder
+        , prepareLevel
+        )
+
+        challengeAccepted = challengeInstance.initialize()
       }
+
+      if (challengeAccepted) {
+        this.display(this.challengeSection, "timeless")
+        this.setHeader(challenge)
+
+      } else {
+        this.prepareLevel()
+      }
+    }
+
+
+    prepareLevel(challengeCallback) {
+      this.challengeCallback = challengeCallback
 
       // Listeners
       let supportCallback = this.provideSupport.bind(this)
       monika.support.addEventListener("failure", supportCallback)
 
-      this.display()
+      this.display(this.section)
 
       let tapStart = this.tapStart.bind(this)
       this.section.onmousedown = this.section.ontouchstart = tapStart
 
       monika.timer.prepareLevel(this.options)
 
-      this.setHeader()
+      this.setHeader(this.options)
       this.number = -1
       this.expectedTotal = this.renewQueue()
       this.started = false
@@ -97,16 +115,21 @@
     }
 
 
-    display () {
+    display (activeSection, timeless) {
+      // Show timer?
+      if (timeless || this.options.timeless || monika.timeless) {
+        document.body.classList.add("timeless")
+      } else {
+        document.body.classList.remove("timeless")         
+      }
+
       this.sections.forEach(section => {
-        if (section === this.section) {
+        if (section === activeSection) {
           section.classList.add("active")
         } else {
           section.classList.remove("active")
         }
       })
-
-      this.feedback.classList.add("active")
     }
 
 
@@ -268,9 +291,9 @@
     // PREPARE CHALLENGE
    
 
-    setHeader() {
-      this.header.innerHTML = this.options.header || ""
-      this.text.innerHTML = this.options.text || ""
+    setHeader(options) {
+      this.header.innerHTML = options.header || ""
+      this.text.innerHTML = options.text || ""
     }
 
 
@@ -647,11 +670,16 @@
       this.number = this.getNextNumber()
 
       if (this.number === undefined) {
-        log ("no more numbers in newChallenge")
         let reward = monika.timer.getReward()
-        log ("reward in newChallenge: ", reward)
-        return monika.pass.show(reward)
 
+        if (this.challengeCallback) {
+          this.display(this.challengeSection, "timeless")
+          this.challengeCallback(reward)
+        } else {
+          monika.pass.show(reward)
+        }
+
+        return
       }
 
       // Allow 3 errors in a row before triggering support
@@ -734,6 +762,7 @@
 
       return className
     }
+
 
     numberIsInRange(wrongNumber) {
       let range = this.options.cue_range // ? decoy_range
@@ -833,7 +862,6 @@
 
     cleanUp() {
       this.section.onmousedown = this.section.ontouchstart = null
-      this.feedback.classList.remove("active")
       monika.support.removeEventListener("failure", "all")
     }
   }

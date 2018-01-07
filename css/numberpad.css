@@ -1,114 +1,27 @@
-.numberpad div.numbers li {
-flex-direction: row;
-align-items: center;
+div#number-pad {
+height: 100%;
+}
+
+div#number-pad ul {
+height: 25%;
+}
+
+div#number-pad li {
+height: 100%;
+width: 33.3333%;
 
 background-color: transparent;
-border-color: #fff
-;
-width: 24vmin;
-height: 25vmin;
+border-color: #fff;
 
-font-size: 20vmin;
 font-family: sans-serif;
-border-width: 0.2vmin;
 color: #fff;
 
 opacity: 0.5;
 }
 
-.numberpad div.numbers li:hover,
-.numberpad div.numbers li:active {
+div#number-pad li:hover,
+div#number-pad li:active {
 background-color: transparent;
-border-color: #fff
-;
-border-width: 1vmin;
+border-color: #fff;
 opacity: 1;
-}
-
-/* Superimpose numberpad and image */
-
-section.numberpad > div {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-}
-
-.numberpad img {
-position: absolute;
-top: 0;
-left: 0
-width: 100vmin;
-height: 100vmin;
-}
-
-.numberpad .image p {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100vmin;
-margin: 0;
-color: #000;
-}
-
-.numberpad .mask {
-position: absolute;
-top: 0;
-background-color: #002; /*same as page background*/
-opacity: 0.888;
-width: 100vmin;
-height: 100vmin;
-}
-
-/* Place numberpad to right of dialled number*/
-
-
-div.dialled {
-width: 25vmin;
-height: 100vmin;
-display: flex;
-flex-direction: column;
-justify-content: start;
-}
-
-div.dialled p {
-box-sizing: border-box;
-width: 90%;
-height: 10vmin;
-border: 0.2vmin solid #666;
-margin: 0 5%;
-text-align: right;
-font-family: sans-serif;
-text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-}
-
-.numberpad ul {
-width: 75vmin;
-display: flex;
-}
-
-.numberpad .mask.fadeout,
-.numberpad .numbers.fadeout ul {
-opacity: 0;
-transition: opacity 0.5s;
-}
-
-.numberpad .numbers.fadeout .dialled p {
-border: none; 
-/* TODO: add black outline */
-}
-
-.numberpad .numbers ul p {
-display: inline;
-font-size: 5vmin; /*8min is good for DEL*/
-}
-
-.numberpad .numbers span{
-font-size: 20vmin;
-visibility: hidden;
 }

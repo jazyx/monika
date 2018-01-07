@@ -92,7 +92,7 @@
       let screenWidth = screen.width;
       let windowHeight = window.innerHeight
       let dimensions = {
-        width: innerWidth
+        width: window.innerWidth
       , height: windowHeight
       }
       let orientation = (screenWidth > screen.height)

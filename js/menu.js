@@ -59,7 +59,7 @@
         }
 
       } else {
-        level = Math.min(level, this.bestLevel())
+        level = Math.min(this.level, this.bestLevel())
       }
 
       if (level) {
@@ -256,7 +256,7 @@
      *                                     the previous level into
      *                                     view
      */
-    showActiveLevel(levelIndex, options) {
+    showActiveLevel(levelIndex, options = {}) {
       let list             = document.querySelectorAll("nav li")
       let scrollToPrevious = options.scrollToPrevious
       let bestLevel        = this.bestLevel()
@@ -299,6 +299,8 @@
           li.removeAttribute("disabled")
         }
       }
+
+      this.setRefDisplay()
     }
 
 
@@ -333,6 +335,13 @@
       if (!levelTimes) {
         levelTimes = {}
         localData.levelTimes = levelTimes
+      }
+
+      // CHALLENGE
+      let challenges = localData.challenges
+      if (!challenges) {
+        challenges = {}
+        localData.challenges = challenges
       }
 
       return localData
@@ -408,9 +417,17 @@
 
     // Called by showReference and also by toggleType in layout/reference.js
     displayRef(hash, dontScrollPage) {
-      let refLinks = document.querySelectorAll("nav div.ref a")
-
       this.showActiveLevel(0) // doesn't change this.level
+
+      this.setLevel(hash.substring(1), { dontScroll: dontScrollPage })
+      this.setRefDisplay(hash)
+
+      return true
+    }
+
+
+    setRefDisplay(hash) {
+      let refLinks = document.querySelectorAll("nav div.ref a")
 
       var total = refLinks.length       
       for (let ii = 0; ii < total; ii += 1) {
@@ -420,11 +437,7 @@
         } else {
           refLink.classList.remove("active")
         }
-      }
-
-      this.setLevel(hash.substring(1), { dontScroll: dontScrollPage })
-
-      return true
+      } 
     }
 
 
@@ -436,6 +449,41 @@
 
     setLevelTimes(levelName, levelTimes) {
       this.localData.levelTimes[levelName] = levelTimes
+      localStorage[STORAGE_NAME] = JSON.stringify(this.localData)
+    }
+
+
+    getChallenges(challengeFolder, dontClone) {
+      let challengeData = this.localData.challenges[challengeFolder]
+
+      if (!challengeData) {
+        challengeData = []
+        this.localData.challenges[challengeFolder] = challengeData
+      }
+
+      if (!dontClone) {
+        challengeData = challengeData.slice(0)
+      }
+
+      console.log(challengeData)
+
+      return challengeData
+    }
+
+
+    updateChallenge(challengeFolder, challengeName) {
+      let challengeData = this.getChallenges(challengeFolder, true)
+
+      // Esure that challengeName is at the end
+      let index = challengeData.indexOf(challengeName)
+      if (index < 0) {
+
+      } else {
+        challengeData.splice(index, 1)
+      }
+
+      challengeData.push(challengeName)
+
       localStorage[STORAGE_NAME] = JSON.stringify(this.localData)
     }
   }

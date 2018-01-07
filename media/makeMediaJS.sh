@@ -8,6 +8,11 @@
 # !!! CAUTION !!!
 # THIS SCRIPT WILL BREAK IF THERE ARE SPACES IN ANY AUDIO OR IMAGE
 # FILE NAME (INCLUDING IN THE PATH LEADING TO THE ROOT FOLDER) !!!
+######################################################################
+
+######################################################################
+#
+# NEED TO ADD CODE FOR media/ru/CHALLENGES/SUBFOLDERS
 #
 ######################################################################
 

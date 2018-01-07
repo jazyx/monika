@@ -13,7 +13,7 @@
   class Intro extends monika.layouts.Digits {
     constructor (options) {
       options.consecutive = options.consecutive || true
-      options.repeat      = 0 // options.repeat      || 2
+      options.repeat      = options.repeat      || 1
 
       super(options)
 

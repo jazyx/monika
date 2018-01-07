@@ -118,6 +118,10 @@
 
     placeholder.innerHTML = src
     placeholder.style.color = this.colours.pop()
+
+    setTimeout(() => {
+      placeholder.innerHTML = ""
+    }, 1000)
     
     if (this.nextUp.callback) {
       this.nextUp.callback()

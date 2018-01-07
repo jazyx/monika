@@ -207,445 +207,506 @@
   , numbers: {
       0: {
         name: "ноль|нуль"
-   // , path: "/monika/media/ru/numbers/0/"
-      , audio: [
-  "/monika/media/ru/numbers/0/audio/0"
-]
-      , words: {
-          иней: {
-            audio: [
-  "/monika/media/ru/numbers/0/words/иней/audio/иней"
-]
-          , images: [
-  "/monika/media/ru/numbers/0/words/иней/images/hoarfrost.jpg"
-, "/monika/media/ru/numbers/0/words/иней/images/rime.jpg"
-, "/monika/media/ru/numbers/0/words/иней/images/leaf.jpg"
-, "/monika/media/ru/numbers/0/words/иней/images/default.jpg"
-, "/monika/media/ru/numbers/0/words/иней/images/fence.jpg"
-, "/monika/media/ru/numbers/0/words/иней/images/tree.jpg"
-, "/monika/media/ru/numbers/0/words/иней/images/icing.jpg"
-, "/monika/media/ru/numbers/0/words/иней/images/frost.jpg"
-, "/monika/media/ru/numbers/0/words/иней/images/clearing.jpg"
-, "/monika/media/ru/numbers/0/words/иней/images/crystals.jpg"
-]
-          }
-        , default_word: "иней"
-        }
+       // , path: "/monika/media/ru/numbers/0/"
+              , audio: [
+          "/monika/media/ru/numbers/0/audio/0"
+        ]
+              , words: {
+                  иней: {
+                    audio: [
+          "/monika/media/ru/numbers/0/words/иней/audio/иней"
+        ]
+                  , images: [
+          "/monika/media/ru/numbers/0/words/иней/images/hoarfrost.jpg"
+        , "/monika/media/ru/numbers/0/words/иней/images/rime.jpg"
+        , "/monika/media/ru/numbers/0/words/иней/images/leaf.jpg"
+        , "/monika/media/ru/numbers/0/words/иней/images/default.jpg"
+        , "/monika/media/ru/numbers/0/words/иней/images/fence.jpg"
+        , "/monika/media/ru/numbers/0/words/иней/images/tree.jpg"
+        , "/monika/media/ru/numbers/0/words/иней/images/icing.jpg"
+        , "/monika/media/ru/numbers/0/words/иней/images/frost.jpg"
+        , "/monika/media/ru/numbers/0/words/иней/images/clearing.jpg"
+        , "/monika/media/ru/numbers/0/words/иней/images/crystals.jpg"
+        ]
+                  }
+                , default_word: "иней"
+                }
+              }
+            , 1: {
+                name: "один|одна|одно|одни"
+           // , path: "/monika/media/ru/numbers/1/"
+              , audio: [
+          "/monika/media/ru/numbers/1/audio/1"
+        ]
+              , words: {
+                  рай: {
+                    audio: [
+          "/monika/media/ru/numbers/1/words/рай/audio/рай"
+        ]
+                  , images: [
+          "/monika/media/ru/numbers/1/words/рай/images/clouds.jpg"
+        , "/monika/media/ru/numbers/1/words/рай/images/default.jpg"
+        , "/monika/media/ru/numbers/1/words/рай/images/eden.jpg"
+        , "/monika/media/ru/numbers/1/words/рай/images/garden.jpg"
+        ]
+                  }
+                , default_word: "рай"
+                }
+              }
+            , 10: {
+                name: "десять"
+           // , path: "/monika/media/ru/numbers/10/"
+              , audio: []
+              , words: {
+                  руина: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/10/words/руина/images/church.jpg"
+        , "/monika/media/ru/numbers/10/words/руина/images/arch.jpg"
+        , "/monika/media/ru/numbers/10/words/руина/images/chalet.jpg"
+        , "/monika/media/ru/numbers/10/words/руина/images/castle.jpg"
+        ]
+                  }
+                , default_word: "руина"
+                }
+              }
+            , 11: {
+                name: "одиннадцать"
+           // , path: "/monika/media/ru/numbers/11/"
+              , audio: []
+              , words: {
+                  рация: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/11/words/рация/images/action.jpg"
+        , "/monika/media/ru/numbers/11/words/рация/images/default.jpg"
+        , "/monika/media/ru/numbers/11/words/рация/images/tilt.jpg"
+        , "/monika/media/ru/numbers/11/words/рация/images/nerf.jpg"
+        ]
+                  }
+                , default_word: "рация"
+                }
+              }
+            , 12: {
+                name: "двенадцать"
+           // , path: "/monika/media/ru/numbers/12/"
+              , audio: []
+              , words: {
+                  рот: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/12/words/рот/images/default.jpg"
+        , "/monika/media/ru/numbers/12/words/рот/images/baby.jpg"
+        , "/monika/media/ru/numbers/12/words/рот/images/lipstick.jpg"
+        , "/monika/media/ru/numbers/12/words/рот/images/man.jpg"
+        , "/monika/media/ru/numbers/12/words/рот/images/open.jpg"
+        ]
+                  }
+                , default_word: "рот"
+                }
+              }
+            , 13: {
+                name: "тринадцать"
+           // , path: "/monika/media/ru/numbers/13/"
+              , audio: []
+              , words: {
+                  рука: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/13/words/рука/images/arm.jpg"
+        , "/monika/media/ru/numbers/13/words/рука/images/default.jpg"
+        , "/monika/media/ru/numbers/13/words/рука/images/drawing.jpg"
+        , "/monika/media/ru/numbers/13/words/рука/images/fingers.jpg"
+        , "/monika/media/ru/numbers/13/words/рука/images/wooden.jpg"
+        , "/monika/media/ru/numbers/13/words/рука/images/reach.jpg"
+        ]
+                  }
+                , default_word: "рука"
+                }
+              }
+            , 14: {
+                name: "четырнадцать"
+           // , path: "/monika/media/ru/numbers/14/"
+              , audio: []
+              , words: {
+                  ручей: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/14/words/ручей/images/default.jpg"
+        , "/monika/media/ru/numbers/14/words/ручей/images/stream.jpg"
+        , "/monika/media/ru/numbers/14/words/ручей/images/torrent.jpg"
+        , "/monika/media/ru/numbers/14/words/ручей/images/brook.jpg"
+        ]
+                  }
+                , default_word: "ручей"
+                }
+              }
+            , 15: {
+                name: "пятнадцать"
+           // , path: "/monika/media/ru/numbers/15/"
+              , audio: []
+              , words: {
+                  рыба: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/15/words/рыба/images/mort.jpg"
+        , "/monika/media/ru/numbers/15/words/рыба/images/default.jpg"
+        , "/monika/media/ru/numbers/15/words/рыба/images/spiny.jpg"
+        , "/monika/media/ru/numbers/15/words/рыба/images/bufoceratias.jpg"
+        , "/monika/media/ru/numbers/15/words/рыба/images/discus.jpg"
+        , "/monika/media/ru/numbers/15/words/рыба/images/moray.jpg"
+        , "/monika/media/ru/numbers/15/words/рыба/images/tail.jpg"
+        , "/monika/media/ru/numbers/15/words/рыба/images/blowfish.jpg"
+        , "/monika/media/ru/numbers/15/words/рыба/images/yellow.jpg"
+        , "/monika/media/ru/numbers/15/words/рыба/images/boha.jpg"
+        ]
+                  }
+                , default_word: "рыба"
+                }
+              }
+            , 16: {
+                name: "шестнадцать"
+           // , path: "/monika/media/ru/numbers/16/"
+              , audio: []
+              , words: {
+                  руль: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/16/words/руль/images/default.jpg"
+        , "/monika/media/ru/numbers/16/words/руль/images/helm.jpg"
+        , "/monika/media/ru/numbers/16/words/руль/images/rudder.jpg"
+        , "/monika/media/ru/numbers/16/words/руль/images/zoomer.jpg"
+        , "/monika/media/ru/numbers/16/words/руль/images/handlebars.jpg"
+        ]
+                  }
+                , default_word: "руль"
+                }
+              }
+            , 17: {
+                name: "семнадцать"
+           // , path: "/monika/media/ru/numbers/17/"
+              , audio: []
+              , words: {
+                  роза: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/17/words/роза/images/flat.jpg"
+        , "/monika/media/ru/numbers/17/words/роза/images/default.jpg"
+        , "/monika/media/ru/numbers/17/words/роза/images/stem.jpg"
+        , "/monika/media/ru/numbers/17/words/роза/images/closeup.jpg"
+        ]
+                  }
+                , default_word: "роза"
+                }
+              }
+            , 18: {
+                name: "восемнадцать"
+           // , path: "/monika/media/ru/numbers/18/"
+              , audio: []
+              , words: {
+                  арфа: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/18/words/арфа/images/player.jpg"
+        , "/monika/media/ru/numbers/18/words/арфа/images/double.jpg"
+        , "/monika/media/ru/numbers/18/words/арфа/images/greek.jpg"
+        , "/monika/media/ru/numbers/18/words/арфа/images/celtic.jpg"
+        ]
+                  }
+                , default_word: "арфа"
+                }
+              }
+            , 19: {
+                name: "девятнадцать"
+           // , path: "/monika/media/ru/numbers/19/"
+              , audio: []
+              , words: {
+                  Pим: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/19/words/Pим/images/default.jpg"
+        , "/monika/media/ru/numbers/19/words/Pим/images/pietro.jpg"
+        , "/monika/media/ru/numbers/19/words/Pим/images/colloseum.jpg"
+        , "/monika/media/ru/numbers/19/words/Pим/images/basilica.jpg"
+        , "/monika/media/ru/numbers/19/words/Pим/images/map.jpg"
+        ]
+                  }
+                , default_word: "Pим"
+                }
+              }
+            , 2: {
+                name: "два|две"
+           // , path: "/monika/media/ru/numbers/2/"
+              , audio: [
+          "/monika/media/ru/numbers/2/audio/2"
+        ]
+              , words: {
+                  ад: {
+                    audio: [
+          "/monika/media/ru/numbers/2/words/ад/audio/ад"
+        ]
+                  , images: [
+          "/monika/media/ru/numbers/2/words/ад/images/default.jpg"
+        , "/monika/media/ru/numbers/2/words/ад/images/donald.jpg"
+        , "/monika/media/ru/numbers/2/words/ад/images/hortus.jpg"
+        , "/monika/media/ru/numbers/2/words/ад/images/lava.jpg"
+        ]
+                  }
+                , default_word: "ад"
+                }
+              }
+            , 21: {
+                name: "двадцать один|двадцать одна|двадцать одно"
+           // , path: "/monika/media/ru/numbers/21/"
+              , audio: []
+              , words: {
+                  дыра: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/21/words/дыра/images/wall.jpg"
+        , "/monika/media/ru/numbers/21/words/дыра/images/default.jpg"
+        ]
+                  }
+                , default_word: "дыра"
+                }
+              }
+            , 3: {
+                name: "три"
+           // , path: "/monika/media/ru/numbers/3/"
+              , audio: [
+          "/monika/media/ru/numbers/3/audio/3"
+        ]
+              , words: {
+                  око: {
+                    audio: [
+          "/monika/media/ru/numbers/3/words/око/audio/око"
+        ]
+                  , images: [
+          "/monika/media/ru/numbers/3/words/око/images/symbol.png"
+        , "/monika/media/ru/numbers/3/words/око/images/default.jpg"
+        , "/monika/media/ru/numbers/3/words/око/images/blue.jpg"
+        , "/monika/media/ru/numbers/3/words/око/images/fish.jpg"
+        , "/monika/media/ru/numbers/3/words/око/images/wolf.jpg"
+        ]
+                  }
+                , ухо: {
+                    audio: []
+                  , images: [
+          "/monika/media/ru/numbers/3/words/ухо/images/cat.jpg"
+        , "/monika/media/ru/numbers/3/words/ухо/images/default.jpg"
+        , "/monika/media/ru/numbers/3/words/ухо/images/drawing.jpg"
+        , "/monika/media/ru/numbers/3/words/ухо/images/elephant.jpg"
+        , "/monika/media/ru/numbers/3/words/ухо/images/schema.jpg"
+        , "/monika/media/ru/numbers/3/words/ухо/images/doe.jpg"
+        ]
+                  }
+                , default_word: "око"
+                }
+              }
+            , 4: {
+                name: "четыре"
+           // , path: "/monika/media/ru/numbers/4/"
+              , audio: [
+          "/monika/media/ru/numbers/4/audio/4"
+        ]
+              , words: {
+                  чай: {
+                    audio: [
+          "/monika/media/ru/numbers/4/words/чай/audio/чай"
+        ]
+                  , images: [
+          "/monika/media/ru/numbers/4/words/чай/images/lipton.jpg"
+        , "/monika/media/ru/numbers/4/words/чай/images/default.jpg"
+        , "/monika/media/ru/numbers/4/words/чай/images/chinese.jpg"
+        , "/monika/media/ru/numbers/4/words/чай/images/tea.jpg"
+        , "/monika/media/ru/numbers/4/words/чай/images/lemon.jpg"
+        ]
+                  }
+                , default_word: "чай"
+                }
+              }
+            , 5: {
+                name: "пять"
+           // , path: "/monika/media/ru/numbers/5/"
+              , audio: [
+          "/monika/media/ru/numbers/5/audio/5"
+        ]
+              , words: {
+                  бой: {
+                    audio: [
+          "/monika/media/ru/numbers/5/words/бой/audio/бой"
+        ]
+                  , images: [
+          "/monika/media/ru/numbers/5/words/бой/images/default.jpg"
+        , "/monika/media/ru/numbers/5/words/бой/images/rubble.jpg"
+        , "/monika/media/ru/numbers/5/words/бой/images/revenge.jpg"
+        , "/monika/media/ru/numbers/5/words/бой/images/kerala.jpg"
+        , "/monika/media/ru/numbers/5/words/бой/images/stamp.jpg"
+        , "/monika/media/ru/numbers/5/words/бой/images/karate.png"
+        , "/monika/media/ru/numbers/5/words/бой/images/cockfight.jpg"
+        , "/monika/media/ru/numbers/5/words/бой/images/Лубок.jpg"
+        , "/monika/media/ru/numbers/5/words/бой/images/nilgais.jpg"
+        ]
+                  }
+                , default_word: "бой"
+                }
+              }
+            , 6: {
+                name: "шесть"
+           // , path: "/monika/media/ru/numbers/6/"
+              , audio: [
+          "/monika/media/ru/numbers/6/audio/6"
+        ]
+              , words: {
+                  шея: {
+                    audio: [
+          "/monika/media/ru/numbers/6/words/шея/audio/шея"
+        ]
+                  , images: [
+          "/monika/media/ru/numbers/6/words/шея/images/default.jpg"
+        , "/monika/media/ru/numbers/6/words/шея/images/guy.jpg"
+        , "/monika/media/ru/numbers/6/words/шея/images/emu.jpg"
+        , "/monika/media/ru/numbers/6/words/шея/images/bald.jpg"
+        , "/monika/media/ru/numbers/6/words/шея/images/diplodocus.jpg"
+        ]
+                  }
+                , default_word: "шея"
+                }
+              }
+            , 7: {
+                name: "семь"
+           // , path: "/monika/media/ru/numbers/7/"
+              , audio: [
+          "/monika/media/ru/numbers/7/audio/7"
+        ]
+              , words: {
+                  оса: {
+                    audio: [
+          "/monika/media/ru/numbers/7/words/оса/audio/оса"
+        ]
+                  , images: [
+          "/monika/media/ru/numbers/7/words/оса/images/default.jpg"
+        , "/monika/media/ru/numbers/7/words/оса/images/close-up.jpg"
+        , "/monika/media/ru/numbers/7/words/оса/images/hornet.png"
+        , "/monika/media/ru/numbers/7/words/оса/images/wasp.jpg"
+        ]
+                  }
+                , default_word: "оса"
+                }
+              }
+            , 8: {
+                name: "восемь"
+           // , path: "/monika/media/ru/numbers/8/"
+              , audio: [
+          "/monika/media/ru/numbers/8/audio/8"
+        ]
+              , words: {
+                  ива: {
+                    audio: [
+          "/monika/media/ru/numbers/8/words/ива/audio/ива"
+        ]
+                  , images: [
+          "/monika/media/ru/numbers/8/words/ива/images/shade.jpg"
+        , "/monika/media/ru/numbers/8/words/ива/images/default.jpg"
+        , "/monika/media/ru/numbers/8/words/ива/images/catkins.jpg"
+        , "/monika/media/ru/numbers/8/words/ива/images/sketch.jpg"
+        ]
+                  }
+                , фея: {
+                    audio: [
+          "/monika/media/ru/numbers/8/words/фея/audio/фея"
+        ]
+                  , images: [
+          "/monika/media/ru/numbers/8/words/фея/images/default.jpg"
+        , "/monika/media/ru/numbers/8/words/фея/images/drawing.jpg"
+        , "/monika/media/ru/numbers/8/words/фея/images/silhouette.png"
+        , "/monika/media/ru/numbers/8/words/фея/images/fairy.jpg"
+        ]
+                  }
+                , default_word: "фея"
+                }
+              }
+            , 9: {
+                name: "девять"
+           // , path: "/monika/media/ru/numbers/9/"
+              , audio: [
+          "/monika/media/ru/numbers/9/audio/9"
+        ]
+              , words: {
+                  яма: {
+                    audio: [
+          "/monika/media/ru/numbers/9/words/яма/audio/яма"
+        ]
+                  , images: [
+          "/monika/media/ru/numbers/9/words/яма/images/mine.jpg"
+        , "/monika/media/ru/numbers/9/words/яма/images/default.jpg"
+        , "/monika/media/ru/numbers/9/words/яма/images/road.jpg"
+        , "/monika/media/ru/numbers/9/words/яма/images/site.jpg"
+        , "/monika/media/ru/numbers/9/words/яма/images/tree.jpg"
+        ]
+                  }
+                , default_word: "яма"
+                }
       }
-    , 1: {
-        name: "один|одна|одно|одни"
-   // , path: "/monika/media/ru/numbers/1/"
-      , audio: [
-  "/monika/media/ru/numbers/1/audio/1"
-]
-      , words: {
-          рай: {
-            audio: [
-  "/monika/media/ru/numbers/1/words/рай/audio/рай"
-]
-          , images: [
-  "/monika/media/ru/numbers/1/words/рай/images/clouds.jpg"
-, "/monika/media/ru/numbers/1/words/рай/images/default.jpg"
-, "/monika/media/ru/numbers/1/words/рай/images/eden.jpg"
-, "/monika/media/ru/numbers/1/words/рай/images/garden.jpg"
-]
+    }
+
+  // WARNING: NOT CREATED AUTOMATICALLY. WILL BE OVERWRITTEN //
+
+  , challenges: {
+      root: "media/ru/challenges/"
+    , remember: "я запомню"
+    , contents: {
+        make_words: {
+          "москва": {
+            question:  "Какова длина реки Москва?"
+          , translations: {
+              en: "How long is the Moskva River?"
+            , fr: "Quelle est la longueur de la rivière Moskva?"
+            }
+          , answer:    "502"
+          , units:     "км"
+          , clue:      "панда"
+          , qImage:    "Moskva_river.png"
+          , clueImage: "panda.jpg"
           }
-        , default_word: "рай"
+        , "иртыш": {
+            question:  "Какова длина реки Иртыш?"
+          , translations: {
+              en: "How long is the Irtysh River?"
+            , fr: "Quelle est la longueur de la rivière Irtysh?"
+            }
+          , answer:    "5410"
+          , units:     "км"
+          , clue:      "поларная|балерина"
+          , qImage:    "irtysh.jpg"
+          , clueImage: "ballerina.jpg"
+          }
         }
-      }
-    , 10: {
-        name: "десять"
-   // , path: "/monika/media/ru/numbers/10/"
-      , audio: []
-      , words: {
-          руина: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/10/words/руина/images/church.jpg"
-, "/monika/media/ru/numbers/10/words/руина/images/arch.jpg"
-, "/monika/media/ru/numbers/10/words/руина/images/chalet.jpg"
-, "/monika/media/ru/numbers/10/words/руина/images/castle.jpg"
-]
+      , more_words: {
+          "grandmasters": {
+            question:  "Сколько русских шахматных гроссмейстеров?"
+          , translations: {
+              en: "How many Russian chess grandmasters are there?"
+            , fr: "Combien de grand maîtres d'échecs Russe y a-t-il?"
+            }
+          , answer:    "243"
+          , units:     ""
+          , clue:      "точка"
+          , qImage:    "spassky.jpg"
+          , clueImage: "dot.jpg"
           }
-        , default_word: "руина"
-        }
-      }
-    , 11: {
-        name: "одиннадцать"
-   // , path: "/monika/media/ru/numbers/11/"
-      , audio: []
-      , words: {
-          рация: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/11/words/рация/images/action.jpg"
-, "/monika/media/ru/numbers/11/words/рация/images/default.jpg"
-, "/monika/media/ru/numbers/11/words/рация/images/tilt.jpg"
-, "/monika/media/ru/numbers/11/words/рация/images/nerf.jpg"
-]
+        , "population": {
+            question:  "Что такое население России?"
+          , translations: {
+              en: "What is the population of Russia?"
+            , fr: "Quelle est la population de la Russie?"
+            }
+          , answer:    "143"
+          , units:     "миллиона"
+          , clue:      "ручка"
+          , qImage:    "population.jpg"
+          , clueImage: "pens.jpg"
           }
-        , default_word: "рация"
-        }
-      }
-    , 12: {
-        name: "двенадцать"
-   // , path: "/monika/media/ru/numbers/12/"
-      , audio: []
-      , words: {
-          рот: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/12/words/рот/images/default.jpg"
-, "/monika/media/ru/numbers/12/words/рот/images/baby.jpg"
-, "/monika/media/ru/numbers/12/words/рот/images/lipstick.jpg"
-, "/monika/media/ru/numbers/12/words/рот/images/man.jpg"
-, "/monika/media/ru/numbers/12/words/рот/images/open.jpg"
-]
-          }
-        , default_word: "рот"
-        }
-      }
-    , 13: {
-        name: "тринадцать"
-   // , path: "/monika/media/ru/numbers/13/"
-      , audio: []
-      , words: {
-          рука: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/13/words/рука/images/arm.jpg"
-, "/monika/media/ru/numbers/13/words/рука/images/default.jpg"
-, "/monika/media/ru/numbers/13/words/рука/images/drawing.jpg"
-, "/monika/media/ru/numbers/13/words/рука/images/fingers.jpg"
-, "/monika/media/ru/numbers/13/words/рука/images/wooden.jpg"
-, "/monika/media/ru/numbers/13/words/рука/images/reach.jpg"
-]
-          }
-        , default_word: "рука"
-        }
-      }
-    , 14: {
-        name: "четырнадцать"
-   // , path: "/monika/media/ru/numbers/14/"
-      , audio: []
-      , words: {
-          ручей: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/14/words/ручей/images/default.jpg"
-, "/monika/media/ru/numbers/14/words/ручей/images/stream.jpg"
-, "/monika/media/ru/numbers/14/words/ручей/images/torrent.jpg"
-, "/monika/media/ru/numbers/14/words/ручей/images/brook.jpg"
-]
-          }
-        , default_word: "ручей"
-        }
-      }
-    , 15: {
-        name: "пятнадцать"
-   // , path: "/monika/media/ru/numbers/15/"
-      , audio: []
-      , words: {
-          рыба: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/15/words/рыба/images/mort.jpg"
-, "/monika/media/ru/numbers/15/words/рыба/images/default.jpg"
-, "/monika/media/ru/numbers/15/words/рыба/images/spiny.jpg"
-, "/monika/media/ru/numbers/15/words/рыба/images/bufoceratias.jpg"
-, "/monika/media/ru/numbers/15/words/рыба/images/discus.jpg"
-, "/monika/media/ru/numbers/15/words/рыба/images/moray.jpg"
-, "/monika/media/ru/numbers/15/words/рыба/images/tail.jpg"
-, "/monika/media/ru/numbers/15/words/рыба/images/blowfish.jpg"
-, "/monika/media/ru/numbers/15/words/рыба/images/yellow.jpg"
-, "/monika/media/ru/numbers/15/words/рыба/images/boha.jpg"
-]
-          }
-        , default_word: "рыба"
-        }
-      }
-    , 16: {
-        name: "шестнадцать"
-   // , path: "/monika/media/ru/numbers/16/"
-      , audio: []
-      , words: {
-          руль: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/16/words/руль/images/default.jpg"
-, "/monika/media/ru/numbers/16/words/руль/images/helm.jpg"
-, "/monika/media/ru/numbers/16/words/руль/images/rudder.jpg"
-, "/monika/media/ru/numbers/16/words/руль/images/zoomer.jpg"
-, "/monika/media/ru/numbers/16/words/руль/images/handlebars.jpg"
-]
-          }
-        , default_word: "руль"
-        }
-      }
-    , 17: {
-        name: "семнадцать"
-   // , path: "/monika/media/ru/numbers/17/"
-      , audio: []
-      , words: {
-          роза: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/17/words/роза/images/flat.jpg"
-, "/monika/media/ru/numbers/17/words/роза/images/default.jpg"
-, "/monika/media/ru/numbers/17/words/роза/images/stem.jpg"
-, "/monika/media/ru/numbers/17/words/роза/images/closeup.jpg"
-]
-          }
-        , default_word: "роза"
-        }
-      }
-    , 18: {
-        name: "восемнадцать"
-   // , path: "/monika/media/ru/numbers/18/"
-      , audio: []
-      , words: {
-          арфа: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/18/words/арфа/images/player.jpg"
-, "/monika/media/ru/numbers/18/words/арфа/images/double.jpg"
-, "/monika/media/ru/numbers/18/words/арфа/images/greek.jpg"
-, "/monika/media/ru/numbers/18/words/арфа/images/celtic.jpg"
-]
-          }
-        , default_word: "арфа"
-        }
-      }
-    , 19: {
-        name: "девятнадцать"
-   // , path: "/monika/media/ru/numbers/19/"
-      , audio: []
-      , words: {
-          Pим: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/19/words/Pим/images/default.jpg"
-, "/monika/media/ru/numbers/19/words/Pим/images/pietro.jpg"
-, "/monika/media/ru/numbers/19/words/Pим/images/colloseum.jpg"
-, "/monika/media/ru/numbers/19/words/Pим/images/basilica.jpg"
-, "/monika/media/ru/numbers/19/words/Pим/images/map.jpg"
-]
-          }
-        , default_word: "Pим"
-        }
-      }
-    , 2: {
-        name: "два|две"
-   // , path: "/monika/media/ru/numbers/2/"
-      , audio: [
-  "/monika/media/ru/numbers/2/audio/2"
-]
-      , words: {
-          ад: {
-            audio: [
-  "/monika/media/ru/numbers/2/words/ад/audio/ад"
-]
-          , images: [
-  "/monika/media/ru/numbers/2/words/ад/images/default.jpg"
-, "/monika/media/ru/numbers/2/words/ад/images/donald.jpg"
-, "/monika/media/ru/numbers/2/words/ад/images/hortus.jpg"
-, "/monika/media/ru/numbers/2/words/ад/images/lava.jpg"
-]
-          }
-        , default_word: "ад"
-        }
-      }
-    , 21: {
-        name: "двадцать один|двадцать одна|двадцать одно"
-   // , path: "/monika/media/ru/numbers/21/"
-      , audio: []
-      , words: {
-          дыра: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/21/words/дыра/images/wall.jpg"
-, "/monika/media/ru/numbers/21/words/дыра/images/default.jpg"
-]
-          }
-        , default_word: "дыра"
-        }
-      }
-    , 3: {
-        name: "три"
-   // , path: "/monika/media/ru/numbers/3/"
-      , audio: [
-  "/monika/media/ru/numbers/3/audio/3"
-]
-      , words: {
-          око: {
-            audio: [
-  "/monika/media/ru/numbers/3/words/око/audio/око"
-]
-          , images: [
-  "/monika/media/ru/numbers/3/words/око/images/symbol.png"
-, "/monika/media/ru/numbers/3/words/око/images/default.jpg"
-, "/monika/media/ru/numbers/3/words/око/images/blue.jpg"
-, "/monika/media/ru/numbers/3/words/око/images/fish.jpg"
-, "/monika/media/ru/numbers/3/words/око/images/wolf.jpg"
-]
-          }
-        , ухо: {
-            audio: []
-          , images: [
-  "/monika/media/ru/numbers/3/words/ухо/images/cat.jpg"
-, "/monika/media/ru/numbers/3/words/ухо/images/default.jpg"
-, "/monika/media/ru/numbers/3/words/ухо/images/drawing.jpg"
-, "/monika/media/ru/numbers/3/words/ухо/images/elephant.jpg"
-, "/monika/media/ru/numbers/3/words/ухо/images/schema.jpg"
-, "/monika/media/ru/numbers/3/words/ухо/images/doe.jpg"
-]
-          }
-        , default_word: "око"
-        }
-      }
-    , 4: {
-        name: "четыре"
-   // , path: "/monika/media/ru/numbers/4/"
-      , audio: [
-  "/monika/media/ru/numbers/4/audio/4"
-]
-      , words: {
-          чай: {
-            audio: [
-  "/monika/media/ru/numbers/4/words/чай/audio/чай"
-]
-          , images: [
-  "/monika/media/ru/numbers/4/words/чай/images/lipton.jpg"
-, "/monika/media/ru/numbers/4/words/чай/images/default.jpg"
-, "/monika/media/ru/numbers/4/words/чай/images/chinese.jpg"
-, "/monika/media/ru/numbers/4/words/чай/images/tea.jpg"
-, "/monika/media/ru/numbers/4/words/чай/images/lemon.jpg"
-]
-          }
-        , default_word: "чай"
-        }
-      }
-    , 5: {
-        name: "пять"
-   // , path: "/monika/media/ru/numbers/5/"
-      , audio: [
-  "/monika/media/ru/numbers/5/audio/5"
-]
-      , words: {
-          бой: {
-            audio: [
-  "/monika/media/ru/numbers/5/words/бой/audio/бой"
-]
-          , images: [
-  "/monika/media/ru/numbers/5/words/бой/images/default.jpg"
-, "/monika/media/ru/numbers/5/words/бой/images/rubble.jpg"
-, "/monika/media/ru/numbers/5/words/бой/images/revenge.jpg"
-, "/monika/media/ru/numbers/5/words/бой/images/kerala.jpg"
-, "/monika/media/ru/numbers/5/words/бой/images/stamp.jpg"
-, "/monika/media/ru/numbers/5/words/бой/images/karate.png"
-, "/monika/media/ru/numbers/5/words/бой/images/cockfight.jpg"
-, "/monika/media/ru/numbers/5/words/бой/images/Лубок.jpg"
-, "/monika/media/ru/numbers/5/words/бой/images/nilgais.jpg"
-]
-          }
-        , default_word: "бой"
-        }
-      }
-    , 6: {
-        name: "шесть"
-   // , path: "/monika/media/ru/numbers/6/"
-      , audio: [
-  "/monika/media/ru/numbers/6/audio/6"
-]
-      , words: {
-          шея: {
-            audio: [
-  "/monika/media/ru/numbers/6/words/шея/audio/шея"
-]
-          , images: [
-  "/monika/media/ru/numbers/6/words/шея/images/default.jpg"
-, "/monika/media/ru/numbers/6/words/шея/images/guy.jpg"
-, "/monika/media/ru/numbers/6/words/шея/images/emu.jpg"
-, "/monika/media/ru/numbers/6/words/шея/images/bald.jpg"
-, "/monika/media/ru/numbers/6/words/шея/images/diplodocus.jpg"
-]
-          }
-        , default_word: "шея"
-        }
-      }
-    , 7: {
-        name: "семь"
-   // , path: "/monika/media/ru/numbers/7/"
-      , audio: [
-  "/monika/media/ru/numbers/7/audio/7"
-]
-      , words: {
-          оса: {
-            audio: [
-  "/monika/media/ru/numbers/7/words/оса/audio/оса"
-]
-          , images: [
-  "/monika/media/ru/numbers/7/words/оса/images/default.jpg"
-, "/monika/media/ru/numbers/7/words/оса/images/close-up.jpg"
-, "/monika/media/ru/numbers/7/words/оса/images/hornet.png"
-, "/monika/media/ru/numbers/7/words/оса/images/wasp.jpg"
-]
-          }
-        , default_word: "оса"
-        }
-      }
-    , 8: {
-        name: "восемь"
-   // , path: "/monika/media/ru/numbers/8/"
-      , audio: [
-  "/monika/media/ru/numbers/8/audio/8"
-]
-      , words: {
-          ива: {
-            audio: [
-  "/monika/media/ru/numbers/8/words/ива/audio/ива"
-]
-          , images: [
-  "/monika/media/ru/numbers/8/words/ива/images/shade.jpg"
-, "/monika/media/ru/numbers/8/words/ива/images/default.jpg"
-, "/monika/media/ru/numbers/8/words/ива/images/catkins.jpg"
-, "/monika/media/ru/numbers/8/words/ива/images/sketch.jpg"
-]
-          }
-        , фея: {
-            audio: [
-  "/monika/media/ru/numbers/8/words/фея/audio/фея"
-]
-          , images: [
-  "/monika/media/ru/numbers/8/words/фея/images/default.jpg"
-, "/monika/media/ru/numbers/8/words/фея/images/drawing.jpg"
-, "/monika/media/ru/numbers/8/words/фея/images/silhouette.png"
-, "/monika/media/ru/numbers/8/words/фея/images/fairy.jpg"
-]
-          }
-        , default_word: "фея"
-        }
-      }
-    , 9: {
-        name: "девять"
-   // , path: "/monika/media/ru/numbers/9/"
-      , audio: [
-  "/monika/media/ru/numbers/9/audio/9"
-]
-      , words: {
-          яма: {
-            audio: [
-  "/monika/media/ru/numbers/9/words/яма/audio/яма"
-]
-          , images: [
-  "/monika/media/ru/numbers/9/words/яма/images/mine.jpg"
-, "/monika/media/ru/numbers/9/words/яма/images/default.jpg"
-, "/monika/media/ru/numbers/9/words/яма/images/road.jpg"
-, "/monika/media/ru/numbers/9/words/яма/images/site.jpg"
-, "/monika/media/ru/numbers/9/words/яма/images/tree.jpg"
-]
-          }
-        , default_word: "яма"
         }
       }
     }

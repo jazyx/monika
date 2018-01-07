@@ -9,63 +9,50 @@
     monika.levels = {}
   }
 
-  class NumberPad extends monika.Game{
+  class NumberDictation extends monika.Game{
 
     constructor (options) {
       options.cue_range = options.cue_range || { start: 10, end: 99 }
       options.repeat = options.repeat || 2
 
-      super("numberpad", options)
+      super("number-dictation", options)
 
       this.wrongDelay = 1000
       this.rightDelay = 1500
 
-      this.img = document.querySelector(".numberpad .image img")
-      this.imgP = document.querySelector(".numberpad .image p")
-      this.p = document.querySelector(".numberpad .dialled p")
-      this.mask = document.querySelector(".numberpad .mask")
-      let pad = this.pad = document.querySelector(".numberpad .numbers")
-     
-      // TODO: Find solution for computers with touchscreens and mice
-      if (monika.mobileKeyboard.isTouchScreen) {
-        pad.ontouchstart = this.touchStart.bind(this)
-      } else { 
-        pad.onmousedown = this.touchStart.bind(this)
+      let section = document.querySelector("section.number-dictation")
+      this.img = section.querySelector(".image img")
+      this.imgP = section.querySelector(".image p")
+      this.p = section.querySelector(".dialled p")
+      this.mask = section.querySelector(".mask")
+
+      let padParent = section.querySelector(".number-pad-parent")
+
+      let padOptions = {
+        parentNode: padParent
+      , tapNumberCallback: this.tapNumber.bind(this)
+      , tapDeleteCallback: this.clearNumber.bind(this)
+      , tapHashCallback:   this.playNumber.bind(this)
       }
 
-      this.supportElement =  document.querySelector(".numberpad img")
+      this.pad = monika.numberPad.initialize(padOptions)
+
+      this.supportElement = section.querySelector("img")
     }
 
 
-    touchStart(event) {
-      let target = event.target
-      let number = target.innerHTML
+    playNumber() {
+      monika.audio.play(this.src)
+    }
 
-      console.log(number)
 
-      switch (number) {
-        case "#":
-          monika.audio.play(this.src)
-          return
+    clearNumber() {
+      this.p.innerHTML = this.dialled = ""
+    }
 
-        case "1":
-        case "2":
-        case "3":
-        case "4":
-        case "5":
-        case "6":
-        case "7":
-        case "8":
-        case "9":
-        case "0":
-          // continue after switch
 
-        break
-        default: // whatever the DELETE button is called
-          this.p.innerHTML = this.dialled = ""
-          return
-      }
-
+    tapNumber(number, target) {
+     
       // PLAY TONE FOR NUMBER
 
       if (this.timeout) {
@@ -113,7 +100,7 @@
         array[index] = "" + cue
       })
 
-      return queue.length
+      return this.queue.length
     }
 
 
@@ -226,7 +213,7 @@
   }
 
 
-  monika.classes["NumberPad"] = NumberPad
+  monika.classes["NumberDictation"] = NumberDictation
 
 
 })(window.monika)

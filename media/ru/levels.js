@@ -60,6 +60,7 @@
     , firstTime: 300000
     , targetTime:150000
     }
+
     // All digits and their key consonants
   , 4: {
       className: "KeyConsonants"
@@ -70,7 +71,24 @@
       + "<p>Press and hold a consonant to hear it.</p>"
     , firstTime: 300000
     , targetTime:150000
+    , challenge: {
+        folder: "make_words"
+      , header: "Remember numbers with images and words"
+      , text: "<p>We remember the unexpected. We remember things that "
+        + "engage our emotions. To remember a number, you can create "
+        + "words from the consonants associated with the number, "
+        + "adding vowels between them. You can then create a "
+        + "memorable image from the words. The more extravagant, the "
+        + "more cartoon-like your image is, the easier it is to "
+        + "remember.</p><p>Here is a number for you to remember. See "
+        + "how the suggested word(s) express the number. Take a "
+        + "moment to play with images in your mind. When you are "
+        + "ready, click the button.</p><p>You will be asked to recall this "
+        + "number later. You can remember the image and recreate the "
+        + "number from that.</p>"
+      }
     }
+
     // All digits and all their consonants
   , 5: {
       className: "MultiConsonants"
@@ -86,7 +104,18 @@
       + "to balance letter frequencies.</p>"
     , firstTime: 300000
     , targetTime:150000
+    , challenge: {
+        folder: "more_words"
+      , header: "Remember numbers with images and words"
+      , text: "<p>Here is a number for you to remember. See "
+        + "how the suggested word(s) express the number. Take a "
+        + "moment to play with images in your mind. When you are "
+        + "ready, click the button.</p><p>You will be asked to recall this "
+        + "number later. You can remember the image and recreate the "
+        + "number from that.</p>"
+      }
     }
+
     // All digits and all their consonants
   , 6: {
       className: "SoloConsonants"
@@ -95,6 +124,7 @@
     , firstTime: 300000
     , targetTime:150000
     }
+
     // Words for digits
   , 7: {
       className: "Words"
@@ -107,6 +137,11 @@
     , firstTime: 300000
     , targetTime:150000
     }
+
+
+    /// FIRST images CHALLENGE ////
+
+
     // Consonant cue
   , 8: {
       className: "ConsonantCue"
@@ -140,7 +175,7 @@
     }
     // Number cue with varied images
   , 11: {
-      className: "NumberPad" 
+      className: "NumberDictation" 
     , cue_range: { start: 10, end: 19 }
     , header: "Enter the number that you associate with the word "
       + "you hear"

@@ -19,12 +19,6 @@
  */
 
 
-
- /*html,*/
-body {
-height: calc(100vh + 3em); 
-}
-
 body {
   height: calc(64vh + 100vh);     /* will be overruled by @media rules */
   min-height: 110vh; /* ensure that page will scroll on phones */
@@ -42,6 +36,13 @@ body {
   user-select: none; 
 
   text-align: center;
+}
+
+.selectable {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text; 
 }
 
 /* MASK shown for selection of alternative images */
@@ -68,6 +69,12 @@ article#levels {
   height: 100%;  
 }
 
+/* NO TIMER for Introduction, Alphabet and Numbers */
+body.timeless article#levels,
+body.timeless main section {
+  width: 150vh;
+}
+
 header {
   height: 64vh; /* will be overruled by @media */
   color: white;
@@ -83,15 +90,13 @@ header h1 {
 
 header h2 {
   font-size: 15vh;
+  margin: 0;
 }
 
 header h3 {
   font-size: 10vh;
   padding: 5vh 0 0;
-}
-
-header div {
-  height: 30vh;
+  margin: 0;
 }
 
 header p {
@@ -158,11 +163,11 @@ div#feedback svg {
 
 
 /* NO TIMER for Introduction, Alphabet and Numbers */
-article#levels.timeless {
+body.timeless article#level {
   width: 150vh;
 }
 
-article#levels.timeless div#feedback {
+body.timeless div#feedback {
   display: none;
 }
 
@@ -376,7 +381,7 @@ float: left;
   }
 
   article#levels {
-    width: 100%;
+    width: 100vw;
   }
 
   div#feedback {
@@ -393,17 +398,14 @@ float: left;
     width: calc(100vw - 150vh);
   }
 
-  /* NO TIMER for Introduction, Alphabet and Numbers */
-  article#levels.timeless,
-  article#levels.timeless section {
-    width: 150vh;
-  }
-
 }
 
 
 /* DECREASE HEIGHT TO FIT WIDTH */
-/* Cells are 31.25vw */
+/* Perfect flow would use 62.5 vw for height, 93.75 for width and
+   6.25 for feedback width, but it is simpler to round to a 1x1 square 
+   of side 31vw. Header height is not changed.
+*/
 
 @media (max-aspect-ratio: 16/10) {
 
@@ -418,7 +420,6 @@ float: left;
 
   header h1 {
     font-size: 3.75vw;
-    height: 2.4vw;
   }
 
   header h2 {
@@ -434,6 +435,7 @@ float: left;
     font-size: 3vw;
   }
 
+  body.timeless article#levels,
   article#levels {
     width: 100vw;
   }
@@ -460,8 +462,17 @@ float: left;
   }
 
   /* NO TIMER for Introduction, Alphabet and Numbers */
-  article#levels.timeless section {
-    width: 100vw;
+  
+  body.timeless {
+    height: calc(64vh + 100vh);
+  }
+
+  body.timeless main section {
+    width: 150vh;
+  }
+  
+  body.timeless main {
+    height: 100vh;
   }
 
   /* At this and narrower widths, cell size depends on width */
@@ -483,6 +494,25 @@ float: left;
   span.helper,
   span.filler {
     font-size: 4.2vw;
+  }
+}
+
+/* timeless displays need a minor tweak here */
+@media (max-aspect-ratio: 15/10) {
+
+
+  /* NO TIMER for Introduction, Alphabet and Numbers */
+  
+  body.timeless{
+    height: calc(40vw + 66.6667vw);
+  }
+  
+  body.timeless main {
+    height: 66.6667vw;
+  }
+
+  body.timeless main section {
+    width: 100vw;
   }
 }
 
@@ -587,6 +617,21 @@ float: left;
 
 }
 
+
+/* timeless only */
+@media (max-aspect-ratio: 10/10) {
+
+  body.timeless {
+    height: calc(40vw + 100vw);
+  }
+
+  body.timeless main section,
+  body.timeless main{
+    height: 100vw;
+  }
+}
+
+
 /* PORTRAIT MODE: expanding */
 @media (max-aspect-ratio: 10/11) {
 
@@ -594,6 +639,8 @@ float: left;
     height: calc(40vw + 100vh);
     background-color: #033;
   }
+
+
 
   main {
     height: 100vh;

@@ -24,10 +24,12 @@
 
       this.style = this.section.querySelector("._abc li.style")
       let switchStyle = this.switchStyle.bind(this)
-      this.style.onmouseup = this.style.ontouchend = switchStyle
+      this.style.onmouseup = switchStyle
+      // this.style.onmouseup = this.style.ontouchend = switchStyle
 
       let playAudio = this.playAudio.bind(this)
-      this.section.onmouseup = this.section.ontouchend = playAudio
+      this.section.onmouseup = playAudio
+      // this.section.onmouseup = this.section.ontouchend = playAudio
 
       this.list = this.section.querySelectorAll("li")
     }

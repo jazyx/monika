@@ -1,0 +1,439 @@
+@font-face {
+  font-family: 'fontello';
+  src: url('../fonts/fontello.eot');
+  src: url('../fonts/fontello.eot#iefix') format('embedded-opentype'),
+       url('../fonts/fontello.woff2') format('woff2'),
+       url('../fonts/fontello.woff') format('woff'),
+       url('../fonts/fontello.ttf') format('truetype'),
+       url('../fonts/fontello.svg#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+section.challenge {
+  flex-direction: row;
+  background-color: #000;
+  border: 1px solid white;
+  border-radius: 2vmin
+}
+
+section.challenge.active {
+  display: flex;
+}
+
+section.challenge > div {
+  position: relative;
+  width: 33.3333%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+section.challenge > div > div {
+ position: relative;
+ height: 50%;
+
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+
+ font-size: 4vw;
+}
+
+section.challenge p {
+  margin: 0;
+}
+
+
+/* BUTTONS: audio, I'll remember, hint checkboxes */
+
+section.challenge div.texts div.answer,
+section.challenge button,
+section.challenge input {
+  position: absolute; /*all except I'll Remember in landscape*/
+}
+
+section.challenge button {
+  height: 16.6667%;
+  border: 0px;
+  border-radius: 1vmin;
+}
+
+/* ANSWER in both text and landscape columns */
+
+section.challenge div.answer {
+  width: 100%;
+  top: 0;
+}
+
+/* Landscape version */
+section.challenge div.answer div {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+section.challenge span.units {
+  color: #fff;
+  padding: 0 0.2em;
+  font-size: 4vw;
+  text-align: left;
+}
+
+
+section.challenge span.units:empty {
+  display: none;
+}
+
+section.challenge span.units:empty ~ span {
+  text-align: center;
+}
+
+section.challenge span.number {
+  display: inline-block;
+  height: 1.2em;
+  text-align: right;
+  padding: 0 0.1em;
+  flex-basis: 100%;
+}
+
+/* Portrait version */
+section.challenge div.texts div.answer div {
+  display: flex;
+  flex-direction: column;
+}
+
+section.challenge div.texts span.number {
+  text-align: center;
+}
+
+section.challenge div.texts span.units {
+  color: #fff;
+  text-align: center;
+  font-size: 4vw;
+  position: relative;
+  top: -2vw;
+}
+/* End of versions */
+
+
+section.challenge.show-pad span.number {
+  background-color: rgba(255,255,255,0.2);
+  border: 1px rgba(0,0,0,0.5) inset;
+}
+
+
+/* CLUE */
+
+section.challenge div.words p,
+section.challenge div.answer div {
+  font-size: 6vw;
+}
+
+
+/* I'll Remember buttons */
+
+section.challenge button.continue {
+  width: 90%;
+  margin: 2.5% 5%;
+  font-size: 3.6vw
+}
+
+section.challenge div.landscape button {
+  position: relative;
+}
+
+
+
+/*IMAGES*/
+
+section.challenge div.images img {
+  width: 100%;
+  pointer-events: none;
+}
+
+
+section.challenge div.images input.hint {
+  right: 0; 
+  left: auto;
+}
+
+
+
+/*LANDSCAPE*/
+
+section.challenge div.texts div.answer,
+section.challenge div.texts button.continue {
+  display: none;
+}
+
+
+/* TRANSLATE and HINT buttons */
+
+section.challenge button.translate,
+section.challenge.show-pad input:before { 
+  position: relative;
+  height: 5vw;
+  width: 5vw;
+
+  background-color: #fff;
+  border: 0.2vw solid #aaa;
+  border-right-color: #666;
+  border-bottom-color: #666;
+  border-radius: 1vw;
+}
+
+section.challenge button.translate {
+  position: absolute;
+  display: flex;
+  padding: 0.5vw;
+}
+
+section.challenge button.translate img {
+  width: 100%;
+}
+
+section.challenge p.tooltip {
+  position: absolute;
+  bottom: 5vw;
+  left: 0;
+  background-color: rgba(255, 221, 153, 0.9);
+  color: #000;
+  font-size: 4vw;
+  padding: 0.5vw;
+  display: none;
+}
+
+section.challenge button.translate.active ~ p.tooltip {
+  display: block;
+}
+
+
+/* HINTS */
+
+section.challenge input {
+  bottom: 0;
+  height: 0;
+  width: 0;
+  display: none;
+}
+
+section.challenge.show-pad input {
+  display: block;
+}
+
+section.challenge.show-pad input:before { 
+  content:"\e803"; 
+  font-family: fontello;
+
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+
+  bottom: 5vw;
+  font-size: 4vh;
+}
+
+section.challenge.show-pad div.images input {
+  right: 5vw;
+}
+
+section.challenge.show-pad input[disabled]:before {
+  background-color: #999;
+}
+
+
+section.challenge button.translate.active,
+section.challenge.show-pad input:checked:before {
+  color: #fff;
+  background-color: #777;
+  border-color: #555;
+  border-right-color: #999;
+  border-bottom-color: #999;
+}
+
+section.challenge.show-pad input ~ * {
+  opacity: 0;
+}
+
+section.challenge.show-pad input:checked ~ * {
+  opacity: 1;
+}
+
+
+
+/* KEYPAD */
+
+section.challenge div.number-pad-parent {
+  position: absolute;
+  top: 33.3333%;
+  left: 66.6667%;
+  height: 66.6667%;
+  width: 33.3333%;
+  font-size: 8vw;
+  font-family: sans-serif;
+
+  display: none;
+}
+
+section.challenge.show-pad div.number-pad-parent {
+  display: block;
+}
+
+section.challenge div#number-pad li {
+  font-size: 8vw;
+  background: transparent;
+  border-width: 0.1vw;
+}
+
+section.challenge #number-pad li:hover,
+section.challenge  #number-pad li:active {
+  border-width: 0.5vmin;
+}
+
+section.challenge #number-pad li.del{
+  font-size: 2.4vw;
+}
+
+
+
+/* SHOW-PAD MODE */
+
+section.challenge.show-pad div.pad,
+section.challenge.show-pad input.hint {
+  display: block;
+}
+
+section.challenge.show-pad button.continue {
+  display: none !important;
+}
+
+
+@media (max-aspect-ratio: 10/10) {
+
+  body.timeless main{
+    height: 100vw;
+  }
+
+  section.challenge > div {
+    width: 50vw;
+  }
+
+  section.challenge div.landscape {
+    display: none;
+  }
+
+  section.challenge div.question button.answer,
+  section.challenge div.texts div.answer,
+  section.challenge div.texts button.continue {
+    display: block;
+  }
+
+
+  /* QUESTION */
+
+  section.challenge > div > div {
+    font-size: 6vw
+  }
+
+  section.challenge p.tooltip {
+    bottom: 7.5vw;
+    font-size: 6vw;
+    padding: 0.75vw;
+  }
+
+
+  /* HINT */
+  section.challenge button.translate,
+  section.challenge.show-pad input:before {
+    border: 0.3vw solid #aaa;
+    border-radius: 1.5vw;
+
+    bottom: 7.5vw;
+    height: 7.5vw;
+    width: 7.5vw;
+    font-size: 4.5vw;
+  }
+
+  section.challenge div.words p,
+  section.challenge div.answer div {
+    font-size: 9vw;
+  }
+
+  /* ANSWER */
+  section.challenge span.units {
+    font-size: 6vw
+  }
+
+  /* KEYPAD */
+
+  section.challenge div.number-pad-parent {
+    top: 50vw;
+    left: 50vw;
+    height: 50vw;
+    width: 37.5vw;
+  }
+
+  section.challenge div.number-pad-parent li {
+    font-size: 12vw;
+  }
+
+}
+
+
+@media (min-aspect-ratio: 15/10) {
+
+  /* ANSWER */
+  section.challenge span.units {
+    font-size: 6vh;
+  }
+
+  section.challenge p.tooltip {
+    bottom: 7.5vh;
+    font-size: 6vh;
+    padding: 0.75vh;
+  }
+
+  section.challenge div.#number-pad li {
+    font-size: 12vh;
+  }
+
+  section.challenge div#number-pad li.del {
+    font-size: 3.6vh;
+  }
+
+
+  section.challenge > div > div {
+    font-size: 6vh;
+  }
+
+  section.challenge div.question button {
+    font-size: 6vh;
+  }
+
+  section.challenge div.words p,
+  section.challenge div.answer div {
+    font-size: 9vh;
+  }
+
+  section.challenge button.continue {
+    font-size: 5.4vh;
+  }
+
+  section.challenge button.translate,
+  section.challenge.show-pad input:before {
+    border: 0.3vh solid #aaa;
+    border-radius: 1.5vh;
+ 
+    bottom: 7.5vh;
+    height: 7.5vh;
+    width: 7.5vh;
+    font-size: 4.5vh;
+  }
+
+
+}
+
+/* TRANSLATE and I'll Rememeber buttons*/
+section.challenge div.texts button {
+  bottom: 0;
+}
