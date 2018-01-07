@@ -48,6 +48,7 @@
     initialize() {
       let level = parseInt(window.location.hash.substring(1), 10) || 0
       let force = /[?&]force$/.test(window.location.href)
+      let bestLevel = this.bestLevel()
 
       if (force) {
         if (level > 0) {
@@ -59,11 +60,13 @@
         }
 
       } else {
-        level = Math.min(level, this.bestLevel())
+        level = Math.min(level, bestLevel)
       }
 
       if (level) {
         this.setLevel(level, { dontStart: true })
+      } else {
+        this.showActiveLevel(0)
       }
     }
 
