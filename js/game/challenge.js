@@ -263,6 +263,7 @@
       let translation = translations[lang]
 
       this.elements.tooltip.innerText = translation
+      this.elements.translate.classList.remove("active")
     }
 
 

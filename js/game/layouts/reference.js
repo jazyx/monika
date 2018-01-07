@@ -20,7 +20,7 @@
     }
 
     initialize () {
-      this.display() // super.initialize()
+      this.display(this.section) // super.initialize()
      
       let toggleType = this.toggleType.bind(this)
       this.toggle.onmouseup = toggleType

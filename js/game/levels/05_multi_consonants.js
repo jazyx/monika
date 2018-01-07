@@ -17,8 +17,8 @@
     // this.allRequiredConsonantLIs
     // this.answersExpected
 
-    initialize() {
-      super.initialize()
+    prepareLevel() {
+      super.prepareLevel()
       monika.support.pause()
 
       this.answersExpected = 0
