@@ -29,14 +29,14 @@
       {
         let touchLevel = this.touchLevel.bind(this)
         this.menu.addEventListener("mousedown", touchLevel, false)
-        this.menu.addEventListener("touchstart", touchLevel, false)
+        // this.menu.addEventListener("touchstart", touchLevel, false)
 
-        // Prevent a movable label from appear when user drags on link
+        // Don't let movable label appear when user drags on link
         this.menu.ondragstart = function() { return false; }
 
         let closeMenu = this.closeMenu.bind(this)
         document.body.addEventListener("mousedown", closeMenu, false)
-        document.body.addEventListener("touchstart", closeMenu, false)
+        // document.body.addEventListener("touchstart", closeMenu, false)
       }
     }
 
@@ -59,7 +59,7 @@
         }
 
       } else {
-        level = Math.min(this.level, this.bestLevel())
+        level = Math.min(level, this.bestLevel())
       }
 
       if (level) {
@@ -110,28 +110,41 @@
         return
       }
 
+      this.startScroll = this.getSectionScrollTop(target)
+
       this.levelTarget = target
       let selectLevel = this.selectLevel.bind(this)
 
-      document.body.onmouseup = document.body.ontouchend = selectLevel
+      // document.body.onmouseup = document.body.ontouchend = selectLevel
+      document.body.onmouseup = selectLevel
+    }
+
+
+    getSectionScrollTop(target) {
+      while (target && target.nodeName !== "SECTION") {
+        target = target.parentNode
+      }
+
+      let scrollTop = target ? target.scrollTop : 0
+
+      return scrollTop
     }
 
 
     // Called by a mouseup|touchend, as set in touchLevel
     selectLevel(event) {
-      var success
-      let level = this.levelTarget.innerHTML
+      let scrollTop = this.getSectionScrollTop(this.levelTarget)
 
-      if (event.target !== this.levelTarget) {
-        log(
-          "Button"
-        , level
-        , "touched,"
-        , "but button"
-        , event.target.innerHTML
-        , "released. No action.")
+      if (Math.abs(scrollTop - this.scrollTop) > 10 ) {
+        // The user dragged the menu. Don't make any selection yet
+        return
+      } else if (event.target !== this.levelTarget) {
+        // The user dragged along the menu to a different button
         return // Leave the menu open
       }
+
+      let level = this.levelTarget.innerHTML
+      let success
 
       if (this.levelTarget.parentNode.classList.contains("ref")) {
         success = this.showReference(this.levelTarget)
