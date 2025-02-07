@@ -376,9 +376,9 @@ float: left;
 
 @media (max-aspect-ratio: 17/10) {
 
-  body {
+  /* body {
     background-color: #033;
-  }
+  } */
 
   article#levels {
     width: 100vw;
@@ -411,7 +411,7 @@ float: left;
 
   html, body {
     height: calc(40vw + 62vw);
-    background-color: #030;
+    /* background-color: #030; */
   }
 
   header {
@@ -521,7 +521,7 @@ float: left;
 
   html, body {
     height: calc(40vw + 100vh);
-    background-color: #330;
+    /* background-color: #330; */
   }
 
   main {
@@ -591,7 +591,7 @@ float: left;
 
   html, body {
     height: calc(40vw + 80vw);
-    background-color: #300;
+    /* background-color: #300; */
   }
 
   main {
@@ -637,7 +637,7 @@ float: left;
 
   html, body {
     height: calc(40vw + 100vh);
-    background-color: #033;
+    /* background-color: #033; */
   }
 
 
@@ -708,7 +708,7 @@ float: left;
 
   html, body {
     height: calc(40vw + 120vw);
-    background-color: #003;
+    /* background-color: #003; */
   }
 
   main {
