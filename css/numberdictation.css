@@ -44,7 +44,7 @@ align-items: center;
 .number-dictation img {
 position: absolute;
 top: 0;
-left: 0
+left: 0;
 width: 100vmin;
 height: 100vmin;
 }
@@ -63,7 +63,7 @@ color: #000;
 position: absolute;
 top: 0;
 background-color: #002; /*same as page background*/
-opacity: 0.888;
+opacity: 0.8;
 width: 100vmin;
 height: 100vmin;
 }

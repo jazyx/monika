@@ -123,6 +123,66 @@ section {
   display: none;
 }
 
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.6em;
+}
+
+h3 {
+  font-size: 1.4em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+/* Stacked headers */
+h1:has(+ h3 + h4),
+h1 + h3:has(+ h4),
+h1 + h3 + h4 {
+  text-align: center;
+  margin: 0.325em 0;
+}
+
+table {
+  margin: 0 auto;
+  height: 100%;
+  width: 90%;
+  border: 1px solid #dededf;
+  /* table-layout: fixed; */
+  border-collapse: collapse;
+  border-spacing: 1px;
+  text-align: center;
+}
+th {
+  text-align: center;
+  border: 1px solid #666;
+  padding: 5px;
+}
+td {
+  border: 1px solid #666;
+  padding: 5px;
+}
+table img {
+  width: 100px;
+  max-width: 15vw;
+}
+
+.splash {
+  height: auto!important; /* overrides media queries */
+  width: 800px!important;
+  max-width: 95vw!important;
+  margin: 0 auto;
+
+  h2,
+  p {
+    text-align: left;
+  }
+}
+
 div#feedback {
   display: flex;
   flex-direction: column;
