@@ -3,7 +3,7 @@
 
 A game for learning the Major System for training your memory, in Russian
 
-You can follow progress [here](https://lexogram.github.io/monika/).
+You can follow progress [here](https://jazyx.github.io/monika/).
 
 ## The Major System
 The [Major System](https://en.wikipedia.org/wiki/Mnemonic_major_system) is a mnemonic technique for remembering numbers. It associates each digit with one or more consonants. By adding vowels wherever you like, you can create words that are easier to remember than the original number.
