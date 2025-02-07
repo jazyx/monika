@@ -135,18 +135,26 @@
 
 
     // Called by a mouseup|touchend, as set in touchLevel
-    selectLevel(event) {
+    selectLevel({ target }) {
       let scrollTop = this.getSectionScrollTop(this.levelTarget)
+
+      while (target.tagName !== "A") {
+        target = target.parentNode
+      }
+
+      if (!target) {
+        return
+      }
 
       if (Math.abs(scrollTop - this.scrollTop) > 10 ) {
         // The user dragged the menu. Don't make any selection yet
         return
-      } else if (event.target !== this.levelTarget) {
+      } else if (target !== this.levelTarget) {
         // The user dragged along the menu to a different button
         return // Leave the menu open
       }
 
-      let level = this.levelTarget.innerHTML
+      let level = this.levelTarget.innerText
       let success
 
       if (this.levelTarget.parentNode.classList.contains("ref")) {
