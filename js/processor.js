@@ -173,18 +173,38 @@
 
         switch (type) {
           case "alphabet":
-            audio = [ "&lt;audio for " + ref + "&gt;" ]
+            // audio = [ "&lt;audio for " + ref + "&gt;" ]
+            const consonants = monika.media.consonants.audio
+            // Vowels may not have been recorded yet
+            const vowels = monika.media.vowels?.audio
+
+            let files = consonants[ref.toLowerCase()] // array
+            if (!files) {
+              files = consonants[ref.toUpperCase()]
+
+              if (!files && vowels) {
+                files = vowels[ref.toLowerCase()]
+                if (!files) {
+                  files = vowels[ref.toUpperCase()]
+                }
+              }
+            }
+
+            audio = files
+              ? files
+              : [ "&lt;no audio for " + ref + "&gt;" ]
+
           break
 
           case "number":
             let folder = media.numbers[ref]
             if (!folder) {
-              folder = { audio: [ "&lt;audio for " + ref + "&gt;" ] }
+              folder = { audio: [ "&lt;no audio for " + ref + "&gt;" ] }
             }
             audio = folder.audio
 
             if (!audio.length) {
-              audio = [ "&lt;audio for " + ref + "&gt;" ]
+              audio = [ "&lt;no audio for " + ref + "&gt;" ]
             }
           break
 
@@ -198,7 +218,7 @@
             } 
             
             if (!audio || !audio.length) {
-              audio = [ "&lt;audio for " + ref + "&gt;" ]
+              audio = [ "&lt;no audio for " + ref + "&gt;" ]
             }
           break
 

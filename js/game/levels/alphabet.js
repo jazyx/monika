@@ -22,6 +22,7 @@
     initialize() {
       super.initialize()
 
+      // Activate the "print/handwritten" style button
       this.style = this.section.querySelector("._abc li.style")
       let switchStyle = this.switchStyle.bind(this)
       this.style.onmouseup = switchStyle

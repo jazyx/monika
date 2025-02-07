@@ -142,7 +142,7 @@
         , 9: "м"
       }
     , audio: {
-      б: [
+        б: [
           "/monika/media/ru/consonants/б/б"
         ]
       , в: [

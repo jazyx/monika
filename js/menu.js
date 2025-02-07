@@ -224,7 +224,7 @@
             // initialize or a click on the menu. It really only needs
             // to be set if the call came from the Continue button in
             // the Pass instance. But hey!
-            window.location.hash = intLevel
+            window.location.hash = intLevel || level
 
             if (!options.dontScrollPage) {
               window.scrollTo(0, 1)
