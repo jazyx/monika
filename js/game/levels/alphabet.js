@@ -16,11 +16,23 @@
       options.toggle = "#_123"
       options.timeless = true
       super("_abc", options)
+      this.options = options
+    }
+
+
+    // WET: Duplicate in numbers.js, near-duplicate in game.js
+    setHeader(options) {
+      const header = document.querySelector("header h1")
+      const text = document.querySelector("header div")
+      header.innerHTML = options.header || ""
+      text.innerHTML = options.text || ""
     }
 
 
     initialize() {
       super.initialize()
+
+      this.setHeader(this.options)
 
       // Activate the "print/handwritten" style button
       this.style = this.section.querySelector("._abc li.style")

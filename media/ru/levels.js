@@ -32,7 +32,6 @@
     // Even digits and their key consonants
   , 1: {
       className: "Intro"
-    , name: "George"
     , header: "Learn the numbers from 0 - 9, and train your memory."
     , text: "<p>Click on the three buttons that correspond to the number "
       + "that you hear.</p>"

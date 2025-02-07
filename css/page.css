@@ -735,7 +735,7 @@ float: left;
 
   html, body {
     height: 186vw;
-    background-color: #033;
+    /* background-color: #033; */
   }
 
   header {

@@ -11,7 +11,7 @@
   }
 
   class Numbers extends monika.layouts.Reference {
-   constructor (options) {
+    constructor (options) {
       options.toggle = "#_abc"
       options.timeless = true
       super("_123", options)
@@ -20,8 +20,35 @@
       this.word = this.section.querySelector("._123 p.word")
       this.ul = this.section.querySelector("ul")
       this.list = this.ul.querySelectorAll("li")
+
       let treatNumber = this.treatNumber.bind(this)
       this.ul.onmousedown = this.ul.ontouchstart = treatNumber
+
+      this.options = options
+    }
+
+
+    // WET: Duplicate in numbers.js, near-duplicate in game.js
+    setHeader(options) {
+      const header = document.querySelector("header h1")
+      const text = document.querySelector("header div")
+      header.innerHTML = options.header || ""
+      text.innerHTML = options.text || ""
+    }
+
+
+    initialize() {
+      super.initialize()
+
+      this.setHeader(this.options)
+    }
+
+    // WET: Duplicate in alphabet.js, near-duplicate in game.js
+    setHeader(options) {
+      const header = document.querySelector("header h1")
+      const text = document.querySelector("header div")
+      header.innerHTML = options.header || ""
+      text.innerHTML = options.text || ""
     }
 
     treatNumber({ target }) {
