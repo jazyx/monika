@@ -146,6 +146,16 @@ h1 + h3 + h4 {
   text-align: center;
   margin: 0.325em 0;
 }
+h1:has(+ h3 + h4) {
+  margin-top: 1em;
+}
+
+header:has(+ main .splash.active) {
+  height: 0;
+}
+main:has(.splash.active) #feedback {
+  height: 0;
+}
 
 table {
   margin: 0 auto;

@@ -2,7 +2,7 @@
 
 
 ;(function loaded(monika){
-  // monika = 
+  // monika =
   // { Game: class
   // , classes: {Intro, EvenConsonants, …}
   // , layouts: {Digits, Words, ...}
@@ -154,6 +154,21 @@
         return // Leave the menu open
       }
 
+      if (target.href.match("#splash")) {
+        const sections = document.querySelectorAll("section")
+
+
+        sections.forEach(section => {
+          if (section.classList.contains("splash")) {
+            section.classList.add("active")
+          } else {
+            section.classList.remove("active")
+          }
+        })
+
+        return
+      }
+
       let level = this.levelTarget.innerText
       let success
 
@@ -178,7 +193,7 @@
      * When called by initialize() on launch, dontStart will be true.
      * This simply opens the menu at the chosen level, so that the
      * end user can tap and thus activate audio.
-     * 
+     *
      * TODO: On a non-touch-screen device, there is no need for an
      * extra click. We should detect the type of device and ignore
      * `dontStart` if it's not needed.
@@ -208,7 +223,7 @@
           if (intLevel) {
             this.level = intLevel
           }
-          
+
           if (options.dontStart) {
             this.openMenu(intLevel, options)
 
@@ -266,13 +281,13 @@
         }
       }
 
-      return level 
+      return level
     }
 
 
     /**
      * Called by initialize, displayLevel and setLevel
-     * 
+     *
      * @param {integer | undefined} level  Level to highlight and
      *                                     scroll to
      * @param {undefined | 0 | 1}   scrollToPrevious  if 1, then
@@ -294,8 +309,8 @@
       // Note special treatment below to deal with this particularity:
       // * Numbering for li elements starts at 0
       // * Numbering for levels starts at 1
-      
-      var total = list.length       
+
+      var total = list.length
       for ( let ii = 0; ii < total; /* see below */ ) {
         // Increment ii after getting the list item
         let li = list[ii++]
@@ -312,7 +327,7 @@
           li.classList.remove("active")
 
           if (scrollToPrevious === ii) {
-            li.scrollIntoView() 
+            li.scrollIntoView()
           }
         }
 
@@ -402,7 +417,7 @@
      *                             Repeat This Level
      */
     completeLevel(deltaLevel) {
-      let options = { 
+      let options = {
         scrollToPrevious: !!deltaLevel // true if going up a level
       , dontScrollPage: !deltaLevel // true if staying at the same level
       }
@@ -453,7 +468,7 @@
     setRefDisplay(hash) {
       let refLinks = document.querySelectorAll("nav div.ref a")
 
-      var total = refLinks.length       
+      var total = refLinks.length
       for (let ii = 0; ii < total; ii += 1) {
         let refLink = refLinks[ii]
         if (refLink.hash === hash) {
@@ -461,7 +476,7 @@
         } else {
           refLink.classList.remove("active")
         }
-      } 
+      }
     }
 
 
