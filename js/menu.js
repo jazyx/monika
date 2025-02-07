@@ -155,8 +155,8 @@
       }
 
       if (target.href.match("#splash")) {
+        // WET: quasi-duplicate of monika.Game.display()
         const sections = document.querySelectorAll("section")
-
 
         sections.forEach(section => {
           if (section.classList.contains("splash")) {

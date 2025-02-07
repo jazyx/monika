@@ -31,7 +31,7 @@ transition: background 0s 0.2s, width 0.2s 0s linear;
 nav label svg {
 height: 90%;
 width: 12vmin;
-fill: rgba(255,255,255,0.3333);
+fill: #fff8;
 }
 
 nav label:hover svg{
@@ -40,18 +40,18 @@ fill: #fff;
 
 nav input[type=checkbox]:checked ~ label {
 width:36vmin;
-background-color: #fff;
-border-bottom: 1px solid #999;
+background-color: #000e;
+/* border-bottom: 1px solid #999; */
 /*transition: width 2s 1s linear;*/
 transition: background 0s 0s, width 0.2s 0.1s linear;
 }
 
 nav input[type=checkbox]:checked ~ label svg {
-fill: rgba(0,0,0,0.3333);
+fill: #fff8;
 }
 
 nav input[type=checkbox]:checked ~ label:hover svg {
-fill: #000;
+fill: #fff;
 }
 
 nav input[type=checkbox]:checked ~ section {
@@ -64,7 +64,7 @@ position: absolute;
 top: 0;
 width: 36vmin;
 height: 100%;
-background-color: #fff;
+background-color: #000e;
 overflow-y: auto;
 left: -36vmin;
 
