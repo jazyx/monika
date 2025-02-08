@@ -26,9 +26,9 @@ body {
   display: flex;
   justify-content: center;
   box-sizing: border-box;
-  background-color: #002;
+  background-color: #222;
 
-  color: #fff;
+  color: #ddd;
 
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -178,7 +178,7 @@ td {
 }
 table img {
   width: 100px;
-  max-width: 15vw;
+  max-width: 12vw; /* Same width as word "Image" */
 }
 
 .splash {
@@ -190,6 +190,27 @@ table img {
   h2,
   p {
     text-align: left;
+    margin-bottom: 0;
+  }
+
+  button.play {
+    width: 10em;
+    margin: 2em auto 1em;
+
+    color: #ded;
+    background-color: #060;
+    border: 1px outset #080;
+    border-radius: 0.5em;
+    padding: 0.5em 0;
+
+    &:hover {
+      color: #fff;
+
+      &:active {
+        border-style: inset;
+        background-color: #040;
+      }
+    }
   }
 }
 

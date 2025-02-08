@@ -1,6 +1,9 @@
 "use strict"
 
 
+const MENU_DELAY = 1000
+
+
 ;(function loaded(monika){
   // monika =
   // { Game: class
@@ -22,7 +25,8 @@
       this.levelTarget = null   // will be button touched on menu
       this.menu = document.querySelector( 'nav section' )
       this.check = document.querySelector( 'input[type=checkbox]' )
-      this.links = [].slice.call(document.querySelectorAll("nav a"))
+      this.check = document.querySelector( 'input[type=checkbox]' )
+      this.play = Array.from(document.querySelectorAll('.play'))
       this.localData = this.readLocalData()
 
       // Mouse events
@@ -37,6 +41,15 @@
         let closeMenu = this.closeMenu.bind(this)
         document.body.addEventListener("mousedown", closeMenu, false)
         // document.body.addEventListener("touchstart", closeMenu, false)
+
+        this.bestLevel = this.bestLevel.bind(this)
+        this.showActiveLevel = this.showActiveLevel.bind(this)
+        this.goPlay = this.goPlay.bind(this)
+        this.play.forEach(button => button.addEventListener(
+          "mouseup", this.goPlay, false
+        ))
+
+        setTimeout(closeMenu, MENU_DELAY)
       }
     }
 
@@ -86,7 +99,7 @@
 
     // Called by mousedown|touchstart anywhere but on the menu
     closeMenu(event) {
-      let target = event.target
+      let target = event?.target
 
       if (this.check.checked) {
         while (target && target.nodeName !== "NAV") {
@@ -149,6 +162,7 @@
       if (Math.abs(scrollTop - this.scrollTop) > 10 ) {
         // The user dragged the menu. Don't make any selection yet
         return
+
       } else if (target !== this.levelTarget) {
         // The user dragged along the menu to a different button
         return // Leave the menu open
@@ -235,10 +249,10 @@
             monika.customKeyboard.close()
             monika.timer.stop("reset")
 
-            // hash will already have been set if the call came from
-            // initialize or a click on the menu. It really only needs
-            // to be set if the call came from the Continue button in
-            // the Pass instance. But hey!
+            // hash will already have been set if the call came
+            // from initialize or a click on the menu. It really
+            // only needs to be set if the call came from the 
+            // Continue button in the Pass instance. But hey!
             window.location.hash = intLevel || level
 
             if (!options.dontScrollPage) {
@@ -282,6 +296,19 @@
       }
 
       return level
+    }
+
+
+    goPlay() {
+      const level = this.bestLevel(0) && this.level
+      // 0 if no bestLevel, this.level if bestLevel not 0
+      if (!level) {
+        // Start with the alphabet
+        this.showReference = this.showReference.bind(this)
+        return this.showReference({ hash: "#_abc" })
+      }
+
+      this.setLevel(level)
     }
 
 
@@ -398,11 +425,11 @@
 
 
     // Called by initialize and showActiveLevel
-    bestLevel() {
+    bestLevel(defaultBest = 2) {
       let unlocked = this.localData.levelsPlayed
-      let bestLevel = Math.max.apply(null, unlocked)
+      let bestLevel = Math.max.apply(null, unlocked) // -Infinity?
 
-      return Math.max(bestLevel, 2)
+      return Math.max(bestLevel, defaultBest)
     }
 
 
