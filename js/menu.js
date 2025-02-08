@@ -25,9 +25,9 @@ const MENU_DELAY = 1000
       this.levelTarget = null   // will be button touched on menu
       this.menu = document.querySelector( 'nav section' )
       this.check = document.querySelector( 'input[type=checkbox]' )
-      this.check = document.querySelector( 'input[type=checkbox]' )
       this.play = Array.from(document.querySelectorAll('.play'))
       this.localData = this.readLocalData()
+      this.clickMS = 0
 
       // Mouse events
       {
@@ -61,7 +61,7 @@ const MENU_DELAY = 1000
     initialize() {
       let level = parseInt(window.location.hash.substring(1), 10) || 0
       let force = /[?&]force$/.test(window.location.href)
-      let bestLevel = this.bestLevel()
+      let bestLevel = this.bestLevel(0)
 
       if (force) {
         if (level > 0) {
@@ -117,6 +117,7 @@ const MENU_DELAY = 1000
     // Called by mousedown|touchstart on the menu
     touchLevel(event) {
       let target = event.target
+      this.clickMS = +new Date()
 
       while (target && target.nodeName !== "A") {
         target = target.parentNode
@@ -151,6 +152,13 @@ const MENU_DELAY = 1000
     selectLevel({ target }) {
       let scrollTop = this.getSectionScrollTop(this.levelTarget)
 
+      // HACK to unlock all levels
+      if (+new Date() - this.clickMS > 2000) {
+        const list = document.querySelectorAll("nav li")
+        list.forEach( button => button.removeAttribute("disabled"))
+        this.unlockLevel(99)
+      }
+
       while (target.tagName !== "A") {
         target = target.parentNode
       }
@@ -179,6 +187,8 @@ const MENU_DELAY = 1000
             section.classList.remove("active")
           }
         })
+
+        this.closeMenu()
 
         return
       }

@@ -603,7 +603,7 @@ float: left;
   }
 
   body.timeless main section {
-    width: 100vw;
+    width: calc(100vw - 12px); /* to hide horizontal scrollbar */
   }
 }
 
